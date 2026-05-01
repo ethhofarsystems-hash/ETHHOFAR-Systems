@@ -60,6 +60,23 @@
             text-align: center;
         }
 
+        /* Stiluri pentru butoanele de Social Media */
+        .social-links { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
+        .social-box { 
+            padding: 12px 25px; 
+            border-radius: 8px; 
+            color: white; 
+            font-weight: bold; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: 0.3s; 
+        }
+        .social-box:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); color: white; }
+        .yt { background: #FF0000; }
+        .dc { background: #5865F2; }
+        .wa { background: #25D366; }
+
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; background: #eee; }
     </style>
 </head>
@@ -76,33 +93,39 @@
     <div class="story-section reveal">
         <h2 style="color: var(--primary); text-align: center;">Viziunea Noastră</h2>
         <p>
-            <strong>ETHHOFAR Systems</strong> este un brand format de studenți pasionați, lansat inițial ca un proiect de testare a pieței, cu scopul de a evolua într-o structură profesională solidă. Proiectul a luat naștere din dorința de a oferi României o alternativă corectă în domeniul reparațiilor IT: prețuri de bun simț și o echipă de viitori profesioniști care să te ghideze prin complexitatea tehnologiei actuale[cite: 5].
+            <strong>ETHHOFAR Systems</strong> este un brand format de studenți pasionați, lansat inițial ca un proiect de testare a pieței, cu scopul de a evolua într-o structură profesională solidă. Proiectul a luat naștere din dorința de a oferi României o alternativă corectă în domeniul reparațiilor IT: prețuri de bun simț și o echipă de viitori profesioniști care să te ghideze prin complexitatea tehnologiei actuale.
         </p>
     </div>
 
     <div class="feature-grid">
         <div class="feature-box reveal">
             <h4>🛡️ Garanția Transparenței</h4>
-            <p>Nu practicăm adaosuri comerciale pentru piesele de schimb. Profitul nostru provine exclusiv din calitatea manoperei, iar piesele sunt facturate la preț de achiziție[cite: 3].</p>
+            <p>Nu practicăm adaosuri comerciale pentru piesele de schimb. Profitul nostru provine exclusiv din calitatea manoperei, iar piesele sunt facturate la preț de achiziție.</p>
         </div>
         <div class="feature-box reveal">
             <h4>📋 Standarde Riguroase</h4>
-            <p>Fiecare echipament este însoțit de o <strong>Fișă de Recepție</strong> la primire și un <strong>Certificat de Recondiționare Tehnică</strong> la predare, atestând starea tehnică și intervențiile efectuate[cite: 2, 4].</p>
+            <p>Fiecare echipament este însoțit de o <strong>Fișă de Recepție</strong> la primire și un <strong>Certificat de Recondiționare Tehnică</strong> la predare, atestând starea tehnică și intervențiile efectuate.</p>
         </div>
         <div class="feature-box reveal">
             <h4>🧪 Calitate "Chirurgicală"</h4>
-            <p>Operăm cu un standard înalt de igienă tehnică, folosind mănuși de nitril, soluții dielectrice și alcool izopropilic 99.9% pentru a lăsa dispozitivele impecabile[cite: 5].</p>
+            <p>Operăm cu un standard înalt de igienă tehnică, folosind mănuși de nitril, soluții dielectrice și alcool izopropilic 99.9% pentru a lăsa dispozitivele impecabile.</p>
         </div>
         <div class="feature-box reveal">
             <h4>🤝 Flexibilitate Online</h4>
-            <p>Momentan activăm exclusiv online. Întâlnirea pentru preluare și predare, precum și semnarea documentelor fizice, se realizează la un punct de contact stabilit de comun acord[cite: 5].</p>
+            <p>Momentan activăm exclusiv online. Întâlnirea pentru preluare și predare, precum și semnarea documentelor fizice, se realizează la un punct de contact stabilit de comun acord.</p>
         </div>
     </div>
 
     <div class="highlight-box reveal">
-        <h3>Susține un proiect studențesc</h3>
-        <p>Suntem o echipă la început de drum. Dacă apreciezi profesionalismul nostru și vrei să ne susții misiunea, ne poți face cinste cu o cafea la întâlnirea de predare a echipamentului.</p>
-        <a href="servicii.html" style="display: inline-block; margin-top: 15px; padding: 12px 25px; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">Vezi Lista de Tarife</a>
+        <h3>Susține proiectul ETHHOFAR Systems!</h3>
+        <p>Suntem o echipă la început de drum. Dacă apreciezi profesionalismul și transparența noastră, ne poți susține dând un share mai departe proiectului nostru și urmărindu-ne activitatea pe platformele de mai jos.</p>
+        
+        <div class="social-links">
+            <!-- Înlocuiește LINK_YOUTUBE etc. cu link-urile tale reale -->
+            <a href="https://www.youtube.com/@ETHHOFAR-Systems" class="social-box yt" target="_blank">▶️ YouTube</a>
+            <a href="https://discord.gg/URRN7uJGeA" class="social-box dc" target="_blank">🎧 Discord</a>
+            <a href="LINK_WHATSAPP" class="social-box wa" target="_blank">💬 WhatsApp</a>
+        </div>
     </div>
 </div>
 
