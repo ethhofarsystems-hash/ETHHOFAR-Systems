@@ -85,9 +85,13 @@
             <input type="email" name="Email" placeholder="Adresa de email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <input type="tel" name="Telefon" placeholder="Număr de telefon" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             
-            <!-- Câmpul nou pentru modelul echipamentului -->
-            <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            
+          <!-- Câmpul pentru modelul echipamentului cu explicație -->
+            <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 5px; margin-bottom: 5px;">
+                <label style="font-size: 0.9rem; color: #444; line-height: 1.4;">
+                    Te rugăm să introduci marca și modelul complet (ca în exemplul de mai jos) pentru a-l identifica mai ușor și a reveni cu un răspuns ferm pentru tine:
+                </label>
+                <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
             <input type="hidden" name="Servicii_Comandate" id="hidden-services">
             <input type="hidden" name="Total_Estimata" id="hidden-total">
 
