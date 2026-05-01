@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicii | ETHHOFAR Systems</title>
+    <style>
+        :root { --primary: #005bb7; --dark: #1a1a1a; --light: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--dark); }
+        nav { background: white; padding: 1rem; display: flex; justify-content: space-around; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        nav a { text-decoration: none; color: var(--dark); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
+        nav a:hover { color: var(--primary); }
+        
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        
+        .card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 8px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 91, 183, 0.1); border-color: var(--primary); }
+        .card h3 { margin-top: 0; font-size: 1.1rem; }
+        .price { font-size: 1.4rem; font-weight: bold; color: #e67e22; margin: 10px 0; }
+        .warranty { font-size: 0.8rem; color: #27ae60; margin-bottom: 15px; font-style: italic; }
+        
+        .btn-cart { background: var(--dark); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn-cart:hover { background: var(--primary); }
+        
+        #cart-container { background: white; border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
+        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Acasă</a>
+    <a href="servicii.html">Servicii și Tarife</a>
+</nav>
+
+<div class="container">
+    <h2 style="text-align: center; margin-bottom: 30px;">Toate Serviciile Noastre</h2>
+    
+    <div class="grid">
+        <!-- Generat din documentul tău de tarife -->
+        <div class="card"><h3>Pachet Revitalizare Laptop (Mentenanță + OS)</h3><p class="price">275 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Pachet Revitalizare Laptop', 275)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Mentenanță Laptop</h3><p class="price">200 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Instalare OS</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Instalare OS', 100)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Manoperă Montaj baterie & Curățare adeziv</h3><p class="price">120 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Înlocuire baterie BIOS (CR2032 / CMOS)</h3><p class="price">50 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Înlocuire baterie BIOS', 50)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare placă de rețea (Wi-Fi/BT)</h3><p class="price">80 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare placă rețea', 80)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Upgrade RAM / SSD (montaj + verificare)</h3><p class="price">80 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Upgrade RAM / SSD', 80)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare placă de bază (fără lipire)</h3><p class="price">250 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare placă de bază', 250)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare ecran/panel laptop</h3><p class="price">200 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare ecran laptop', 200)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare tastatură (modulară)</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare Touchpad</h3><p class="price">90 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Porturi USB modulare</h3><p class="price">80 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Mentenanță (PS4, PS5, Xbox)</h3><p class="price">250 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare butoane/carcasă controller</h3><p class="price">70 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare butoane controller', 70)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare boxe (difuzoare) laptop</h3><p class="price">70 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare balamale</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare webcam/microfon</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Schimbare radiator/ventilator</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă</button></div>
+        <div class="card"><h3>Diagnosticare (0 RON dacă se repară)</h3><p class="price">50 RON</p><p class="warranty">Detalii transparente</p><button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button></div>
+    </div>
+
+    <!-- Coș Virtual curățat -->
+    <div id="cart-container" style="display:none;">
+        <h3 style="margin-top:0;">Finalizare Comandă</h3>
+        <p>Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la final.</p>
+        
+        <ul id="cart-list" style="font-weight: bold; line-height: 1.8;"></ul>
+        <p style="font-size: 1.2rem;"><strong>Total estimat manoperă: <span id="cart-total" style="color: #e67e22;">0</span> RON</strong></p>
+
+        <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
+            <input type="text" name="Nume" placeholder="Numele tău complet" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <input type="email" name="Email" placeholder="Adresa de email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <input type="tel" name="Telefon" placeholder="Număr de telefon" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            
+            <input type="hidden" name="Servicii_Comandate" id="hidden-services">
+            <input type="hidden" name="Total_Estimata" id="hidden-total">
+
+            <button type="submit" style="background: var(--primary); color: white; border: none; padding: 15px; font-size: 1.1rem; border-radius: 4px; cursor: pointer;">Trimite Comanda pe Email</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 ETHHOFAR Systems. Toate drepturile rezervate.
+</footer>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        total += price;
+        updateCartUI();
+        // Scroll automat către coș
+        document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateCartUI() {
+        const container = document.getElementById('cart-container');
+        const list = document.getElementById('cart-list');
+        const totalEl = document.getElementById('cart-total');
+        const hiddenServices = document.getElementById('hidden-services');
+        const hiddenTotal = document.getElementById('hidden-total');
+        
+        container.style.display = 'block';
+        list.innerHTML = '';
+        
+        let servicesText = "";
+        
+        cart.forEach((item) => {
+            const li = document.createElement('li');
+            li.innerText = item.name + " - " + item.price + " RON";
+            list.appendChild(li);
+            servicesText += item.name + " (" + item.price + " RON), ";
+        });
+        
+        totalEl.innerText = total;
+        hiddenServices.value = servicesText;
+        hiddenTotal.value = total + " RON";
+    }
+</script>
+
+</body>
+</html>
