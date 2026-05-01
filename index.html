@@ -63,16 +63,7 @@
 
         /* Stiluri pentru butoanele de Social Media */
         .social-links { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-        .social-box { 
-            padding: 12px 25px; 
-            border-radius: 8px; 
-            color: white; 
-            font-weight: bold; 
-            text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            transition: 0.3s; 
-        }
+       .social-box { padding: 12px 25px; border-radius: 8px; color: white; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
         .social-box:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); color: white; }
         .yt { background: #FF0000; }
         .dc { background: #5865F2; }
@@ -121,11 +112,19 @@
         <h3>Susține proiectul ETHHOFAR Systems!</h3>
         <p>Suntem o echipă la început de drum. Dacă apreciezi profesionalismul și transparența noastră, ne poți susține dând un share mai departe proiectului nostru și urmărindu-ne activitatea pe platformele de mai jos.</p>
         
-        <div class="social-links">
-            <!-- Înlocuiește LINK_YOUTUBE etc. cu link-urile tale reale -->
-            <a href="https://www.youtube.com/@ETHHOFAR-Systems" class="social-box yt" target="_blank">▶️ YouTube</a>
-            <a href="https://discord.gg/URRN7uJGeA" class="social-box dc" target="_blank">🎧 Discord</a>
-           <a href="https://wa.me/40779316979?text=Salut,%20Am%20o%20întrebare." class="social-box wa" target="_blank">💬 WhatsApp</a>
+       <div class="social-links">
+            <!-- Înlocuiește LINK_YOUTUBE și LINK_DISCORD cu link-urile tale reale -->
+            <a href="LINK_YOUTUBE" class="social-box yt" target="_blank">
+                <i class="fa-brands fa-youtube" style="font-size: 1.3rem;"></i> YouTube
+            </a>
+            
+            <a href="LINK_DISCORD" class="social-box dc" target="_blank">
+                <i class="fa-brands fa-discord" style="font-size: 1.3rem;"></i> Discord
+            </a>
+            
+            <a href="https://wa.me/40779316979?text=Salut,%20ETHHOFAR!%20Am%20o%20întrebare." class="social-box wa" target="_blank">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> WhatsApp
+            </a>
         </div>
     </div>
 </div>
