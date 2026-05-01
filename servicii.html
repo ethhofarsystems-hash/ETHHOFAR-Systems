@@ -80,10 +80,13 @@
 
         <p style="font-size: 1.2rem;"><strong>Total estimat manoperă: <span id="cart-total" style="color: #e67e22;">0</span> RON</strong></p>
 
-        <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
+      <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
             <input type="text" name="Nume" placeholder="Numele tău complet" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <input type="email" name="Email" placeholder="Adresa de email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <input type="tel" name="Telefon" placeholder="Număr de telefon" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            
+            <!-- Câmpul nou pentru modelul echipamentului -->
+            <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             
             <input type="hidden" name="Servicii_Comandate" id="hidden-services">
             <input type="hidden" name="Total_Estimata" id="hidden-total">
