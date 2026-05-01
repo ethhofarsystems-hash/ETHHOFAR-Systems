@@ -60,12 +60,23 @@
         <div class="card"><h3>Diagnosticare (0 RON dacă se repară)</h3><p class="price">50 RON</p><p class="warranty">Detalii transparente</p><button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button></div>
     </div>
 
-    <!-- Coș Virtual curățat -->
-    <div id="cart-container" style="display:none;">
+   <!-- Coș Virtual actualizat cu Reduceri -->
+    <div id="cart-container" style="display:none; background: white; border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px;">
         <h3 style="margin-top:0;">Finalizare Comandă</h3>
         <p>Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la final.</p>
         
         <ul id="cart-list" style="font-weight: bold; line-height: 1.8;"></ul>
+        
+        <!-- SECȚIUNEA NOUĂ: Cod de Reducere -->
+        <div style="margin: 20px 0; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px dashed #ccc;">
+            <label style="display: block; font-size: 0.9rem; margin-bottom: 5px;">Ai un cod de reducere? (Opțional)</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="promoInput" placeholder="Ex: Motanel10" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;">
+                <button type="button" onclick="applyPromo()" style="padding: 10px 20px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Validare</button>
+            </div>
+            <p id="promoMessage" style="font-size: 0.9rem; margin-top: 8px; margin-bottom: 0; font-weight: bold;"></p>
+        </div>
+
         <p style="font-size: 1.2rem;"><strong>Total estimat manoperă: <span id="cart-total" style="color: #e67e22;">0</span> RON</strong></p>
 
         <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
@@ -76,7 +87,7 @@
             <input type="hidden" name="Servicii_Comandate" id="hidden-services">
             <input type="hidden" name="Total_Estimata" id="hidden-total">
 
-            <button type="submit" style="background: var(--primary); color: white; border: none; padding: 15px; font-size: 1.1rem; border-radius: 4px; cursor: pointer;">Trimite Comanda pe Email</button>
+            <button type="submit" style="background: var(--primary); color: white; border: none; padding: 15px; font-size: 1.1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">Trimite Comanda pe Email</button>
         </form>
     </div>
 </div>
@@ -86,15 +97,36 @@
 </footer>
 
 <script>
-    let cart = [];
+   let cart = [];
     let total = 0;
+    let discountMultiplier = 0; // 0 = fără reducere, 0.10 = 10% reducere
 
     function addToCart(name, price) {
         cart.push({name, price});
         total += price;
         updateCartUI();
-        // Scroll automat către coș
         document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function applyPromo() {
+        // Preluăm codul și îl transformăm în litere mici pentru a nu conta cum e scris (ex: motanel10 = Motanel10)
+        const code = document.getElementById('promoInput').value.trim().toLowerCase();
+        const msg = document.getElementById('promoMessage');
+        
+        if (code === 'motanel10') {
+            discountMultiplier = 0.10; // 10% reducere
+            msg.innerText = "✅ Cod valid! Ai primit 10% reducere.";
+            msg.style.color = "#27ae60"; // verde
+        } else if (code === '') {
+            msg.innerText = "Introduceți un cod înainte de validare.";
+            msg.style.color = "#e67e22"; // portocaliu
+        } else {
+            discountMultiplier = 0; // resetăm reducerea dacă pune un cod greșit
+            msg.innerText = "❌ Cod invalid. Verifică și încearcă din nou.";
+            msg.style.color = "red";
+        }
+        
+        updateCartUI(); // Recalculăm totalul
     }
 
     function updateCartUI() {
@@ -116,9 +148,20 @@
             servicesText += item.name + " (" + item.price + " RON), ";
         });
         
-        totalEl.innerText = total;
+        // Calculăm noul total
+        let finalTotal = total - (total * discountMultiplier);
+        
+        // Afișăm în interfață prețul tăiat dacă avem reducere
+        if (discountMultiplier > 0) {
+            totalEl.innerHTML = `<s style="color: #999;">${total}</s> <span style="color: #27ae60;">${finalTotal.toFixed(2)}</span>`;
+            servicesText += ` | *** Reducere aplicată: Motanel10 (-10%) ***`;
+        } else {
+            totalEl.innerText = total;
+        }
+
+        // Actualizăm câmpurile ascunse pentru emailul pe care îl primești tu
         hiddenServices.value = servicesText;
-        hiddenTotal.value = total + " RON";
+        hiddenTotal.value = finalTotal.toFixed(2) + " RON";
     }
 </script>
 
