@@ -48,13 +48,12 @@
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
         
-        /* BARĂ NAVIGAȚIE MODIFICATĂ PENTRU COȘ */
+        /* BARĂ NAVIGAȚIE ȘI COȘ */
         nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; transition: 0.3s; border-bottom: 1px solid var(--border-color); }
         .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
         nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
         nav a:hover { color: var(--primary); }
         
-        /* COȘ DE CUMPĂRĂTURI - BUTON ȘI POPUP */
         .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
         .nav-cart { cursor: pointer; font-size: 1.5rem; position: relative; display: flex; align-items: center; padding: 5px 10px; border-radius: 8px; transition: 0.3s; }
         .nav-cart:hover { background: rgba(0, 91, 183, 0.1); }
@@ -67,7 +66,7 @@
         .btn-go-cart { background: var(--primary); color: var(--btn-text); border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; font-size: 1rem; }
         .btn-go-cart:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-        /* Schimbătorul de teme */
+        /* Teme și Litere */
         .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
         .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
         [data-theme="dark"] .theme-ring { left: 42px; } 
@@ -78,30 +77,22 @@
         .theme-dark { background: #1a1a1a; border-color: #555; }
         .theme-warm { background: #fdf6e3; border-color: #d35400; }
 
-        /* Grila Alfabetică Fixă */
         .alphabet-nav { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; background: var(--card-bg); padding: 10px 5px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); z-index: 999; gap: 2px; }
         .alphabet-nav a { color: var(--text-color); text-decoration: none; font-size: 0.85rem; font-weight: bold; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
         .alphabet-nav a.active, .alphabet-nav a:hover { background: var(--primary); color: var(--btn-text); transform: scale(1.2); }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; padding-right: 60px; }
-        
         .warranty-banner { text-align: center; background: rgba(39, 174, 96, 0.1); border: 1px dashed var(--accent); color: var(--accent); padding: 15px; border-radius: 8px; font-weight: bold; margin-bottom: 30px; font-size: 1.1rem; }
-        
-        /* Bară de Căutare */
         .search-container { margin-bottom: 30px; }
         .search-input { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid var(--primary); font-size: 1.1rem; background: var(--card-bg); color: var(--text-color); box-sizing: border-box; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .search-input:focus { box-shadow: 0 4px 12px rgba(0, 91, 183, 0.2); }
 
-        /* Gruparea Secțiunilor pe Litere */
         .letter-section { scroll-margin-top: 100px; margin-bottom: 40px; }
         .letter-header { display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0 30px 0; }
         .letter-header::after { content: ""; flex: 1; height: 1px; background: var(--border-color); margin-left: 20px; }
 
-        /* GRILA CORECTATĂ PENTRU A NU MAI ÎNTINDE CARDURILE */
-        /* am schimbat auto-fit cu auto-fill pentru ca un card singur pe rând să nu se facă gigant */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         
-        /* Structura Flip Card - Am mărit puțin înălțimea la 350px ca să încapă butoanele una sub alta perfect */
         .card-container { perspective: 1000px; height: 350px; transition: all 0.3s ease; }
         .card-container.flipped { grid-column: span 2; }
         @media (max-width: 768px) { .card-container.flipped { grid-column: span 1; } }
@@ -128,26 +119,92 @@
         .card-back ul { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5; }
         .card-back li { margin-bottom: 8px; }
         
-        /* BUTOANE REPARATE: Unul sub altul (column), apropiate */
         .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
-        
         .btn-flip { width: 100%; box-sizing: border-box; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-flip:hover { background: var(--primary); color: var(--btn-text); }
-        
         .btn-cart { width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-cart:hover { filter: brightness(1.1); } 
-        
         .btn-back { background: #555; border: none; color: white; padding: 8px; border-radius: 4px; cursor: pointer; margin-top: auto; align-self: flex-start; }
         .btn-back:hover { background: #777; }
         
         #cart-container { background: var(--card-bg); border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
+
+        /* WIDGET WHATSAPP POPUP */
+        .wa-popup {
+            position: fixed;
+            right: -400px; /* Ascuns initial */
+            bottom: 30px;
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            z-index: 1005;
+            transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Animație bouncy fluidă */
+        }
+        .wa-popup.show {
+            right: 40px; /* Apare la 40px de marginea dreaptă (ca să nu se bată cu literele) */
+        }
+        .wa-popup-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            border-radius: 12px;
+            max-width: 250px;
+            position: relative;
+            color: var(--text-color);
+        }
+        /* Codita de la chat bubble */
+        .wa-popup-content::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            bottom: 20px;
+            border-width: 10px 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent var(--card-bg);
+        }
+        .wa-popup-content h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--primary); }
+        .wa-popup-content p { margin: 0; font-size: 0.85rem; line-height: 1.4; color: #777; }
+        [data-theme="dark"] .wa-popup-content p { color: #ccc; }
+        .wa-close { position: absolute; top: 5px; right: 8px; cursor: pointer; font-size: 1.2rem; color: #999; line-height: 1; }
+        .wa-close:hover { color: red; }
+        
+        .wa-popup-icon {
+            background: #25D366;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.3s;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .wa-popup-icon:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
 
+<!-- WIDGET WHATSAPP POPUP -->
+<div id="wa-help-popup" class="wa-popup">
+    <div class="wa-popup-content">
+        <span class="wa-close" onclick="closeWaPopup()" title="Închide">&times;</span>
+        <h4>👋 Ai nevoie de îndrumare?</h4>
+        <p>Un tehnician ETHHOFAR este gata să te ajute să identifici problema sau să alegi serviciul potrivit. Scrie-ne!</p>
+    </div>
+    <a href="https://wa.me/40779316979?text=Salut,%20ETHHOFAR!%20Am%20nevoie%20de%20ajutor%20pentru%20a%20alege%20un%20serviciu." target="_blank" class="wa-popup-icon">
+        <svg viewBox="0 0 32 32" width="35" height="35">
+            <path fill="#ffffff" d="M16 0c-8.836 0-16 7.164-16 16 0 2.805 0.726 5.441 1.996 7.742l-2.28 8.243 8.441-2.215c2.247 1.156 4.792 1.82 7.502 1.82 8.836 0 16-7.164 16-16s-7.164-16-16-16zM23.167 19.333c-0.344-0.177-2.026-0.995-2.344-1.109s-0.547-0.177-0.776 0.177c-0.229 0.354-0.891 1.109-1.089 1.339-0.198 0.229-0.401 0.26-0.745 0.083-0.344-0.177-1.448-0.531-2.755-1.698-1.016-0.906-1.703-2.026-1.901-2.38s-0.021-0.542 0.151-0.714c0.156-0.156 0.344-0.406 0.516-0.609 0.172-0.203 0.229-0.354 0.344-0.589 0.115-0.234 0.057-0.443-0.026-0.615s-0.776-1.875-1.063-2.568c-0.281-0.677-0.563-0.583-0.776-0.594-0.198-0.01-0.427-0.01-0.656-0.01s-0.604 0.083-0.917 0.427c-0.313 0.344-1.203 1.177-1.203 2.875s1.234 3.339 1.406 3.568c0.172 0.229 2.438 3.719 5.896 5.214 0.823 0.354 1.464 0.568 1.964 0.729 0.823 0.26 1.573 0.224 2.167 0.135 0.661-0.099 2.026-0.828 2.313-1.625 0.286-0.797 0.286-1.484 0.203-1.625-0.083-0.146-0.313-0.234-0.656-0.411z"/>
+        </svg>
+    </a>
+</div>
+
 <nav>
-    <!-- Spacer invizibil pentru a menține meniul centrat -->
     <div style="width: 50px;"></div> 
     
     <div class="nav-links">
@@ -161,7 +218,6 @@
             🛒 <span class="cart-badge" id="cartBadge">0</span>
         </div>
         
-        <!-- Fereastra Pop-up -->
         <div class="cart-popup" id="cartPopup">
             <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
             <p style="color: var(--text-color);">Momentan ai <strong id="popupCount" style="color: var(--accent); font-size: 1.2rem;">0</strong> servicii în coș.</p>
@@ -273,7 +329,7 @@
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Desfacerea echipamentului pentru evaluare internă (dacă este cazul).</li>
+                            <li>Desfacerea echipamentului pentru evaluare internă.</li>
                             <li>Identificarea cu precizie a componentelor defecte.</li>
                             <li>Raport detaliat asupra costurilor de reparație finale.</li>
                         </ul>
@@ -531,7 +587,7 @@
                         <ul>
                             <li>Mentenanță completă a răcirii (Curățare + pastă).</li>
                             <li>Instalarea proaspătă a sistemului de operare (Windows).</li>
-                            <li>Aducerea laptopului la starea software și hardware ideală.</li>
+                            <li>Aducerea laptopului la starea software ideală.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
@@ -555,7 +611,7 @@
                         <ul>
                             <li>Extragerea modulului cu porturi defecte.</li>
                             <li>Deconectarea/reconectarea atentă a panglicii ZIF.</li>
-                            <li>Montarea plăcuței noi și testarea transferului de date.</li>
+                            <li>Montarea plăcuței noi și testarea transferului.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
@@ -658,7 +714,7 @@
                         <ul>
                             <li>Demontarea delicată a ramei frontale.</li>
                             <li>Deconectarea cablului eDP.</li>
-                            <li>Montarea display-ului nou și testare pixeli morți.</li>
+                            <li>Montarea display-ului nou și testare pixeli.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
@@ -943,7 +999,6 @@
                 }
             });
 
-            // Ascundem cu totul litera dacă niciun card din ea nu corespunde căutării
             if(hasVisibleCards) {
                 sec.style.display = "block";
             } else {
@@ -963,28 +1018,24 @@
         total += price;
         updateCartUI();
         
-        // Deschide fereastra pop-up din meniu
         const popup = document.getElementById('cartPopup');
         popup.classList.add('active');
         
-        // Închide automat pop-up-ul după 4 secunde pentru a nu deranja
         if(popupTimeout) clearTimeout(popupTimeout);
         popupTimeout = setTimeout(() => {
             popup.classList.remove('active');
         }, 4000);
     }
     
-    // Închide fereastra dacă utilizatorul dă scroll sau mișcă mouse-ul de pe ea
     function closePopupIfOpen() {
         document.getElementById('cartPopup').classList.remove('active');
     }
 
-    // Funcția care derulează la coș doar la cerere
     function scrollToCart() {
         const cartContainer = document.getElementById('cart-container');
-        cartContainer.style.display = 'block'; // Asigură-te că este vizibil
+        cartContainer.style.display = 'block'; 
         cartContainer.scrollIntoView({ behavior: 'smooth' });
-        closePopupIfOpen(); // Ascunde fereastra pop-up
+        closePopupIfOpen(); 
     }
 
     function applyPromo() {
@@ -997,7 +1048,6 @@
     }
 
     function updateCartUI() {
-        const container = document.getElementById('cart-container');
         const list = document.getElementById('cart-list');
         const totalEl = document.getElementById('cart-total');
         const hiddenServices = document.getElementById('hidden-services');
@@ -1005,7 +1055,6 @@
         const cartBadge = document.getElementById('cartBadge');
         const popupCount = document.getElementById('popupCount');
         
-        // Actualizăm numărul de produse pe bulina roșie și în pop-up
         cartBadge.innerText = cart.length;
         popupCount.innerText = cart.length;
         
@@ -1030,6 +1079,16 @@
 
         hiddenServices.value = servicesText;
         hiddenTotal.value = finalTotal.toFixed(2) + " RON";
+    }
+
+    // --- 5. WIDGET WHATSAPP (Timer de probă: 5 secunde) ---
+    // ATENȚIE: Schimbă 5000 cu 600000 mai jos pentru a obține exact 10 minute pe site-ul final!
+    setTimeout(() => {
+        document.getElementById('wa-help-popup').classList.add('show');
+    }, 5000); 
+
+    function closeWaPopup() {
+        document.getElementById('wa-help-popup').classList.remove('show');
     }
 </script>
 
