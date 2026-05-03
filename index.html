@@ -12,17 +12,62 @@
     <meta name="keywords" content="ETHHOFAR, mentenanță IT, reparații laptopuri, service calculatoare, reparații console">
 
     <style>
+        /* Variabile pentru Teme */
         :root {
             --primary: #005bb7;
             --accent: #27ae60;
-            --dark: #1a1a1a;
             --light: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-color: #1a1a1a;
+            --border-color: #ddd;
+            --feature-bg: #f9f9f9;
+            --dark-box-bg: #1a1a1a;
+            --dark-box-text: #ffffff;
+            --dark-box-muted: #cccccc;
         }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--dark); overflow-x: hidden; }
+
+        [data-theme="dark"] {
+            --primary: #4da3ff;
+            --accent: #2ecc71;
+            --light: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #f4f4f4;
+            --border-color: #333;
+            --feature-bg: #2a2a2a;
+            --dark-box-bg: #2a2a2a;
+            --dark-box-text: #ffffff;
+            --dark-box-muted: #cccccc;
+        }
+
+        [data-theme="warm"] {
+            --primary: #d35400;
+            --accent: #27ae60;
+            --light: #fdf6e3;
+            --card-bg: #fffbf0;
+            --text-color: #4e342e;
+            --border-color: #eaddc5;
+            --feature-bg: #fdf1d6;
+            --dark-box-bg: #4e342e;
+            --dark-box-text: #fffbf0;
+            --dark-box-muted: #eaddc5;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); overflow-x: hidden; transition: background 0.3s, color 0.3s; }
         
-        nav { background: white; padding: 1rem; display: flex; justify-content: space-around; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        nav a { text-decoration: none; color: var(--dark); font-weight: bold; transition: 0.3s; padding: 5px 15px; }
+        nav { background: var(--card-bg); padding: 1rem; display: flex; justify-content: space-around; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); transition: 0.3s; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 15px; }
         nav a:hover { color: var(--primary); }
+
+        /* Teme Switcher UI */
+        .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; transition: 0.3s; }
+        .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
+        [data-theme="dark"] .theme-ring { left: 42px; } 
+        [data-theme="warm"] .theme-ring { left: 78px; } 
+        .theme-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ccc; cursor: pointer; transition: 0.3s; }
+        .theme-btn:hover { transform: scale(1.1); }
+        .theme-light { background: #f4f4f4; }
+        .theme-dark { background: #1a1a1a; border-color: #555; }
+        .theme-warm { background: #fdf6e3; border-color: #d35400; }
 
         .hero { 
             background: url('Banner Youtube.png') no-repeat center; 
@@ -33,7 +78,7 @@
             justify-content: center;
         }
 
-        .container { max-width: 1000px; margin: -50px auto 40px; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+        .container { max-width: 1000px; margin: -50px auto 40px; padding: 40px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; transition: background 0.3s, color 0.3s; border: 1px solid var(--border-color); }
         
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -45,29 +90,32 @@
         .feature-box { 
             padding: 25px; 
             border-left: 5px solid var(--primary); 
-            background: #f9f9f9; 
+            background: var(--feature-bg); 
             border-radius: 8px; 
             transition: 0.3s;
         }
-        .feature-box:hover { transform: scale(1.02); background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .feature-box:hover { transform: scale(1.02); background: var(--card-bg); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .feature-box h4 { margin-top: 0; color: var(--primary); display: flex; align-items: center; gap: 10px; }
 
         .highlight-box { 
-            background: var(--dark); 
-            color: white; 
+            background: var(--dark-box-bg); 
+            color: var(--dark-box-text); 
             padding: 30px; 
             border-radius: 12px; 
             margin-top: 50px;
             text-align: center;
+            transition: 0.3s;
         }
-/* Stiluri pentru Manifestul ETHHOFAR */
+
+        /* Stiluri pentru Manifestul ETHHOFAR */
         .manifesto-section {
-            background: var(--dark);
-            color: white;
+            background: var(--dark-box-bg);
+            color: var(--dark-box-text);
             padding: 40px;
             border-radius: 12px;
             margin-top: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: 0.3s;
         }
         .manifesto-section h3 {
             color: var(--accent);
@@ -80,7 +128,7 @@
             text-align: center;
             font-size: 1.1rem;
             margin-bottom: 30px;
-            color: #ddd;
+            color: var(--dark-box-muted);
         }
         .manifesto-item {
             display: flex;
@@ -94,22 +142,22 @@
             margin-top: 5px;
         }
         .manifesto-item strong {
-            color: white;
+            color: var(--dark-box-text);
             font-size: 1.1rem;
             display: block;
             margin-bottom: 5px;
         }
-        .manifesto-item p { margin: 0; color: #ccc; }
+        .manifesto-item p { margin: 0; color: var(--dark-box-muted); }
         
         /* Stiluri pentru butoanele de Social Media */
         .social-links { display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
-       .social-box { padding: 12px 25px; border-radius: 8px; color: white; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .social-box { padding: 12px 25px; border-radius: 8px; color: white; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
         .social-box:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); color: white; }
         .yt { background: #FF0000; }
         .dc { background: #5865F2; }
         .wa { background: #25D366; }
 
-        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; background: #eee; }
+        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: var(--text-color); background: var(--feature-bg); border-top: 1px solid var(--border-color); transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -118,6 +166,14 @@
     <a href="index.html">Acasă</a>
     <a href="servicii.html">Servicii și Tarife</a>
 </nav>
+
+<!-- Switcher Teme -->
+<div class="theme-switcher">
+    <div class="theme-ring" id="theme-ring"></div>
+    <button class="theme-btn theme-light" onclick="setTheme('light')" title="Temă Luminoasă"></button>
+    <button class="theme-btn theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"></button>
+    <button class="theme-btn theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"></button>
+</div>
 
 <div class="hero"></div>
 
@@ -147,7 +203,8 @@
             <p>Momentan activăm exclusiv online. Întâlnirea pentru preluare și predare, precum și semnarea documentelor fizice, se realizează la un punct de contact stabilit de comun acord.</p>
         </div>
     </div>
-<!-- Secțiunea Manifest -->
+
+    <!-- Secțiunea Manifest -->
     <div class="manifesto-section reveal">
         <h3>Manifestul ETHHOFAR</h3>
         <p class="manifesto-intro">Dincolo de ecrane și plăci de bază, ETHHOFAR este o inițiativă construită pe etică, transparență și valori umane.</p>
@@ -176,12 +233,12 @@
             </div>
         </div>
     </div>
+
     <div class="highlight-box reveal">
         <h3>Susține proiectul ETHHOFAR Systems!</h3>
         <p>Suntem o echipă la început de drum. Dacă apreciezi profesionalismul și transparența noastră, ne poți susține dând un share mai departe proiectului nostru și urmărindu-ne activitatea pe platformele de mai jos.</p>
         
        <div class="social-links">
-            <!-- Înlocuiește LINK_YOUTUBE și LINK_DISCORD cu link-urile tale reale -->
             <a href="https://www.youtube.com/@ETHHOFAR-Systems" class="social-box yt" target="_blank">
                 <i class="fa-brands fa-youtube" style="font-size: 1.3rem;"></i> YouTube
             </a>
@@ -203,7 +260,19 @@
 </footer>
 
 <script>
-    // Funcție pentru animația de tip Scroll Reveal
+    // --- Sistemul de Teme ---
+    function setTheme(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+        localStorage.setItem('ethhofar_theme', themeName); // Folosim aceeași cheie ca pe pagina de servicii
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Preia tema salvată sau setează 'light' by default
+        const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
+        setTheme(savedTheme);
+    });
+
+    // --- Funcție pentru animația de tip Scroll Reveal ---
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
         for (var i = 0; i < reveals.length; i++) {
@@ -216,6 +285,7 @@
         }
     }
     window.addEventListener("scroll", reveal);
+    
     // Rulăm funcția o dată la încărcare pentru elementele vizibile imediat
     reveal();
 </script>
