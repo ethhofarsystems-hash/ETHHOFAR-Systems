@@ -30,7 +30,7 @@
             --border-color: #333;
             --accent: #2ecc71;
             --text-color: #f4f4f4;
-            --btn-text: #121212; /* Text negru pe butonul "Adaugă" când fundalul e albastru luminos */
+            --btn-text: #121212; 
         }
 
         [data-theme="warm"] {
@@ -63,7 +63,7 @@
         .theme-dark { background: #1a1a1a; border-color: #555; }
         .theme-warm { background: #fdf6e3; border-color: #d35400; }
 
-        /* Grila Alfabetică */
+        /* Grila Alfabetică Fixă */
         .alphabet-nav { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; background: var(--card-bg); padding: 10px 5px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); z-index: 999; gap: 2px; }
         .alphabet-nav a { color: var(--text-color); text-decoration: none; font-size: 0.85rem; font-weight: bold; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
         .alphabet-nav a.active, .alphabet-nav a:hover { background: var(--primary); color: var(--btn-text); transform: scale(1.2); }
@@ -77,59 +77,29 @@
         .search-input { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid var(--primary); font-size: 1.1rem; background: var(--card-bg); color: var(--text-color); box-sizing: border-box; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .search-input:focus { box-shadow: 0 4px 12px rgba(0, 91, 183, 0.2); }
 
+        /* Gruparea Secțiunilor pe Litere */
+        .letter-section { scroll-margin-top: 100px; margin-bottom: 40px; }
+        
+        /* Header-ul literelor cu linia despărțitoare */
+        .letter-header { display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0 30px 0; }
+        .letter-header::after { content: ""; flex: 1; height: 1px; background: var(--border-color); margin-left: 20px; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         
-        /* Structura Flip Card Corectată */
-        .card-container { 
-            perspective: 1000px; 
-            height: 320px; /* Înălțime fixă pentru toate cardurile */
-            transition: all 0.3s ease; 
-        }
+        /* Structura Flip Card */
+        .card-container { perspective: 1000px; height: 320px; transition: all 0.3s ease; }
         .card-container.flipped { grid-column: span 2; }
         @media (max-width: 768px) { .card-container.flipped { grid-column: span 1; } }
 
         .card-inner { width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; position: relative; }
         .card-container.flipped .card-inner { transform: rotateY(180deg); }
         
-        .card-front, .card-back { 
-            width: 100%; 
-            height: 100%; 
-            -webkit-backface-visibility: hidden; 
-            backface-visibility: hidden; 
-            border-radius: 8px; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            box-sizing: border-box; 
-        }
+        .card-front, .card-back { width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 8px; position: absolute; top: 0; left: 0; box-sizing: border-box; }
         
-        .card-front { 
-            z-index: 2; 
-            border: 1px solid var(--border-color); 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
-            transition: 0.3s; 
-            background-color: var(--card-bg);
-            color: var(--text-color);
-        }
+        .card-front { z-index: 2; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; background-color: var(--card-bg); color: var(--text-color); }
         .card-front:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 91, 183, 0.1); border-color: var(--primary); }
         
-        .card-back { 
-            background-color: var(--card-back-bg); 
-            color: var(--card-back-text); 
-            padding: 20px; 
-            transform: rotateY(180deg); 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start; /* Aliniat sus pentru scroll clar */
-            z-index: 1; 
-            overflow-y: auto; /* Permite scroll în interiorul cardului pe spate */
-            border: 1px solid var(--primary); /* Evidențiază spatele cardului */
-        }
-        
-        /* Stilizare bară de scroll pentru spatele cardului (opțional, arată mai bine) */
+        .card-back { background-color: var(--card-back-bg); color: var(--card-back-text); padding: 20px; transform: rotateY(180deg); display: flex; flex-direction: column; justify-content: flex-start; z-index: 1; overflow-y: auto; border: 1px solid var(--primary); }
         .card-back::-webkit-scrollbar { width: 6px; }
         .card-back::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 4px; }
         .card-back::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
@@ -143,27 +113,18 @@
         .card-back ul { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5; }
         .card-back li { margin-bottom: 8px; }
         
-        .btn-flip { background: none; border: 2px solid var(--primary); color: var(--primary); padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-bottom: 15px; width: 100%; }
+        /* Grup de Butoane (Află mai multe + Adaugă pe același rând) */
+        .button-group { display: flex; gap: 10px; margin-top: auto; }
+        
+        .btn-flip { flex: 1; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-flip:hover { background: var(--primary); color: var(--btn-text); }
         
-        .btn-cart { background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; margin-top: auto; }
-        .btn-cart:hover { filter: brightness(1.1); } /* Efect subtil de hover bazat pe luminozitate */
+        .btn-cart { flex: 1; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-cart:hover { filter: brightness(1.1); } 
         
         .btn-back { background: #555; border: none; color: white; padding: 8px; border-radius: 4px; cursor: pointer; margin-top: auto; align-self: flex-start; }
         .btn-back:hover { background: #777; }
         
-        /* Ajustări pentru navigația alfabetică (distanțare forțată) */
-        .letter-section { 
-            scroll-margin-top: 120px; 
-            margin-top: 40px; /* Forțează spațiu între grupuri de litere */
-            padding-top: 20px;
-        }
-        /* Eliminăm spațiul deasupra primei secțiuni (Litera A) */
-        .letter-section:first-child { margin-top: 0; padding-top: 0; }
-        
-        /* Titlu invizibil pentru screen readere, util pt structură */
-        .letter-header { width: 100%; grid-column: 1 / -1; font-size: 1.5rem; color: var(--primary); border-bottom: 2px solid var(--border-color); margin-bottom: 15px; display: none; }
-
         #cart-container { background: var(--card-bg); border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
     </style>
@@ -196,17 +157,23 @@
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Caută un serviciu (ex: baterie, curatare, OS)..." onkeyup="filterCards()">
     </div>
     
-    <div class="grid" id="servicesGrid">
-        
-        <!-- ==================== LITERA A ==================== -->
-        <div class="letter-section" id="sec-A" data-letter="A" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="A">
+    <!-- CONȚINUT STRUCTURAT PE LITERE -->
+    
+    <!-- ==================== LITERA A ==================== -->
+    <div class="letter-section" id="sec-A" data-letter="A">
+        <div class="letter-header">A</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Asamblare Unitate Desktop <span>🛡️</span></h3>
-                        <p class="price">250 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Asamblare Unitate Desktop <span>🛡️</span></h3>
+                            <p class="price">250 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -221,16 +188,23 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA C ==================== -->
-        <div class="letter-section" id="sec-C" data-letter="C" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="C">
+    <!-- ==================== LITERA C ==================== -->
+    <div class="letter-section" id="sec-C" data-letter="C">
+        <div class="letter-header">C</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Consultanță Achiziție SH</h3>
-                        <p class="price">100 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Consultanță SH', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Consultanță Achiziție SH</h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Consultanță SH', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -245,17 +219,24 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA D ==================== -->
-        <div class="letter-section" id="sec-D" data-letter="D" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="D">
+    <!-- ==================== LITERA D ==================== -->
+    <div class="letter-section" id="sec-D" data-letter="D">
+        <div class="letter-header">D</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Diagnosticare</h3>
-                        <p class="price">50 RON</p>
-                        <p class="details-note">Gratuit dacă se repară la noi.</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Diagnosticare</h3>
+                            <p class="price">50 RON</p>
+                            <p class="details-note">Gratuit dacă se repară la noi.</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -269,16 +250,23 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA I ==================== -->
-        <div class="letter-section" id="sec-I" data-letter="I" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="I">
+    <!-- ==================== LITERA I ==================== -->
+    <div class="letter-section" id="sec-I" data-letter="I">
+        <div class="letter-header">I</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Instalare OS <span>🛡️</span></h3>
-                        <p class="price">100 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Instalare OS', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Instalare OS <span>🛡️</span></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Instalare OS', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -293,16 +281,23 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA Î ==================== -->
-        <div class="letter-section" id="sec-Î" data-letter="Î" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="Î">
+    <!-- ==================== LITERA Î ==================== -->
+    <div class="letter-section" id="sec-Î" data-letter="Î">
+        <div class="letter-header">Î</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Înlocuire baterie BIOS (CMOS) <span>🛡️</span></h3>
-                        <p class="price">50 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Baterie BIOS', 50)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Înlocuire baterie BIOS <span>🛡️</span></h3>
+                            <p class="price">50 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Baterie BIOS', 50)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -316,16 +311,23 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA M ==================== -->
-        <div class="letter-section" id="sec-M" data-letter="M" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="M">
+    <!-- ==================== LITERA M ==================== -->
+    <div class="letter-section" id="sec-M" data-letter="M">
+        <div class="letter-header">M</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Manoperă Montaj Baterie <span>🛡️</span></h3>
-                        <p class="price">120 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Manoperă Montaj Baterie <span>🛡️</span></h3>
+                            <p class="price">120 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -340,13 +342,18 @@
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="M">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Mentenanță (PS4, PS5, Xbox) <span>🛡️</span></h3>
-                        <p class="price">250 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Mentenanță Consolă <span>🛡️</span></h3>
+                            <p class="price">250 RON</p>
+                            <p class="details-note">PS4, PS5, Xbox</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
@@ -361,372 +368,448 @@
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="M">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Mentenanță Desktop (CPU) <span>🛡️</span></h3>
-                        <p class="price">220 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Mentenanță Desktop <span>🛡️</span></h3>
+                            <p class="price">220 RON</p>
+                            <p class="details-note">Aer sau AIO. Fără Custom Loop.</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
                             <li>Suflarea și curățarea prafului din carcasă și de pe filtre.</li>
                             <li>Curățarea ventilatorului CPU și a radiatorului aferent.</li>
-                            <li>Înlocuirea pastei termoconductoare cu pastă premium (Arctic MX-4).</li>
-                            <li>*Atenție: Nu preluăm sisteme cu răcire custom pe lichid.*</li>
+                            <li>Înlocuirea pastei termoconductoare cu pastă premium.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="M">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Mentenanță Laptop <span>🛡️</span></h3>
-                        <p class="price">200 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Mentenanță Laptop <span>🛡️</span></h3>
+                            <p class="price">200 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Demontarea capacului și deconectarea de siguranță a bateriei.</li>
-                            <li>Curățarea grilelor de ventilație și a ventilatorului de scame/praf.</li>
+                            <li>Demontarea capacului și deconectarea bateriei.</li>
+                            <li>Curățarea grilelor și ventilatorului de scame.</li>
                             <li>Înlăturarea pastei cristalizate și aplicarea uneia noi.</li>
-                            <li>Ștergerea generală a carcasei cu alcool izopropilic.</li>
+                            <li>Ștergerea carcasei cu alcool izopropilic.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="M">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Mentenanță Placă Video (GPU) <span>🛡️</span></h3>
-                        <p class="price">80 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță GPU', 80)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Mentenanță Placă Video <span>🛡️</span></h3>
+                            <p class="price">80 RON</p>
+                            <p class="details-note">GPU ieșit din garanție.</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță GPU', 80)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Extragerea GPU din slot și demontarea sistemului ei de răcire.</li>
+                            <li>Extragerea GPU din slot și demontarea răcirii.</li>
                             <li>Curățarea pastilei de siliciu a procesorului grafic.</li>
                             <li>Aplicarea pastei termice proaspete.</li>
-                            <li>*Atenție: Exclusiv pentru plăci video ieșite din perioada de garanție a producătorului.*</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA O ==================== -->
-        <div class="letter-section" id="sec-O" data-letter="O" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="O">
+    <!-- ==================== LITERA O ==================== -->
+    <div class="letter-section" id="sec-O" data-letter="O">
+        <div class="letter-header">O</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Optimizare OS & Tuning </h3>
-                        <p class="price">100 RON</p>
-                        <p class="details-note">Temperaturi minime sau performanță brută.</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Optimizare OS & Tuning </h3>
+                            <p class="price">100 RON</p>
+                            <p class="details-note">Temperaturi minime sau performanță.</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Pachetul de Tuning include:</h4>
                         <ul>
-                            <li><strong>Undervolting:</strong> Reducere voltaj pentru a elimina supraîncălzirea (Ideal laptopuri).</li>
-                            <li><strong>Overclocking:</strong> Forțarea frecvențelor CPU/GPU pt boost (Ideal desktopuri răcite).</li>
-                            <li><strong>Debloat & XMP:</strong> Curățare procese inutile și activare profil maxim RAM.</li>
-                            <li><strong>Stress Test:</strong> Verificare stabilitate la sarcină maximă.</li>
+                            <li><strong>Undervolting:</strong> Reducere voltaj pentru a elimina supraîncălzirea.</li>
+                            <li><strong>Overclocking:</strong> Forțarea frecvențelor CPU/GPU pt boost.</li>
+                            <li><strong>Debloat & XMP:</strong> Curățare procese inutile și activare maxim RAM.</li>
+                            <li><strong>Stress Test:</strong> Verificare stabilitate.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA P ==================== -->
-        <div class="letter-section" id="sec-P" data-letter="P" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="P">
+    <!-- ==================== LITERA P ==================== -->
+    <div class="letter-section" id="sec-P" data-letter="P">
+        <div class="letter-header">P</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Pachet Revitalizare <span>🛡️</span></h3>
-                        <p class="price">275 RON</p>
-                        <p class="details-note">Cel mai popular (Mentenanță completă + OS)</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Revitalizare Laptop', 275)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Pachet Revitalizare <span>🛡️</span></h3>
+                            <p class="price">275 RON</p>
+                            <p class="details-note">Mentenanță completă + OS</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Revitalizare Laptop', 275)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Mentenanță completă a răcirii (Curățare praf + schimbare pastă).</li>
-                            <li>Instalarea proaspătă a sistemului de operare dorit (Windows).</li>
-                            <li>Aducerea laptopului la starea software și hardware de "ieșit din fabrică".</li>
+                            <li>Mentenanță completă a răcirii (Curățare + pastă).</li>
+                            <li>Instalarea proaspătă a sistemului de operare (Windows).</li>
+                            <li>Aducerea laptopului la starea software și hardware ideală.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="P">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Porturi USB modulare <span>🛡️</span></h3>
-                        <p class="price">80 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Porturi USB modulare <span>🛡️</span></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Extragerea modulului secundar cu porturi defecte din laptop.</li>
-                            <li>Deconectarea și reconectarea atentă a panglicii ZIF.</li>
-                            <li>Montarea plăcuței USB noi și testarea transferului de date/curent.</li>
+                            <li>Extragerea modulului cu porturi defecte.</li>
+                            <li>Deconectarea/reconectarea atentă a panglicii ZIF.</li>
+                            <li>Montarea plăcuței noi și testarea transferului de date.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA S ==================== -->
-        <div class="letter-section" id="sec-S" data-letter="S" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="S">
+    <!-- ==================== LITERA S ==================== -->
+    <div class="letter-section" id="sec-S" data-letter="S">
+        <div class="letter-header">S</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare balamale <span>🛡️</span></h3>
-                        <p class="price">100 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare balamale <span>🛡️</span></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Demontarea completă a ansamblului display-ului de restul laptopului.</li>
-                            <li>Înlăturarea balamalelor rigide sau rupte.</li>
-                            <li>Montarea balamalelor noi și calibrarea tensiunii pentru o deschidere fluidă.</li>
+                            <li>Demontarea ansamblului display-ului.</li>
+                            <li>Înlăturarea balamalelor rigide/rupte.</li>
+                            <li>Montarea balamalelor noi și calibrarea tensiunii.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare boxe (difuzoare) <span>🛡️</span></h3>
-                        <p class="price">70 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare boxe laptop <span>🛡️</span></h3>
+                            <p class="price">70 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
                             <li>Demontarea șasiului inferior.</li>
-                            <li>Extragerea modulelor audio stânga/dreapta arse sau distorsionate.</li>
-                            <li>Montarea noilor difuzoare și dirijarea corectă a firelor.</li>
-                            <li>Test de redare audio.</li>
+                            <li>Extragerea modulelor audio distorsionate.</li>
+                            <li>Montarea noilor difuzoare și test audio.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare butoane controller <span>🛡️</span></h3>
-                        <p class="price">70 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare butoane', 70)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare butoane <span>🛡️</span></h3>
+                            <p class="price">70 RON</p>
+                            <p class="details-note">Pentru controllere</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare butoane', 70)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Demontarea carcasei controller-ului (PS/Xbox).</li>
-                            <li>Curățarea plăcii de contact de impurități și grăsimi.</li>
-                            <li>Înlocuirea pad-urilor conductoare uzate sau a butoanelor de plastic.</li>
-                            <li>Asamblarea și testarea tactilă.</li>
+                            <li>Demontarea carcasei controller-ului.</li>
+                            <li>Curățarea plăcii de contact.</li>
+                            <li>Înlocuirea pad-urilor uzate.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare ecran/panel <span>🛡️</span></h3>
-                        <p class="price">200 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare ecran', 200)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare ecran/panel <span>🛡️</span></h3>
+                            <p class="price">200 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare ecran', 200)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Demontarea delicată a ramei frontale (bezel).</li>
-                            <li>Deconectarea cablului eDP fără a deteriora pinii plăcii de bază.</li>
-                            <li>Montarea display-ului nou și prinderea acestuia în siguranțe/adeziv.</li>
-                            <li>Testare pentru pixeli morți și luminozitate.</li>
+                            <li>Demontarea delicată a ramei frontale.</li>
+                            <li>Deconectarea cablului eDP.</li>
+                            <li>Montarea display-ului nou și testare pixeli morți.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare placă de bază <span>🛡️</span></h3>
-                        <p class="price">250 RON</p>
-                        <p class="details-note">Procedură exclusiv de asamblare (fără lipire)</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare placă bază', 250)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare placă bază <span>🛡️</span></h3>
+                            <p class="price">250 RON</p>
+                            <p class="details-note">Procedură modulară de mutare</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare placă bază', 250)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Dezasamblarea completă a laptopului (până la șasiu gol).</li>
-                            <li>Mutarea tuturor componentelor (RAM, SSD, sistem răcire) pe placa donatoare funcțională.</li>
-                            <li>Reconectarea tuturor zecilor de cabluri și panglici mici.</li>
-                            <li>Asamblarea finală și testare POST.</li>
+                            <li>Dezasamblarea completă a laptopului.</li>
+                            <li>Mutarea tuturor componentelor (RAM, SSD) pe placa donatoare.</li>
+                            <li>Reconectarea tuturor cablurilor și testare POST.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare placă rețea (Wi-Fi) <span>🛡️</span></h3>
-                        <p class="price">80 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare placă Wi-Fi', 80)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare placă Wi-Fi <span>🛡️</span></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare placă Wi-Fi', 80)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Deconectarea cablurilor coaxiale foarte fragile ale antenelor.</li>
-                            <li>Extragerea plăcuței Wi-Fi/Bluetooth defecte.</li>
-                            <li>Montarea plăcii noi și instalarea driverelor corespunzătoare în Windows.</li>
+                            <li>Deconectarea cablurilor coaxiale fragile.</li>
+                            <li>Extragerea plăcuței Wi-Fi/BT defecte.</li>
+                            <li>Montarea plăcii noi și instalare drivere.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare radiator/ventilator <span>🛡️</span></h3>
-                        <p class="price">100 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare radiator/ventilator <span>🛡️</span></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Demontarea sistemului termic vechi cu motor gripat sau care zdrăngăne.</li>
+                            <li>Demontarea sistemului termic vechi/gripat.</li>
                             <li>Curățarea cipurilor de resturile pastei vechi.</li>
-                            <li>Montarea ansamblului termic nou, conectarea senzorilor.</li>
-                            <li>Testarea turațiilor la sarcină maximă.</li>
+                            <li>Montarea ansamblului termic nou și test turații.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare tastatură modulară <span>🛡️</span></h3>
-                        <p class="price">100 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare tastatură <span>🛡️</span></h3>
+                            <p class="price">100 RON</p>
+                            <p class="details-note">Modele modulare cu clipsuri</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Extragerea tastaturii din clemele ramei palmrest (fără topire de plastic).</li>
-                            <li>Deconectarea panglicii de date și iluminare (dacă există).</li>
-                            <li>Montarea tastaturii noi și verificarea apăsării fiecărei taste.</li>
+                            <li>Extragerea tastaturii din clemele ramei.</li>
+                            <li>Deconectarea panglicii de date.</li>
+                            <li>Montarea tastaturii noi și testarea fiecărei taste.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare Touchpad <span>🛡️</span></h3>
-                        <p class="price">90 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare Touchpad <span>🛡️</span></h3>
+                            <p class="price">90 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Extragerea bateriei interne (touchpad-ul este de obicei sub ea).</li>
-                            <li>Demontarea modulului de sticlă/plastic defect.</li>
-                            <li>Fixarea modulului nou și conectarea panglicii. Testarea gesturilor multi-touch.</li>
+                            <li>Extragerea bateriei interne pentru acces.</li>
+                            <li>Demontarea modulului defect.</li>
+                            <li>Fixarea modulului nou și testare gesturi multi-touch.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card-container letter-marker" data-letter="S">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Schimbare webcam/microfon <span>🛡️</span></h3>
-                        <p class="price">100 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Schimbare webcam/microfon <span>🛡️</span></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
                             <li>Dezlipirea ramei display-ului.</li>
-                            <li>Extragerea modulului camerei web integrate.</li>
-                            <li>Montarea piesei noi, reatașarea ramei și verificarea feed-ului video/audio.</li>
+                            <li>Extragerea modulului camerei integrate.</li>
+                            <li>Montarea piesei noi și verificarea feed-ului.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ==================== LITERA U ==================== -->
-        <div class="letter-section" id="sec-U" data-letter="U" style="display: contents;">
-            <div class="card-container letter-marker" data-letter="U">
+    <!-- ==================== LITERA U ==================== -->
+    <div class="letter-section" id="sec-U" data-letter="U">
+        <div class="letter-header">U</div>
+        <div class="grid">
+            <div class="card-container">
                 <div class="card-inner">
                     <div class="card-front card">
-                        <h3>Upgrade RAM / SSD <span>🛡️</span></h3>
-                        <p class="price">80 RON</p>
-                        <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
-                        <button class="btn-cart" onclick="addToCart('Upgrade RAM/SSD', 80)">🛒 Adaugă</button>
+                        <div>
+                            <h3>Upgrade RAM / SSD <span>🛡️</span></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Ce include?</button>
+                            <button class="btn-cart" onclick="addToCart('Upgrade RAM/SSD', 80)">🛒 Adaugă</button>
+                        </div>
                     </div>
                     <div class="card-back">
                         <h4>Procedura include:</h4>
                         <ul>
-                            <li>Desfacerea capacului și măsuri de prevenire a staticii (ESD).</li>
-                            <li>Includerea și fixarea modulului de RAM sau unității de stocare NVMe/SATA.</li>
-                            <li>Recunoașterea piesei în BIOS și formatarea corectă a SSD-ului nou în partiții vizibile.</li>
+                            <li>Desfacerea capacului și măsuri ESD.</li>
+                            <li>Fixarea modulului de RAM sau SSD.</li>
+                            <li>Recunoașterea piesei în BIOS și partiționare (pentru SSD).</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div> <!-- End Grid -->
+    </div>
 
    <!-- Coș Virtual -->
     <div id="cart-container" style="display:none;">
@@ -780,16 +863,13 @@
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
         
-        // --- 2. GENERARE GRILĂ ALFABETICĂ (Corectată pt scroll) ---
-        // Folosim elementele cu display:contents ca containere logice, dar observăm cardurile marker
+        // --- 2. GENERARE GRILĂ ALFABETICĂ ---
         const navContainer = document.getElementById('alphabet-nav');
-        const letterMarkers = document.querySelectorAll('.letter-marker');
+        const sections = document.querySelectorAll('.letter-section');
         
-        let uniqueLetters = [];
-        letterMarkers.forEach(marker => {
-            const letter = marker.getAttribute('data-letter');
-            if(!uniqueLetters.includes(letter) && letter) {
-                uniqueLetters.push(letter);
+        sections.forEach(sec => {
+            const letter = sec.getAttribute('data-letter');
+            if(letter) {
                 const link = document.createElement('a');
                 link.href = `#sec-${letter}`;
                 link.innerText = letter;
@@ -797,8 +877,7 @@
             }
         });
 
-        // Configurare precisă pentru Observer (triggerează când un card ajunge la ~150px de sus)
-        const observerOptions = { rootMargin: "-150px 0px -60% 0px" };
+        const observerOptions = { rootMargin: "-100px 0px -70% 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -810,20 +889,33 @@
             });
         }, observerOptions);
         
-        letterMarkers.forEach(marker => observer.observe(marker));
+        sections.forEach(sec => observer.observe(sec));
     });
 
     // --- 3. FUNCȚIA BAREI DE CĂUTARE INTELIGENTĂ ---
     function filterCards() {
         const filter = document.getElementById('searchInput').value.toLowerCase();
-        const cards = document.querySelectorAll('.card-container');
+        const sections = document.querySelectorAll('.letter-section');
         
-        cards.forEach(card => {
-            const text = card.innerText.toLowerCase();
-            if (text.includes(filter)) {
-                card.style.display = ""; 
+        sections.forEach(sec => {
+            let hasVisibleCards = false;
+            const cards = sec.querySelectorAll('.card-container');
+            
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    card.style.display = ""; 
+                    hasVisibleCards = true;
+                } else {
+                    card.style.display = "none"; 
+                }
+            });
+
+            // Ascundem cu totul litera dacă niciun card din ea nu corespunde căutării
+            if(hasVisibleCards) {
+                sec.style.display = "block";
             } else {
-                card.style.display = "none"; 
+                sec.style.display = "none";
             }
         });
     }
