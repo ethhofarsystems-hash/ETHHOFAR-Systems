@@ -6,118 +6,188 @@
     <title>Servicii | ETHHOFAR Systems</title>
     <link rel="icon" type="image/png" href="logo_fara_text-cerc.png">
     <style>
-        :root { --primary: #005bb7; --dark: #1a1a1a; --light: #f4f4f4; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--dark); }
-        nav { background: white; padding: 1rem; display: flex; justify-content: space-around; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        /* Variabile pentru Teme */
+        :root { 
+            --primary: #005bb7; 
+            --dark: #1a1a1a; 
+            --light: #f4f4f4; 
+            --card-bg: #ffffff; 
+            --border-color: #ddd;
+            --accent: #27ae60; /* Verde pentru garanție/prețuri */
+        }
+
+        [data-theme="dark"] {
+            --primary: #4da3ff; 
+            --dark: #f4f4f4; 
+            --light: #121212; 
+            --card-bg: #1e1e1e; 
+            --border-color: #333;
+            --accent: #2ecc71;
+        }
+
+        [data-theme="warm"] {
+            --primary: #d35400; 
+            --dark: #4e342e; 
+            --light: #fdf6e3; 
+            --card-bg: #fffbf0; 
+            --border-color: #eaddc5;
+            --accent: #27ae60;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--dark); transition: background 0.3s, color 0.3s; }
+        
+        nav { background: var(--card-bg); padding: 1rem; display: flex; justify-content: center; gap: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; transition: 0.3s; border-bottom: 1px solid var(--border-color); }
         nav a { text-decoration: none; color: var(--dark); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
         nav a:hover { color: var(--primary); }
         
-        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        /* Schimbătorul de teme - Stânga Sus (Sub Nav) */
+        .theme-switcher {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            display: flex;
+            gap: 12px;
+            background: var(--card-bg);
+            padding: 8px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            z-index: 999;
+        }
+        .theme-ring {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            top: 6px;
+            left: 6px; /* Poziția default pt Light */
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            box-sizing: border-box;
+        }
+        /* Mutarea inelului pe baza temei setate pe HTML */
+        [data-theme="dark"] .theme-ring { left: 42px; } /* 6 + 24 btn + 12 gap */
+        [data-theme="warm"] .theme-ring { left: 78px; } /* 42 + 24 btn + 12 gap */
+        
+        .theme-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ccc; cursor: pointer; transition: 0.3s; }
+        .theme-btn:hover { transform: scale(1.1); }
+        .theme-light { background: #f4f4f4; }
+        .theme-dark { background: #1a1a1a; border-color: #555; }
+        .theme-warm { background: #fdf6e3; border-color: #d35400; }
+
+        /* Grila Alfabetică - Dreapta */
+        .alphabet-nav {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 10px 5px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            z-index: 999;
+            gap: 2px;
+        }
+        .alphabet-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .alphabet-nav a.active, .alphabet-nav a:hover { background: var(--primary); color: white; transform: scale(1.2); }
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; padding-right: 60px; /* spațiu pentru litere */ }
+        
+        /* Banner Garanție */
+        .warranty-banner {
+            text-align: center;
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px dashed var(--accent);
+            color: var(--accent);
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         
-        .card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 8px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 91, 183, 0.1); border-color: var(--primary); }
-        .card h3 { margin-top: 0; font-size: 1.1rem; }
+        .card h3 { margin-top: 0; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: flex-start; }
         .price { font-size: 1.4rem; font-weight: bold; color: #e67e22; margin: 10px 0; transition: color 0.3s ease; }
-        .card:hover .price { color: #27ae60; }
-        .warranty { font-size: 0.8rem; color: #27ae60; margin-bottom: 15px; font-style: italic; }
+        .card:hover .price { color: var(--accent); }
+        .details-note { font-size: 0.8rem; color: #888; margin-bottom: 15px; font-style: italic; }
         
-        .btn-cart { background: var(--dark); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn-cart { background: var(--dark); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; margin-top: auto; }
         .btn-cart:hover { background: var(--primary); }
         
-        #cart-container { background: white; border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
+        #cart-container { background: var(--card-bg); border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
 
-        /* Efect 3D tip Carte (Flip Card) + Dublare dimensiune strict la întoarcere */
+        /* Efect 3D tip Carte (Flip Card) Corectat */
         .card-container {
             perspective: 1000px;
-            min-height: 280px;
+            min-height: 360px; /* Înălțime crescută pt a nu ieși butonul */
             transition: all 0.3s ease;
         }
-        
-        /* Când cardul este întors, ocupă 2 spații pe grilă (pe ecrane mari) */
-        .card-container.flipped {
-            grid-column: span 2;
-        }
-
-        /* Pe telefoane păstrăm lățimea normală ca să nu iasă din ecran */
-        @media (max-width: 768px) {
-            .card-container.flipped {
-                grid-column: span 1;
-            }
-        }
+        .card-container.flipped { grid-column: span 2; }
+        @media (max-width: 768px) { .card-container.flipped { grid-column: span 1; } }
 
         .card-inner {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
             position: relative;
         }
-        
-        .card-container.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
+        .card-container.flipped .card-inner { transform: rotateY(180deg); }
         
         .card-front, .card-back {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             -webkit-backface-visibility: hidden; 
             backface-visibility: hidden;
-            background-color: white; 
+            background-color: var(--card-bg); 
             border-radius: 8px;
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: absolute; top: 0; left: 0;
+            box-sizing: border-box;
         }
         
-        .card-front {
-            /* Fără padding aici, îl ia direct din clasa .card */
-            box-sizing: border-box;
-            z-index: 2; 
-        }
+        .card-front { z-index: 2; border: 1px solid var(--border-color); }
+        .card-front:hover { border-color: var(--primary); }
         
         .card-back {
             background-color: var(--dark);
-            color: white;
-            padding: 20px;
+            color: white; padding: 20px;
             transform: rotateY(180deg);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            display: flex; flex-direction: column; justify-content: center;
             z-index: 1;
-            border-radius: 8px;
         }
         
         .card-back h4 { color: var(--accent); margin-top: 0; margin-bottom: 10px; font-size: 1.2rem; }
         .card-back ul { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; color: #ddd; line-height: 1.5; }
         .card-back li { margin-bottom: 8px; }
         
-        .btn-flip {
-            background: none;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            margin-bottom: 10px;
-        }
+        .btn-flip { background: none; border: 2px solid var(--primary); color: var(--primary); padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-bottom: 15px; }
         .btn-flip:hover { background: var(--primary); color: white; }
         
-        .btn-back {
-            background: #555;
-            border: none;
-            color: white;
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: auto;
-            align-self: flex-start;
-        }
+        .btn-back { background: #555; border: none; color: white; padding: 8px; border-radius: 4px; cursor: pointer; margin-top: auto; align-self: flex-start; }
         .btn-back:hover { background: #777; }
+        
+        /* Pentru a lega elementele pentru meniul lateral */
+        .letter-section { scroll-margin-top: 100px; }
     </style>
 </head>
 <body>
@@ -127,102 +197,224 @@
     <a href="servicii.html">Servicii și Tarife</a>
 </nav>
 
+<!-- Schimbător de teme -->
+<div class="theme-switcher">
+    <div class="theme-ring" id="theme-ring"></div>
+    <button class="theme-btn theme-light" onclick="setTheme('light')" title="Temă Luminoasă"></button>
+    <button class="theme-btn theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"></button>
+    <button class="theme-btn theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"></button>
+</div>
+
+<!-- Grila Alfabetică -->
+<div class="alphabet-nav" id="alphabet-nav">
+    <!-- Generată automat de JavaScript din clasele .letter-section -->
+</div>
+
 <div class="container">
-    <h2 style="text-align: center; margin-bottom: 30px;">Toate Serviciile Noastre</h2>
+    <h2 style="text-align: center; margin-bottom: 20px;">Toate Serviciile Noastre</h2>
+    
+    <div class="warranty-banner">
+        🛡️ Toate serviciile marcate cu acest simbol beneficiază de o garanție a manoperei de 90 de zile.
+    </div>
     
     <div class="grid">
-        
-       <!-- Card Flip pentru Optimizare, Undervolt & Overclocking -->
-        <div class="card-container">
+        <!-- CARDURILE ORDONATE ALFABETIC -->
+
+        <div class="card letter-section" id="sec-A" data-letter="A">
+            <h3>Asamblare Unitate Desktop <span>🛡️</span></h3>
+            <p class="price">250 RON</p>
+            <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card letter-section" id="sec-C" data-letter="C">
+            <h3>Consultanță Achiziție dispozitive SH</h3>
+            <p class="price">100 RON</p>
+            <p class="details-note">Diagnosticare hardware pe loc.</p>
+            <button class="btn-cart" onclick="addToCart('Consultanță dispozitive SH', 100)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card letter-section" id="sec-D" data-letter="D">
+            <h3>Diagnosticare</h3>
+            <p class="price">50 RON</p>
+            <p class="details-note">Gratuit dacă reparația se efectuează la noi.</p>
+            <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card letter-section" id="sec-I" data-letter="I">
+            <h3>Instalare OS <span>🛡️</span></h3>
+            <p class="price">100 RON</p>
+            <button class="btn-cart" onclick="addToCart('Instalare OS', 100)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card letter-section" id="sec-Î" data-letter="Î">
+            <h3>Înlocuire baterie BIOS (CR2032/CMOS) <span>🛡️</span></h3>
+            <p class="price">50 RON</p>
+            <button class="btn-cart" onclick="addToCart('Înlocuire baterie BIOS', 50)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card letter-section" id="sec-M" data-letter="M">
+            <h3>Manoperă Montaj baterie & Curățare <span>🛡️</span></h3>
+            <p class="price">120 RON</p>
+            <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Mentenanță (PS4, PS5, Xbox) <span>🛡️</span></h3>
+            <p class="price">250 RON</p>
+            <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Mentenanță Desktop (Curățare + Pastă) <span>🛡️</span></h3>
+            <p class="price">220 RON</p>
+            <p class="details-note">Valabil pt coolere aer sau AIO. Nu preluăm Custom Loop.</p>
+            <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Mentenanță Laptop <span>🛡️</span></h3>
+            <p class="price">200 RON</p>
+            <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Mentenanță Placă Video (GPU) <span>🛡️</span></h3>
+            <p class="price">80 RON</p>
+            <p class="details-note">Doar pentru componente ieșite din garanție.</p>
+            <button class="btn-cart" onclick="addToCart('Mentenanță Placă Video', 80)">🛒 Adaugă</button>
+        </div>
+
+        <!-- Card Flip pentru Optimizare (Litera O) -->
+        <div class="card-container letter-section" id="sec-O" data-letter="O">
             <div class="card-inner">
-                <!-- Fața Cardului -->
                 <div class="card-front card">
-                    <h3>Optimizare OS, Undervolt & Overclocking</h3>
+                    <h3>Optimizare OS, Undervolt & Overclock</h3>
                     <p class="price">100 RON</p>
-                    <p class="warranty">Alege între temperaturi minime sau performanță brută stoarsă la maximum.</p>
+                    <p class="details-note">Temperaturi minime sau performanță brută la maximum.</p>
                     <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Află mai multe</button>
-                    <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)" style="margin-top: auto;">🛒 Adaugă</button>
+                    <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)">🛒 Adaugă</button>
                 </div>
-                
-                <!-- Spatele Cardului -->
                 <div class="card-back">
-                    <h4>Pachetul de Tuning Complet include:</h4>
+                    <h4>Pachetul de Tuning include:</h4>
                     <ul>
-                        <li><strong>Undervolting:</strong> Reducerea voltajului pentru a elimina supraîncălzirea, menținând FPS-urile (Ideal pentru laptopuri).</li>
-                        <li><strong>Overclocking (La cerere):</strong> Forțarea controlată a frecvențelor CPU/GPU pentru un boost de performanță (Ideal pentru desktopuri bine răcite).</li>
-                        <li><strong>Debloat & XMP:</strong> Curățarea Windows-ului de aplicații inutile și activarea profilului maxim de RAM.</li>
-                        <li><strong>Stress Test:</strong> Verificarea temperaturilor și stabilității sistemului.</li>
+                        <li><strong>Undervolting:</strong> Reducere voltaj pentru a elimina supraîncălzirea (Ideal laptopuri).</li>
+                        <li><strong>Overclocking:</strong> Forțarea frecvențelor CPU/GPU pt boost (Ideal desktopuri răcite).</li>
+                        <li><strong>Debloat & XMP:</strong> Curățare OS și activare profil maxim RAM.</li>
+                        <li><strong>Stress Test:</strong> Verificare stabilitate.</li>
                     </ul>
-                    <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi la preț</button>
+                    <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                 </div>
             </div>
         </div>
-        
-        <div class="card">
-            <h3>Mentenanță Desktop (Curățare + Pastă CPU)</h3>
-            <p class="price">220 RON</p>
-            <p class="warranty">Valabil pentru coolere pe aer sau AIO. Nu preluăm sisteme Custom Loop.</p>
-            <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)">🛒 Adaugă</button>
+
+        <div class="card letter-section" id="sec-P" data-letter="P">
+            <h3>Pachet Revitalizare (Mentenanță+OS) <span>🛡️</span></h3>
+            <p class="price">275 RON</p>
+            <button class="btn-cart" onclick="addToCart('Pachet Revitalizare Laptop', 275)">🛒 Adaugă</button>
         </div>
+
         <div class="card">
-            <h3>Mentenanță Placă Video (GPU)</h3>
+            <h3>Porturi USB modulare <span>🛡️</span></h3>
             <p class="price">80 RON</p>
-            <p class="warranty">Curățare și înlocuire pastă termoconductoare. Doar pentru componente ieșite din garanție.</p>
-            <button class="btn-cart" onclick="addToCart('Mentenanță Placă Video', 80)">🛒 Adaugă</button>
+            <button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă</button>
         </div>
-        <div class="card"><h3>Asamblare Unitate Desktop </h3><p class="price">250 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Consultanță Achiziție dispozitive SH</h3><p class="price">100 RON</p><p class="warranty">Diagnosticare hardware pe loc</p><button class="btn-cart" onclick="addToCart('Consultanță dispozitive SH', 100)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Pachet Revitalizare Laptop (Mentenanță + OS)</h3><p class="price">275 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Pachet Revitalizare Laptop', 275)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Mentenanță Laptop</h3><p class="price">200 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Instalare OS</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Instalare OS', 100)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Manoperă Montaj baterie & Curățare adeziv</h3><p class="price">120 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Înlocuire baterie BIOS (CR2032 / CMOS)</h3><p class="price">50 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Înlocuire baterie BIOS', 50)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare placă de rețea (Wi-Fi/BT)</h3><p class="price">80 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare placă rețea', 80)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Upgrade RAM / SSD (montaj + verificare)</h3><p class="price">80 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Upgrade RAM / SSD', 80)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare placă de bază (fără lipire)</h3><p class="price">250 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare placă de bază', 250)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare ecran/panel laptop</h3><p class="price">200 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare ecran laptop', 200)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare tastatură (modulară)</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare Touchpad</h3><p class="price">90 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Porturi USB modulare</h3><p class="price">80 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Mentenanță (PS4, PS5, Xbox)</h3><p class="price">250 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare butoane/carcasă controller</h3><p class="price">70 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare butoane controller', 70)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare boxe (difuzoare) laptop</h3><p class="price">70 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare balamale</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare webcam/microfon</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Schimbare radiator/ventilator</h3><p class="price">100 RON</p><p class="warranty">Garanție manoperă 90 zile</p><button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă</button></div>
-        <div class="card"><h3>Diagnosticare (0 RON dacă se repară)</h3><p class="price">50 RON</p><p class="warranty">Detalii transparente</p><button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button></div>
+
+        <div class="card letter-section" id="sec-S" data-letter="S">
+            <h3>Schimbare balamale <span>🛡️</span></h3>
+            <p class="price">100 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare boxe (difuzoare) laptop <span>🛡️</span></h3>
+            <p class="price">70 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare butoane/carcasă controller <span>🛡️</span></h3>
+            <p class="price">70 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare butoane controller', 70)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare ecran/panel laptop <span>🛡️</span></h3>
+            <p class="price">200 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare ecran laptop', 200)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare placă de bază (fără lipire) <span>🛡️</span></h3>
+            <p class="price">250 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare placă de bază', 250)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare placă rețea (Wi-Fi/BT) <span>🛡️</span></h3>
+            <p class="price">80 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare placă rețea', 80)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare radiator/ventilator <span>🛡️</span></h3>
+            <p class="price">100 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare tastatură (modulară) <span>🛡️</span></h3>
+            <p class="price">100 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare Touchpad <span>🛡️</span></h3>
+            <p class="price">90 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card">
+            <h3>Schimbare webcam/microfon <span>🛡️</span></h3>
+            <p class="price">100 RON</p>
+            <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă</button>
+        </div>
+
+        <div class="card letter-section" id="sec-U" data-letter="U">
+            <h3>Upgrade RAM / SSD (montaj+verificare) <span>🛡️</span></h3>
+            <p class="price">80 RON</p>
+            <button class="btn-cart" onclick="addToCart('Upgrade RAM / SSD', 80)">🛒 Adaugă</button>
+        </div>
+
     </div>
 
-   <!-- Coș Virtual actualizat cu Reduceri -->
-    <div id="cart-container" style="display:none; background: white; border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px;">
+   <!-- Coș Virtual -->
+    <div id="cart-container" style="display:none;">
         <h3 style="margin-top:0;">Finalizare Comandă</h3>
         <p>Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la final.</p>
         
         <ul id="cart-list" style="font-weight: bold; line-height: 1.8;"></ul>
         
-        <!-- SECȚIUNEA NOUĂ: Cod de Reducere -->
-        <div style="margin: 20px 0; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px dashed #ccc;">
+        <div style="margin: 20px 0; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; border: 1px dashed var(--border-color);">
             <label style="display: block; font-size: 0.9rem; margin-bottom: 5px;">Ai un cod de reducere? (Opțional)</label>
             <div style="display: flex; gap: 10px;">
-                <input type="text" id="promoInput" placeholder="Introdu codul aici" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;">
+                <input type="text" id="promoInput" placeholder="Introdu codul" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1;">
                 <button type="button" onclick="applyPromo()" style="padding: 10px 20px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Validare</button>
             </div>
             <p id="promoMessage" style="font-size: 0.9rem; margin-top: 8px; margin-bottom: 0; font-weight: bold;"></p>
         </div>
 
-        <p style="font-size: 1.2rem;"><strong>Total estimat manoperă: <span id="cart-total" style="color: #e67e22;">0</span> RON</strong></p>
+        <p style="font-size: 1.2rem;"><strong>Total estimat manoperă: <span id="cart-total" style="color: var(--accent);">0</span> RON</strong></p>
 
-      <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
+        <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
             <input type="text" name="Nume" placeholder="Numele tău complet" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <input type="email" name="Email" placeholder="Adresa de email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             <input type="tel" name="Telefon" placeholder="Număr de telefon" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             
-          <!-- Câmpul pentru modelul echipamentului cu explicație -->
             <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 5px; margin-bottom: 5px;">
-                <label style="font-size: 0.9rem; color: #444; line-height: 1.4;">
-                    Te rugăm să introduci marca și modelul complet (ca în exemplul de mai jos) pentru a-l identifica mai ușor și a reveni cu un răspuns ferm pentru tine:
+                <label style="font-size: 0.9rem; color: #888; line-height: 1.4;">
+                    Te rugăm să introduci marca și modelul complet pentru a-l identifica mai ușor:
                 </label>
-                <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
             <input type="hidden" name="Servicii_Comandate" id="hidden-services">
             <input type="hidden" name="Total_Estimata" id="hidden-total">
@@ -237,9 +429,49 @@
 </footer>
 
 <script>
-   let cart = [];
+    // --- 1. SISTEMUL DE TEME ---
+    function setTheme(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+        localStorage.setItem('ethhofar_theme', themeName);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
+        setTheme(savedTheme);
+        
+        // --- 2. GENERARE GRILĂ ALFABETICĂ ---
+        const sections = document.querySelectorAll('.letter-section');
+        const navContainer = document.getElementById('alphabet-nav');
+        
+        // Creăm link-urile literelor găsite pe pagină
+        sections.forEach(sec => {
+            const letter = sec.getAttribute('data-letter');
+            const link = document.createElement('a');
+            link.href = `#sec-${letter}`;
+            link.innerText = letter;
+            navContainer.appendChild(link);
+        });
+
+        // Observer pt a lumina litera corectă la scroll
+        const observerOptions = { rootMargin: "-10% 0px -80% 0px" }; // declanșează când atinge sus
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const letter = entry.target.getAttribute('data-letter');
+                    document.querySelectorAll('.alphabet-nav a').forEach(a => a.classList.remove('active'));
+                    const activeLink = document.querySelector(`.alphabet-nav a[href="#sec-${letter}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => observer.observe(sec));
+    });
+
+    // --- 3. LOGICA COȘULUI ---
+    let cart = [];
     let total = 0;
-    let discountMultiplier = 0; // 0 = fără reducere, 0.10 = 10% reducere
+    let discountMultiplier = 0;
 
     function addToCart(name, price) {
         cart.push({name, price});
@@ -249,24 +481,22 @@
     }
 
     function applyPromo() {
-        // Preluăm codul și îl transformăm în litere mici pentru a nu conta cum e scris (ex: motanel10 = Motanel10)
         const code = document.getElementById('promoInput').value.trim().toLowerCase();
         const msg = document.getElementById('promoMessage');
         
         if (code === 'motanel10') {
-            discountMultiplier = 0.10; // 10% reducere
+            discountMultiplier = 0.10;
             msg.innerText = "✅ Cod valid! Ai primit 10% reducere.";
-            msg.style.color = "#27ae60"; // verde
+            msg.style.color = "var(--accent)";
         } else if (code === '') {
             msg.innerText = "Introduceți un cod înainte de validare.";
-            msg.style.color = "#e67e22"; // portocaliu
+            msg.style.color = "#e67e22";
         } else {
-            discountMultiplier = 0; // resetăm reducerea dacă pune un cod greșit
+            discountMultiplier = 0;
             msg.innerText = "❌ Cod invalid. Verifică și încearcă din nou.";
             msg.style.color = "red";
         }
-        
-        updateCartUI(); // Recalculăm totalul
+        updateCartUI();
     }
 
     function updateCartUI() {
@@ -278,7 +508,6 @@
         
         container.style.display = 'block';
         list.innerHTML = '';
-        
         let servicesText = "";
         
         cart.forEach((item) => {
@@ -288,18 +517,15 @@
             servicesText += item.name + " (" + item.price + " RON), ";
         });
         
-        // Calculăm noul total
         let finalTotal = total - (total * discountMultiplier);
         
-        // Afișăm în interfață prețul tăiat dacă avem reducere
         if (discountMultiplier > 0) {
-            totalEl.innerHTML = `<s style="color: #999;">${total}</s> <span style="color: #27ae60;">${finalTotal.toFixed(2)}</span>`;
-            servicesText += ` | *** Reducere aplicată: Motanel10 (-10%) ***`;
+            totalEl.innerHTML = `<s style="color: #999;">${total}</s> <span style="color: var(--accent);">${finalTotal.toFixed(2)}</span>`;
+            servicesText += ` | *** Reducere: Motanel10 (-10%) ***`;
         } else {
             totalEl.innerText = total;
         }
 
-        // Actualizăm câmpurile ascunse pentru emailul pe care îl primești tu
         hiddenServices.value = servicesText;
         hiddenTotal.value = finalTotal.toFixed(2) + " RON";
     }
