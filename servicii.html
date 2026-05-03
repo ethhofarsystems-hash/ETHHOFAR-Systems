@@ -57,7 +57,7 @@
         .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
         .nav-cart { cursor: pointer; font-size: 1.5rem; position: relative; display: flex; align-items: center; padding: 10px; border-radius: 50%; transition: 0.3s; z-index: 10; background: transparent; }
         
-        /* Efect Cerc Roșu la apăsarea coșului */
+        /* Efect Cerc Roșu MUTEZAT LA ADAUGARE */
         .cart-highlight { animation: ring-pulse 2s ease-out; }
         @keyframes ring-pulse {
             0% { box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.7); }
@@ -197,11 +197,11 @@
             transform: scale(1.1);
         }
 
-        /* Bara minimizată WhatsApp */
+        /* Bara minimizată WhatsApp MUTAȚĂ MAI JOS */
         .wa-minimized {
             position: fixed;
             right: -40px; 
-            bottom: 120px;
+            bottom: 30px; /* Coborât pentru a nu bloca alfabetul */
             background: #25D366;
             color: white;
             padding: 15px 5px;
@@ -938,7 +938,7 @@
         </div>
     </div>
 
-   <!-- Coș Virtual (Ascuns până se apasă pe iconița din nav) -->
+   <!-- Coș Virtual -->
     <div id="cart-container" style="display:none;">
         <h3 style="margin-top:0;">Finalizare Comandă</h3>
         <p>Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la final.</p>
@@ -965,7 +965,7 @@
                 <label style="font-size: 0.9rem; color: var(--text-color); line-height: 1.4;">
                     Te rugăm să introduci marca și modelul complet pentru a-l identifica mai ușor:
                 </label>
-                <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-color);">
+                <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-color);">
             </div>
             <input type="hidden" name="Servicii_Comandate" id="hidden-services">
             <input type="hidden" name="Total_Estimata" id="hidden-total">
@@ -1046,26 +1046,37 @@
         });
     }
 
-    // --- 4. LOGICA COȘULUI NOU (CU ELIMINARE ȘI ID-URI UNICE) ---
+    // --- 4. LOGICA COȘULUI NOU ---
     let cart = [];
     let total = 0;
     let discountMultiplier = 0;
     let popupTimeout;
+    let highlightTimeout;
 
     function addToCart(name, price) {
-        // Generăm un ID unic pentru a putea șterge precis produsul
         const id = Date.now() + Math.random();
         cart.push({ id, name, price });
         total += price;
         updateCartUI();
         
+        // Afișează fereastra de popup
         const popup = document.getElementById('cartPopup');
         popup.classList.add('active');
-        
         if(popupTimeout) clearTimeout(popupTimeout);
         popupTimeout = setTimeout(() => {
             popup.classList.remove('active');
         }, 4000);
+
+        // Declanșează inelul roșu din jurul coșului EXACT CÂND SE ADAUGĂ produsul
+        const cartIcon = document.getElementById('navCartIcon');
+        cartIcon.classList.remove('cart-highlight');
+        void cartIcon.offsetWidth; // Forcează un "reflow" pentru a reporni animația dacă e deja activă
+        cartIcon.classList.add('cart-highlight');
+        
+        if(highlightTimeout) clearTimeout(highlightTimeout);
+        highlightTimeout = setTimeout(() => {
+            cartIcon.classList.remove('cart-highlight');
+        }, 2000);
     }
     
     function removeItem(id) {
@@ -1082,15 +1093,7 @@
     }
 
     function scrollToCart() {
-        const cartIcon = document.getElementById('navCartIcon');
         const cartContainer = document.getElementById('cart-container');
-        
-        // Efectul de puls roșu
-        cartIcon.classList.add('cart-highlight');
-        setTimeout(() => {
-            cartIcon.classList.remove('cart-highlight');
-        }, 2000);
-
         cartContainer.style.display = 'block'; 
         cartContainer.scrollIntoView({ behavior: 'smooth' });
         closePopupIfOpen(); 
