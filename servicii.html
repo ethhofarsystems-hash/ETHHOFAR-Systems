@@ -27,41 +27,61 @@
         
         #cart-container { background: white; border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
-   /* Efect 3D tip Carte (Flip Card) */
+ /* Efect 3D tip Carte (Flip Card) + Dublare dimensiune */
         .card-container {
             perspective: 1000px;
-            min-height: 280px; /* Asigură spațiu suficient pentru text */
+            min-height: 280px;
+            transition: all 0.3s ease; /* Ajută la o tranziție mai curată */
         }
+        
+        /* Când cardul este întors, ocupă 2 spații pe grilă (pe ecrane mari) */
+        .card-container.flipped {
+            grid-column: span 2;
+        }
+
+        /* Pe telefoane păstrăm lățimea normală ca să nu iasă din ecran */
+        @media (max-width: 768px) {
+            .card-container.flipped {
+                grid-column: span 1;
+            }
+        }
+
         .card-inner {
             width: 100%;
             height: 100%;
-            transition: transform 0.6s;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); /* O rotație mult mai fină și naturală */
             transform-style: preserve-3d;
             position: relative;
         }
+        
         .card-container.flipped .card-inner {
             transform: rotateY(180deg);
         }
+        
         .card-front, .card-back {
             width: 100%;
             height: 100%;
+            /* Reparația pentru bug-ul de dispariție: */
+            -webkit-backface-visibility: hidden; 
             backface-visibility: hidden;
+            background-color: white; /* Obligatoriu fundal solid pentru a nu clipi */
             border-radius: 8px;
             position: absolute;
             top: 0;
             left: 0;
         }
+        
         .card-front {
-            /* Păstrăm designul normal al cardului tău pe față */
-            background: white; 
             padding: 20px; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
+            z-index: 2; /* Ține fața deasupra până se întoarce */
         }
+        
         .card-back {
-            background: var(--dark);
+            background-color: var(--dark);
             color: white;
             padding: 20px;
             transform: rotateY(180deg);
@@ -69,10 +89,12 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            z-index: 1;
         }
-        .card-back h4 { color: var(--accent); margin-top: 0; margin-bottom: 10px; }
-        .card-back ul { padding-left: 20px; font-size: 0.85rem; margin-bottom: 15px; color: #ccc; }
-        .card-back li { margin-bottom: 5px; }
+        
+        .card-back h4 { color: var(--accent); margin-top: 0; margin-bottom: 10px; font-size: 1.2rem; }
+        .card-back ul { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; color: #ddd; line-height: 1.5; }
+        .card-back li { margin-bottom: 8px; }
         
         .btn-flip {
             background: none;
@@ -95,6 +117,7 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: auto;
+            align-self: flex-start;
         }
         .btn-back:hover { background: #777; }
     </style>
@@ -111,29 +134,31 @@
     
     <div class="grid">
         <!-- Generat din documentul tău de tarife -->
-        <!-- Card Flip pentru Optimizare OS -->
+       <!-- Card Flip pentru Optimizare, Undervolt & Overclocking -->
         <div class="card-container">
             <div class="card-inner">
                 <!-- Fața Cardului -->
                 <div class="card-front card">
-                    <h3>Optimizare OS & Răcire Software (Undervolt)</h3>
-                    <p class="price">80 RON</p>
-                    <p class="warranty">Performanță maximă, temperaturi minime în gaming.</p>
+                    <h3>Optimizare OS, Undervolt & Overclocking</h3>
+                    <p class="price">100 RON</p>
+                    <p class="warranty">Alege între temperaturi minime sau performanță brută stoarsă la maximum.</p>
                     <button class="btn-flip" onclick="this.closest('.card-container').classList.toggle('flipped')">📖 Află mai multe</button>
-                    <button class="btn-cart" onclick="addToCart('Optimizare și Undervolt', 80)" style="margin-top: auto;">🛒 Adaugă</button>
+                    <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)" style="margin-top: auto;">🛒 Adaugă</button>
                 </div>
                 
                 <!-- Spatele Cardului -->
                 <div class="card-back">
-                    <h4>Ce include procedura:</h4>
+                    <h4>Pachetul de Tuning Complet include:</h4>
                     <ul>
-                        <li><strong>Undervolting:</strong> Reducerea inteligentă a voltajului pentru a elimina supraîncălzirea (fără pierderi de FPS).</li>
-                        <li><strong>Debloat:</strong> Curățarea proceselor de fundal inutile din Windows.</li>
-                        <li><strong>XMP & Drivere:</strong> Activare profil maxim pentru RAM și update-uri critice.</li>
-                        <li><strong>Stress Test:</strong> Verificarea stabilității la sarcină maximă.</li>
+                        <li><strong>Undervolting:</strong> Reducerea voltajului pentru a elimina supraîncălzirea, menținând FPS-urile (Ideal pentru laptopuri).</li>
+                        <li><strong>Overclocking (La cerere):</strong> Forțarea controlată a frecvențelor CPU/GPU pentru un boost de performanță (Ideal pentru desktopuri bine răcite).</li>
+                        <li><strong>Debloat & XMP:</strong> Curățarea Windows-ului de aplicații inutile și activarea profilului maxim de RAM.</li>
+                        <li><strong>Stress Test:</strong> Verificarea temperaturilor și stabilității sistemului.</li>
                     </ul>
-                    <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
+                    <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi la preț</button>
                 </div>
+            </div>
+        </div>
             </div>
         </div>
         <div class="card">
