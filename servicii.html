@@ -48,12 +48,27 @@
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
         
-        nav { background: var(--card-bg); padding: 1rem; display: flex; justify-content: center; gap: 40px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; transition: 0.3s; border-bottom: 1px solid var(--border-color); }
+        /* BARĂ NAVIGAȚIE MODIFICATĂ PENTRU COȘ */
+        nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; transition: 0.3s; border-bottom: 1px solid var(--border-color); }
+        .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
         nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
         nav a:hover { color: var(--primary); }
         
+        /* COȘ DE CUMPĂRĂTURI - BUTON ȘI POPUP */
+        .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
+        .nav-cart { cursor: pointer; font-size: 1.5rem; position: relative; display: flex; align-items: center; padding: 5px 10px; border-radius: 8px; transition: 0.3s; }
+        .nav-cart:hover { background: rgba(0, 91, 183, 0.1); }
+        .cart-badge { position: absolute; top: 0px; right: 0px; background: var(--accent); color: white; font-size: 0.8rem; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        
+        .cart-popup { display: none; position: absolute; top: 120%; right: 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 260px; text-align: center; z-index: 1001; cursor: default; }
+        .cart-popup.active { display: block; animation: popupAnim 0.3s ease; }
+        @keyframes popupAnim { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .btn-go-cart { background: var(--primary); color: var(--btn-text); border: none; padding: 12px; width: 100%; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; font-size: 1rem; }
+        .btn-go-cart:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
         /* Schimbătorul de teme */
-        .theme-switcher { position: fixed; top: 80px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
+        .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
         .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
         [data-theme="dark"] .theme-ring { left: 42px; } 
         [data-theme="warm"] .theme-ring { left: 78px; } 
@@ -79,15 +94,15 @@
 
         /* Gruparea Secțiunilor pe Litere */
         .letter-section { scroll-margin-top: 100px; margin-bottom: 40px; }
-        
-        /* Header-ul literelor cu linia despărțitoare */
         .letter-header { display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0 30px 0; }
         .letter-header::after { content: ""; flex: 1; height: 1px; background: var(--border-color); margin-left: 20px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        /* GRILA CORECTATĂ PENTRU A NU MAI ÎNTINDE CARDURILE */
+        /* am schimbat auto-fit cu auto-fill pentru ca un card singur pe rând să nu se facă gigant */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         
-        /* Structura Flip Card */
-        .card-container { perspective: 1000px; height: 320px; transition: all 0.3s ease; }
+        /* Structura Flip Card - Am mărit puțin înălțimea la 350px ca să încapă butoanele una sub alta perfect */
+        .card-container { perspective: 1000px; height: 350px; transition: all 0.3s ease; }
         .card-container.flipped { grid-column: span 2; }
         @media (max-width: 768px) { .card-container.flipped { grid-column: span 1; } }
 
@@ -113,13 +128,13 @@
         .card-back ul { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5; }
         .card-back li { margin-bottom: 8px; }
         
-        /* Grup de Butoane (Află mai multe + Adaugă pe același rând) */
-        .button-group { display: flex; gap: 10px; margin-top: auto; }
+        /* BUTOANE REPARATE: Unul sub altul (column), apropiate */
+        .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
         
-        .btn-flip { flex: 1; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-flip { width: 100%; box-sizing: border-box; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-flip:hover { background: var(--primary); color: var(--btn-text); }
         
-        .btn-cart { flex: 1; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-cart { width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-cart:hover { filter: brightness(1.1); } 
         
         .btn-back { background: #555; border: none; color: white; padding: 8px; border-radius: 4px; cursor: pointer; margin-top: auto; align-self: flex-start; }
@@ -132,8 +147,28 @@
 <body>
 
 <nav>
-    <a href="index.html">Acasă</a>
-    <a href="servicii.html">Servicii și Tarife</a>
+    <!-- Spacer invizibil pentru a menține meniul centrat -->
+    <div style="width: 50px;"></div> 
+    
+    <div class="nav-links">
+        <a href="index.html">Acasă</a>
+        <a href="servicii.html">Servicii și Tarife</a>
+    </div>
+
+    <!-- Noul buton de coș inteligent -->
+    <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
+        <div class="nav-cart" onclick="scrollToCart()">
+            🛒 <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        
+        <!-- Fereastra Pop-up -->
+        <div class="cart-popup" id="cartPopup">
+            <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
+            <p style="color: var(--text-color);">Momentan ai <strong id="popupCount" style="color: var(--accent); font-size: 1.2rem;">0</strong> servicii în coș.</p>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 5px;">Când ești pregătit să finalizezi comanda, apasă mai jos:</p>
+            <button class="btn-go-cart" onclick="scrollToCart()">Mergi la coș</button>
+        </div>
+    </div>
 </nav>
 
 <div class="theme-switcher">
@@ -152,12 +187,9 @@
         🛡️ Toate serviciile marcate cu acest simbol beneficiază de o garanție a manoperei de 90 de zile.
     </div>
 
-    <!-- Bara de Căutare -->
     <div class="search-container">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Caută un serviciu (ex: baterie, curatare, OS)..." onkeyup="filterCards()">
     </div>
-    
-    <!-- CONȚINUT STRUCTURAT PE LITERE -->
     
     <!-- ==================== LITERA A ==================== -->
     <div class="letter-section" id="sec-A" data-letter="A">
@@ -210,7 +242,7 @@
                         <h4>Procedura include:</h4>
                         <ul>
                             <li>Deplasarea tehnicianului la punctul de întâlnire cu vânzătorul.</li>
-                            <li>Testare hardware pe loc cu instrumente software (BatteryInfo, CrystalDisk).</li>
+                            <li>Testare hardware pe loc cu instrumente software.</li>
                             <li>Verificarea porturilor, ecranului și componentelor interne.</li>
                             <li>Verdict onest dacă dispozitivul merită cumpărat.</li>
                         </ul>
@@ -650,7 +682,7 @@
                         <h4>Procedura include:</h4>
                         <ul>
                             <li>Dezasamblarea completă a laptopului.</li>
-                            <li>Mutarea tuturor componentelor (RAM, SSD) pe placa donatoare.</li>
+                            <li>Mutarea tuturor componentelor pe placa donatoare.</li>
                             <li>Reconectarea tuturor cablurilor și testare POST.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
@@ -686,7 +718,7 @@
                 <div class="card-inner">
                     <div class="card-front card">
                         <div>
-                            <h3>Schimbare radiator/ventilator <span>🛡️</span></h3>
+                            <h3>Schimbare radiator/vent. <span>🛡️</span></h3>
                             <p class="price">100 RON</p>
                         </div>
                         <div class="button-group">
@@ -748,7 +780,7 @@
                         <ul>
                             <li>Extragerea bateriei interne pentru acces.</li>
                             <li>Demontarea modulului defect.</li>
-                            <li>Fixarea modulului nou și testare gesturi multi-touch.</li>
+                            <li>Fixarea modulului nou și testare gesturi.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
@@ -759,7 +791,7 @@
                 <div class="card-inner">
                     <div class="card-front card">
                         <div>
-                            <h3>Schimbare webcam/microfon <span>🛡️</span></h3>
+                            <h3>Schimbare webcam/mic. <span>🛡️</span></h3>
                             <p class="price">100 RON</p>
                         </div>
                         <div class="button-group">
@@ -802,7 +834,7 @@
                         <ul>
                             <li>Desfacerea capacului și măsuri ESD.</li>
                             <li>Fixarea modulului de RAM sau SSD.</li>
-                            <li>Recunoașterea piesei în BIOS și partiționare (pentru SSD).</li>
+                            <li>Recunoașterea piesei în BIOS și partiționare.</li>
                         </ul>
                         <button class="btn-back" onclick="this.closest('.card-container').classList.toggle('flipped')">↩ Înapoi</button>
                     </div>
@@ -811,7 +843,7 @@
         </div>
     </div>
 
-   <!-- Coș Virtual -->
+   <!-- Coș Virtual (Partea de jos, ascunsă până se apasă pe butonul "Mergi la coș") -->
     <div id="cart-container" style="display:none;">
         <h3 style="margin-top:0;">Finalizare Comandă</h3>
         <p>Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la final.</p>
@@ -920,16 +952,39 @@
         });
     }
 
-    // --- 4. LOGICA COȘULUI ---
+    // --- 4. LOGICA COȘULUI NOU ---
     let cart = [];
     let total = 0;
     let discountMultiplier = 0;
+    let popupTimeout;
 
     function addToCart(name, price) {
         cart.push({name, price});
         total += price;
         updateCartUI();
-        document.getElementById('cart-container').scrollIntoView({ behavior: 'smooth' });
+        
+        // Deschide fereastra pop-up din meniu
+        const popup = document.getElementById('cartPopup');
+        popup.classList.add('active');
+        
+        // Închide automat pop-up-ul după 4 secunde pentru a nu deranja
+        if(popupTimeout) clearTimeout(popupTimeout);
+        popupTimeout = setTimeout(() => {
+            popup.classList.remove('active');
+        }, 4000);
+    }
+    
+    // Închide fereastra dacă utilizatorul dă scroll sau mișcă mouse-ul de pe ea
+    function closePopupIfOpen() {
+        document.getElementById('cartPopup').classList.remove('active');
+    }
+
+    // Funcția care derulează la coș doar la cerere
+    function scrollToCart() {
+        const cartContainer = document.getElementById('cart-container');
+        cartContainer.style.display = 'block'; // Asigură-te că este vizibil
+        cartContainer.scrollIntoView({ behavior: 'smooth' });
+        closePopupIfOpen(); // Ascunde fereastra pop-up
     }
 
     function applyPromo() {
@@ -947,8 +1002,13 @@
         const totalEl = document.getElementById('cart-total');
         const hiddenServices = document.getElementById('hidden-services');
         const hiddenTotal = document.getElementById('hidden-total');
+        const cartBadge = document.getElementById('cartBadge');
+        const popupCount = document.getElementById('popupCount');
         
-        container.style.display = 'block';
+        // Actualizăm numărul de produse pe bulina roșie și în pop-up
+        cartBadge.innerText = cart.length;
+        popupCount.innerText = cart.length;
+        
         list.innerHTML = '';
         let servicesText = "";
         
