@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coș de Cumpărături - ETHHOFAR</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        .cart-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        .checkout-form {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 30px;
+        }
+        .checkout-form input, .checkout-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 6px;
+        }
+        .btn-finish {
+            width: 100%;
+            padding: 15px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-finish:hover {
+            background: #2563eb;
+        }
+        .empty-cart-msg {
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body class="dark-theme"> <nav>
+        <div class="logo">ETHHOFAR</div>
+        <div class="nav-links">
+            <a href="index.html">Acasă</a>
+            <a href="servicii.html">Servicii</a>
+            <button id="theme-toggle">🌓</button>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <h1>Coșul tău</h1>
+        
+        <div id="cart-items-list">
+            </div>
+
+        <div id="cart-summary" style="display: none;">
+            <div class="cart-total">Total: <span id="total-price">0</span> RON</div>
+            
+            <div class="checkout-form">
+                <h3>Finalizează Comanda</h3>
+                <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                    <input type="text" name="nume" placeholder="Nume Complet" required>
+                    <input type="email" name="email" placeholder="Adresa de Email" required>
+                    <input type="tel" name="telefon" placeholder="Număr de Telefon">
+                    <textarea name="detalii" rows="4" placeholder="Alte mențiuni despre configurare..."></textarea>
+                    
+                    <input type="hidden" name="comanda_detaliata" id="hidden-cart-data">
+                    
+                    <button type="submit" class="btn-finish">Trimite Comanda</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="empty-msg" class="empty-cart-msg">
+            <p>Coșul tău este gol.</p>
+            <a href="servicii.html" class="btn-primary">Vezi Serviciile</a>
+        </div>
+    </div>
+
+    <script>
+        // --- SISTEMUL DE TEME ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme') || 'dark-theme';
+        body.className = savedTheme;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-theme')) {
+                body.className = 'light-theme';
+            } else {
+                body.className = 'dark-theme';
+            }
+            localStorage.setItem('theme', body.className);
+        });
+
+        // --- LOGICA COȘULUI ---
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
+            const listContainer = document.getElementById('cart-items-list');
+            const summaryContainer = document.getElementById('cart-summary');
+            const emptyMsg = document.getElementById('empty-msg');
+            const totalPriceEl = document.getElementById('total-price');
+            const hiddenInput = document.getElementById('hidden-cart-data');
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = '';
+                summaryContainer.style.display = 'none';
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            emptyMsg.style.display = 'none';
+            summaryContainer.style.display = 'block';
+            listContainer.innerHTML = '';
+
+            let total = 0;
+            let cartText = "";
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartText += `${item.name} (${item.price} RON), `;
+
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Serviciu ETHHOFAR</div>
+                    </div>
+                    <div>
+                        <span>${item.price} RON</span>
+                        <button onclick="removeItem(${index})" style="background:none; border:none; color:#ff4444; cursor:pointer; margin-left:15px;">✕</button>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+
+            totalPriceEl.innerText = total;
+            hiddenInput.value = cartText; // Punem datele în inputul ascuns pentru Formspree
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('ethhofar_cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        // Inițializare la încărcarea paginii
+        renderCart();
+    </script>
+</body>
+</html>
