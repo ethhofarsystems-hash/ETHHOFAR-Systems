@@ -6,7 +6,7 @@
     <title>Coș de Cumpărături | ETHHOFAR Systems</title>
     <link rel="icon" type="image/png" href="logo_fara_text-cerc.png">
     <style>
-        /* Variabile pentru Teme (Preluare din servicii.html) */
+        /* Variabile pentru Teme */
         :root { 
             --primary: #005bb7; 
             --dark: #1a1a1a; 
@@ -48,8 +48,8 @@
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
         
-        /* BARĂ NAVIGAȚIE (Idem cu originalul) */
-        nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; transition: 0.3s; border-bottom: 1px solid var(--border-color); }
+        /* NAVIGAȚIE */
+        nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
         .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
         nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
         nav a:hover { color: var(--primary); }
@@ -60,7 +60,7 @@
         .nav-cart .icon { width: 26px; height: 26px; }
         .cart-badge { position: absolute; top: 0px; right: 0px; background: var(--accent); color: white; font-size: 0.8rem; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--card-bg); }
 
-        /* Teme */
+        /* TEME */
         .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
         .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
         [data-theme="dark"] .theme-ring { left: 42px; } 
@@ -71,35 +71,54 @@
         .theme-dark { background: #1a1a1a; border-color: #555; }
         .theme-warm { background: #fdf6e3; border-color: #d35400; }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        /* CONTAINERE COȘ */
+        .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+        .page-title { display: flex; align-items: center; gap: 15px; font-size: 2rem; color: var(--primary); margin-bottom: 10px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
+        .subtitle { font-size: 0.95rem; color: #777; margin-bottom: 30px; }
+        [data-theme="dark"] .subtitle { color: #aaa; }
         
-        /* ELEMENTE SPECIFICE COȘULUI */
-        .page-title { display: flex; align-items: center; gap: 15px; font-size: 2rem; color: var(--primary); margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
-        
-        .cart-list { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; margin-bottom: 50px; }
+        @media (max-width: 768px) { .checkout-grid { grid-template-columns: 1fr; } }
+
+        .cart-list { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color); transition: 0.3s; }
         .cart-item:last-child { border-bottom: none; padding-bottom: 0; }
         .item-info { display: flex; flex-direction: column; gap: 8px; }
-        .item-name { font-weight: bold; font-size: 1.2rem; }
-        .item-price { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+        .item-name { font-weight: bold; font-size: 1.1rem; }
+        .item-price { color: var(--primary); font-weight: bold; }
         
-        .btn-remove { background: none; color: var(--danger); border: 2px solid var(--danger); padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
+        .btn-remove { background: none; color: var(--danger); border: 2px solid var(--danger); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
         .btn-remove:hover { background: var(--danger); color: white; }
 
-        .cart-summary { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .summary-text { font-size: 1.5rem; }
-        .summary-total { font-size: 2rem; font-weight: bold; color: var(--primary); }
+        /* REDUCERE & SUMAR */
+        .promo-box { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; border: 1px dashed var(--border-color); margin-top: 20px; }
+        [data-theme="dark"] .promo-box { background: rgba(255,255,255,0.05); }
+        .promo-flex { display: flex; gap: 10px; margin-top: 5px; }
+        .promo-input { padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; flex-grow: 1; background: var(--card-bg); color: var(--text-color); }
+        .btn-promo { padding: 10px 20px; background: var(--primary); color: var(--btn-text); border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-promo:hover { filter: brightness(1.1); }
+        #promoMessage { font-size: 0.9rem; margin-top: 8px; margin-bottom: 0; font-weight: bold; }
         
-        .btn-checkout { background: var(--accent); color: white; padding: 15px 30px; font-size: 1.2rem; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.3s; cursor: pointer; border: none; display: flex; align-items: center; gap: 10px; }
-        .btn-checkout:hover { background: #219653; transform: scale(1.05); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4); }
+        .total-box { font-size: 1.3rem; text-align: right; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color); }
+        .total-price { color: var(--accent); font-weight: bold; font-size: 1.6rem; }
 
+        /* FORMULAR */
+        .checkout-form { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .checkout-form h3 { margin-top: 0; color: var(--primary); margin-bottom: 20px; }
+        .form-input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--light); color: var(--text-color); box-sizing: border-box; font-size: 1rem; transition: 0.3s;}
+        .form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 5px rgba(0, 91, 183, 0.2); }
+        .form-label { font-size: 0.9rem; color: var(--text-color); display: block; margin-bottom: 6px; font-weight: bold; }
+        .btn-submit { width: 100%; background: var(--accent); color: white; border: none; padding: 15px; font-size: 1.1rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #219653; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4); }
+
+        /* COȘ GOL */
         .empty-cart { text-align: center; padding: 60px 20px; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 50px; }
         .empty-cart-icon { width: 80px; height: 80px; color: var(--border-color); margin-bottom: 20px; }
         .empty-cart h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--text-color); }
         .btn-return { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: var(--btn-text); padding: 12px 25px; border-radius: 4px; text-decoration: none; font-weight: bold; margin-top: 15px; transition: 0.3s; }
         .btn-return:hover { background: var(--accent); }
 
-        /* GRILA PENTRU RECOMANDĂRI (Preia stilul din servicii.html) */
+        /* GRILĂ RECOMANDĂRI */
         .section-header { display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: var(--text-color); margin: 0 0 30px 0; }
         .section-header::after { content: ""; flex: 1; height: 1px; background: var(--border-color); margin-left: 20px; }
         
@@ -113,7 +132,6 @@
         .card-front:hover .price { color: var(--accent); }
         .details-note { font-size: 0.8rem; color: #888; margin-bottom: 15px; font-style: italic; }
         
-        /* Icoane și butoane din card */
         .icon { width: 18px; height: 18px; fill: currentColor; }
         .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
         .btn-flip { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; text-decoration: none; }
@@ -121,7 +139,6 @@
         .btn-cart { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s, transform 0.2s; }
         .btn-cart:hover { background: var(--accent); transform: scale(1.02); } 
         
-        /* Scut Garantie */
         .tooltip-container { position: relative; display: inline-flex; align-items: center; cursor: pointer; margin-left: 8px; }
         .shield-icon { width: 20px; height: 20px; color: var(--shield-color); transition: transform 0.3s; fill: currentColor; }
         .tooltip-container:hover .shield-icon { transform: scale(1.2) rotate(5deg); }
@@ -138,19 +155,16 @@
     <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
     <symbol id="icon-details" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
     <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></symbol>
-    <symbol id="icon-whatsapp" viewBox="0 0 32 32"><path d="M16 0c-8.836 0-16 7.164-16 16 0 2.805 0.726 5.441 1.996 7.742l-2.28 8.243 8.441-2.215c2.247 1.156 4.792 1.82 7.502 1.82 8.836 0 16-7.164 16-16s-7.164-16-16-16zM23.167 19.333c-0.344-0.177-2.026-0.995-2.344-1.109s-0.547-0.177-0.776 0.177c-0.229 0.354-0.891 1.109-1.089 1.339-0.198 0.229-0.401 0.26-0.745 0.083-0.344-0.177-1.448-0.531-2.755-1.698-1.016-0.906-1.703-2.026-1.901-2.38s-0.021-0.542 0.151-0.714c0.156-0.156 0.344-0.406 0.516-0.609 0.172-0.203 0.229-0.354 0.344-0.589 0.115-0.234 0.057-0.443-0.026-0.615s-0.776-1.875-1.063-2.568c-0.281-0.677-0.563-0.583-0.776-0.594-0.198-0.01-0.427-0.01-0.656-0.01s-0.604 0.083-0.917 0.427c-0.313 0.344-1.203 1.177-1.203 2.875s1.234 3.339 1.406 3.568c0.172 0.229 2.438 3.719 5.896 5.214 0.823 0.354 1.464 0.568 1.964 0.729 0.823 0.26 1.573 0.224 2.167 0.135 0.661-0.099 2.026-0.828 2.313-1.625 0.286-0.797 0.286-1.484 0.203-1.625-0.083-0.146-0.313-0.234-0.656-0.411z"/></symbol>
     <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
     <symbol id="icon-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
 </svg>
 
 <nav>
     <div style="width: 50px;"></div> 
-    
     <div class="nav-links">
         <a href="index.html">Acasă</a>
         <a href="servicii.html">Servicii și Tarife</a>
     </div>
-
     <div class="nav-cart-wrapper">
         <div class="nav-cart" id="navCartIcon">
             <svg class="icon"><use href="#icon-cart"></use></svg>
@@ -167,35 +181,69 @@
 </div>
 
 <div class="container">
-    <h2 class="page-title"><svg class="icon" style="width: 32px; height: 32px;"><use href="#icon-cart"></use></svg> Coșul tău de servicii</h2>
-
-    <!-- ZONA COȘ GOL -->
-    <div id="emptyCartMessage" class="empty-cart" style="display: none;">
+    
+    <div id="empty-cart-message" class="empty-cart" style="display: none;">
         <svg class="empty-cart-icon"><use href="#icon-cart"></use></svg>
         <h3>Coșul tău este momentan gol.</h3>
-        <p>Explorează serviciile noastre și alege ceea ce se potrivește sistemului tău.</p>
-        <a href="servicii.html" class="btn-return"><svg class="icon"><use href="#icon-back"></use></svg> Înapoi la Servicii</a>
+        <p>Nu ai adăugat încă niciun serviciu ETHHOFAR.</p>
+        <a href="servicii.html" class="btn-return"><svg class="icon"><use href="#icon-back"></use></svg> Vezi lista de servicii</a>
     </div>
 
-    <!-- ZONA PRODUSE ÎN COȘ -->
-    <div id="cartContentWrapper">
-        <div class="cart-list" id="cartItemsList">
-            <!-- Produsele vor fi generate aici prin JavaScript -->
-        </div>
+    <div id="cart-content-wrapper" style="display: none;">
+        <h2 class="page-title"><svg class="icon" style="width: 32px; height: 32px;"><use href="#icon-cart"></use></svg> <span id="cart-title">Coșul tău</span></h2>
+        <p class="subtitle">Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la finalul intervenției.</p>
+        
+        <div class="checkout-grid">
+            <!-- Zona cu serviciile adăugate -->
+            <div>
+                <div class="cart-list" id="cart-list">
+                    <!-- Serviciile generate prin JS -->
+                </div>
 
-        <div class="cart-summary">
-            <div class="summary-text">Total estimat: <br><span class="summary-total" id="cartTotalSum">0 RON</span></div>
-            <button class="btn-checkout" onclick="sendOrderViaWhatsApp()">
-                Trimite Comanda <svg class="icon"><use href="#icon-whatsapp"></use></svg>
-            </button>
+                <div class="promo-box">
+                    <label class="form-label">Ai un cod de reducere? (Opțional)</label>
+                    <div class="promo-flex">
+                        <input type="text" id="promoInput" class="promo-input" placeholder="Introdu codul">
+                        <button type="button" class="btn-promo" onclick="applyPromo()">Aplică</button>
+                    </div>
+                    <p id="promoMessage"></p>
+                </div>
+
+                <div class="total-box">
+                    Total estimat manoperă:<br>
+                    <span id="cart-total" class="total-price">0 RON</span>
+                </div>
+            </div>
+
+            <!-- Formularul Formspree -->
+            <div class="checkout-form">
+                <h3>Detalii Comandă</h3>
+                <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST">
+                    <label class="form-label">Nume complet</label>
+                    <input type="text" name="Nume" class="form-input" placeholder="Ex: Popescu Andrei" required>
+                    
+                    <label class="form-label">Email</label>
+                    <input type="email" name="Email" class="form-input" placeholder="Adresa de email" required>
+                    
+                    <label class="form-label">Telefon</label>
+                    <input type="tel" name="Telefon" class="form-input" placeholder="Număr de contact" required>
+                    
+                    <label class="form-label">Marca și modelul echipamentului</label>
+                    <input type="text" name="Model_Echipament" class="form-input" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05">
+                    
+                    <!-- Câmpuri ascunse populate din JS -->
+                    <input type="hidden" name="Servicii_Comandate" id="hidden-services">
+                    <input type="hidden" name="Total_Estimata" id="hidden-total">
+
+                    <button type="submit" class="btn-submit">Trimite Comanda</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- RECOMANDĂRI -->
     <div class="section-header">Servicii recomandate</div>
     <div class="grid">
-        
-        <!-- Recomandare 1 -->
         <div class="card-container">
             <div class="card-front card">
                 <div>
@@ -211,7 +259,6 @@
             </div>
         </div>
 
-        <!-- Recomandare 2 -->
         <div class="card-container">
             <div class="card-front card">
                 <div>
@@ -227,7 +274,6 @@
             </div>
         </div>
 
-        <!-- Recomandare 3 -->
         <div class="card-container">
             <div class="card-front card">
                 <div>
@@ -241,7 +287,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -250,13 +295,15 @@
 </footer>
 
 <script>
-    // --- 1. SISTEMUL DE TEME ---
+    // --- SISTEM TEME ---
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
     }
 
-    // --- 2. LOGICA DE COȘ ---
+    // --- LOGICĂ COȘ ---
+    let discountMultiplier = 0;
+
     function getCart() {
         return JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
     }
@@ -271,45 +318,7 @@
         if(badge) badge.innerText = cart.length;
     }
 
-    function renderCart() {
-        const cart = getCart();
-        const emptyMessage = document.getElementById('emptyCartMessage');
-        const contentWrapper = document.getElementById('cartContentWrapper');
-        const itemsList = document.getElementById('cartItemsList');
-        const totalSum = document.getElementById('cartTotalSum');
-
-        if (cart.length === 0) {
-            emptyMessage.style.display = 'block';
-            contentWrapper.style.display = 'none';
-        } else {
-            emptyMessage.style.display = 'none';
-            contentWrapper.style.display = 'block';
-            
-            itemsList.innerHTML = '';
-            let total = 0;
-
-            cart.forEach(item => {
-                total += item.price;
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-                    <div class="item-info">
-                        <span class="item-name">${item.name}</span>
-                        <span class="item-price">${item.price} RON</span>
-                    </div>
-                    <button class="btn-remove" onclick="removeFromCart(${item.id})">
-                        <svg class="icon"><use href="#icon-trash"></use></svg> Șterge
-                    </button>
-                `;
-                itemsList.appendChild(itemDiv);
-            });
-
-            totalSum.innerText = total + ' RON';
-        }
-        updateCartBadge();
-    }
-
-    function removeFromCart(id) {
+    function removeItem(id) {
         let cart = getCart();
         cart = cart.filter(item => item.id !== id);
         saveCart(cart);
@@ -322,9 +331,9 @@
         cart.push({ id, name, price });
         saveCart(cart); 
         
-        renderCart(); // Re-randăm coșul imediat dacă suntem deja pe pagina de coș
+        renderCart(); 
         
-        // Animație vizuală la coșul de sus
+        // Animație iconiță navbar
         const cartIcon = document.getElementById('navCartIcon');
         cartIcon.style.transform = 'scale(1.2)';
         cartIcon.style.color = 'var(--primary)';
@@ -334,25 +343,86 @@
         }, 300);
     }
 
-    function sendOrderViaWhatsApp() {
-        const cart = getCart();
-        if (cart.length === 0) return;
-
-        let mesaj = "Salut, ETHHOFAR! Doresc să plasez o comandă pentru următoarele servicii:%0A%0A";
-        let total = 0;
-
-        cart.forEach((item, index) => {
-            mesaj += `${index + 1}. ${item.name} - ${item.price} RON%0A`;
-            total += item.price;
-        });
-
-        mesaj += `%0ATotal estimat: *${total} RON*%0A%0AAștept confirmarea și pașii următori. Mulțumesc!`;
-
-        const whatsappUrl = `https://wa.me/40779316979?text=${mesaj}`;
-        window.open(whatsappUrl, '_blank');
+    function applyPromo() {
+        const code = document.getElementById('promoInput').value.trim().toLowerCase();
+        const msg = document.getElementById('promoMessage');
+        
+        if (code === 'motanel10') { 
+            discountMultiplier = 0.10; 
+            msg.innerText = "✅ Cod valid! 10% reducere aplicată manoperei."; 
+            msg.style.color = "var(--accent)"; 
+        } else if (code === '') { 
+            msg.innerText = "Introduceți un cod înainte de aplicare."; 
+            msg.style.color = "#e67e22"; 
+        } else { 
+            discountMultiplier = 0; 
+            msg.innerText = "❌ Cod invalid. Verifică și încearcă din nou."; 
+            msg.style.color = "var(--danger)"; 
+        }
+        renderCart();
     }
 
-    // Inițializări la încărcarea paginii
+    function renderCart() {
+        const cart = getCart();
+        const contentDiv = document.getElementById('cart-content-wrapper');
+        const emptyDiv = document.getElementById('empty-cart-message');
+        
+        updateCartBadge();
+
+        if (cart.length === 0) {
+            contentDiv.style.display = 'none';
+            emptyDiv.style.display = 'block';
+            return;
+        } else {
+            contentDiv.style.display = 'block';
+            emptyDiv.style.display = 'none';
+        }
+
+        const cartTitle = document.getElementById('cart-title');
+        let cuvant = cart.length === 1 ? "serviciu" : "servicii";
+        cartTitle.innerText = `Coșul tău (${cart.length} ${cuvant})`;
+
+        const list = document.getElementById('cart-list');
+        const totalEl = document.getElementById('cart-total');
+        const hiddenServices = document.getElementById('hidden-services');
+        const hiddenTotal = document.getElementById('hidden-total');
+        
+        list.innerHTML = '';
+        let servicesText = "";
+        let baseTotal = 0;
+        
+        cart.forEach((item) => {
+            baseTotal += item.price;
+            
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.innerHTML = `
+                <div class="item-info">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-price">${item.price} RON</span>
+                </div>
+                <button type="button" class="btn-remove" onclick="removeItem(${item.id})">
+                    <svg class="icon"><use href="#icon-trash"></use></svg> Șterge
+                </button>
+            `;
+            list.appendChild(itemDiv);
+            servicesText += item.name + " (" + item.price + " RON), ";
+        });
+        
+        let finalTotal = baseTotal - (baseTotal * discountMultiplier);
+        
+        if (discountMultiplier > 0) {
+            totalEl.innerHTML = `<s style="color: #999; font-size: 1.1rem; margin-right: 10px;">${baseTotal} RON</s> <span>${finalTotal.toFixed(2)} RON</span>`;
+            servicesText += ` | *** Reducere aplicată: Motanel10 (-10%) ***`;
+        } else {
+            totalEl.innerText = baseTotal + " RON";
+        }
+
+        // Populează câmpurile ascunse pentru formular
+        hiddenServices.value = servicesText;
+        hiddenTotal.value = finalTotal.toFixed(2) + " RON";
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
