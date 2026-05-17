@@ -81,9 +81,13 @@
         @media (max-width: 768px) { .checkout-grid { grid-template-columns: 1fr; } }
 
         .cart-list { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        /* DESIGN NOU: ELEMENTE COȘ CU IMAGINE E-MAG STYLE */
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color); transition: 0.3s; }
         .cart-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .item-info { display: flex; flex-direction: column; gap: 8px; }
+        .cart-item-left { display: flex; align-items: center; gap: 15px; }
+        .cart-thumbnail { width: 65px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color); background: var(--border-color); flex-shrink: 0; }
+        .item-info { display: flex; flex-direction: column; gap: 5px; }
         .item-name { font-weight: bold; font-size: 1.1rem; }
         .item-price { color: var(--primary); font-weight: bold; }
         
@@ -248,7 +252,7 @@
 </footer>
 
 <script>
-    // --- BAZA DE DATE A SERVICIILOR (PENTRU RECOMANDĂRI) ---
+    // --- BAZA DE DATE A SERVICIILOR ---
     const servicesDB = [
         { name: 'Asamblare Desktop', price: 250, img: 'poza-editare.jpg', link: 'servicii/asamblare-desktop.html', note: '', tags: ['desktop', 'hardware', 'nou'] },
         { name: 'Consultanță SH', price: 100, img: 'poza-editare.jpg', link: 'servicii/consultanta-achizitie.html', note: '', tags: ['consultanta', 'sh', 'achizitie'] },
@@ -291,21 +295,24 @@
         cart = cart.filter(item => item.id !== id);
         saveCart(cart);
         renderCart();
-        generateRecommendations(); // Regenerează recomandările (dacă ștergi ceva, poate fi recomandat iar)
+        generateRecommendations(); 
     }
 
-    // Această funcție o vei apela din cardurile de recomandare
-    function addToCart(name, price, tags = []) {
+    // Noua funcție acceptă parametrul 'img'
+    function addToCart(name, price, img, tags = []) {
         const cart = getCart();
         const id = Date.now() + Math.random();
-        cart.push({ id, name, price });
+        
+        // Dacă o comandă mai veche vine fără imagine, folosim poza de editare ca fallback
+        const imagePath = img || 'poza-editare.jpg'; 
+        
+        cart.push({ id, name, price, img: imagePath });
         saveCart(cart); 
         
-        // Punctăm interesul și la recomandări
         trackInterests(tags, 3);
         
         renderCart(); 
-        generateRecommendations(); // Ascundem cartonașul cu produsul tocmai adăugat
+        generateRecommendations(); 
         
         const cartIcon = document.getElementById('navCartIcon');
         cartIcon.style.transform = 'scale(1.2)';
@@ -366,12 +373,19 @@
         
         cart.forEach((item) => {
             baseTotal += item.price;
+            
+            // Dacă clientul avea deja produse salvate înainte de update, le punem o poză default
+            let safeImg = item.img ? item.img : 'poza-editare.jpg';
+
             const itemDiv = document.createElement('div');
             itemDiv.className = 'cart-item';
             itemDiv.innerHTML = `
-                <div class="item-info">
-                    <span class="item-name">${item.name}</span>
-                    <span class="item-price">${item.price} RON</span>
+                <div class="cart-item-left">
+                    <img src="${safeImg}" alt="${item.name}" class="cart-thumbnail">
+                    <div class="item-info">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-price">${item.price} RON</span>
+                    </div>
                 </div>
                 <button type="button" class="btn-remove" onclick="removeItem(${item.id})">
                     <svg class="icon"><use href="#icon-trash"></use></svg> Șterge
@@ -407,11 +421,9 @@
         const grid = document.getElementById('recommendationsGrid');
         grid.innerHTML = '';
 
-        // Excludem ce e deja în coș
         const cartNames = cart.map(item => item.name);
         const availableServices = servicesDB.filter(srv => !cartNames.includes(srv.name));
 
-        // Calculăm scorul fiecărui serviciu
         availableServices.forEach(srv => {
             let score = 0;
             srv.tags.forEach(tag => {
@@ -420,15 +432,11 @@
             srv.score = score;
         });
 
-        // Sortăm descrescător după scor (în caz de egalitate se sortează aleatoriu)
         availableServices.sort((a, b) => b.score - a.score || 0.5 - Math.random());
-
-        // Selectăm top 3
         const top3 = availableServices.slice(0, 3);
 
         top3.forEach(srv => {
             const noteHtml = srv.note ? `<p class="details-note">${srv.note}</p>` : '';
-            // Transmitem array-ul de tag-uri ca string formatat pentru funcția addToCart
             const tagsString = JSON.stringify(srv.tags).replace(/"/g, "'");
 
             const card = document.createElement('div');
@@ -443,7 +451,7 @@
                     </div>
                     <div class="button-group">
                         <a href="${srv.link}" class="btn-flip" onclick="trackInterests(${tagsString}, 2)"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('${srv.name}', ${srv.price}, ${tagsString})"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        <button class="btn-cart" onclick="addToCart('${srv.name}', ${srv.price}, '${srv.img}', ${tagsString})"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
                     </div>
                 </div>
             `;
