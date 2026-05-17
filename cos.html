@@ -194,11 +194,8 @@
         <p class="subtitle">Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la finalul intervenției.</p>
         
         <div class="checkout-grid">
-            <!-- Zona cu serviciile adăugate -->
             <div>
-                <div class="cart-list" id="cart-list">
-                    <!-- Serviciile generate prin JS -->
-                </div>
+                <div class="cart-list" id="cart-list"></div>
 
                 <div class="promo-box">
                     <label class="form-label">Ai un cod de reducere? (Opțional)</label>
@@ -215,7 +212,6 @@
                 </div>
             </div>
 
-            <!-- Formularul Formspree -->
             <div class="checkout-form">
                 <h3>Detalii Comandă</h3>
                 <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST">
@@ -231,7 +227,6 @@
                     <label class="form-label">Marca și modelul echipamentului</label>
                     <input type="text" name="Model_Echipament" class="form-input" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05">
                     
-                    <!-- Câmpuri ascunse populate din JS -->
                     <input type="hidden" name="Servicii_Comandate" id="hidden-services">
                     <input type="hidden" name="Total_Estimata" id="hidden-total">
 
@@ -241,52 +236,10 @@
         </div>
     </div>
 
-    <!-- RECOMANDĂRI -->
-    <div class="section-header">Servicii recomandate</div>
-    <div class="grid">
-        <div class="card-container">
-            <div class="card-front card">
-                <div>
-                    <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                    <h3>Diagnosticare <span class="tooltip-container"><svg class="shield-icon"><use href="#icon-shield"></use></svg><span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span></span></h3>
-                    <p class="price">50 RON</p>
-                    <p class="details-note">Gratuit dacă se repară la noi.</p>
-                </div>
-                <div class="button-group">
-                    <a href="servicii/diagnosticare.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                    <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container">
-            <div class="card-front card">
-                <div>
-                    <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                    <h3>Mentenanță Desktop <span class="tooltip-container"><svg class="shield-icon"><use href="#icon-shield"></use></svg><span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span></span></h3>
-                    <p class="price">220 RON</p>
-                    <p class="details-note">Aer sau AIO. Fără Custom Loop.</p>
-                </div>
-                <div class="button-group">
-                    <a href="servicii/mentenanta-desktop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                    <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container">
-            <div class="card-front card">
-                <div>
-                    <img src="instalare-windows.jpg" alt="Imagine Instalare Windows" class="service-img">
-                    <h3>Instalare Windows <span class="tooltip-container"><svg class="shield-icon"><use href="#icon-shield"></use></svg><span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span></span></h3>
-                    <p class="price">100 RON</p>
-                </div>
-                <div class="button-group">
-                    <a href="servicii/instalare-windows.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                    <button class="btn-cart" onclick="addToCart('Instalare Windows', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
-                </div>
-            </div>
-        </div>
+    <!-- RECOMANDĂRI GENERATE DINAMIC -->
+    <div class="section-header">Pachete & Servicii Recomandate</div>
+    <div class="grid" id="recommendationsGrid">
+        <!-- Generat prin JavaScript -->
     </div>
 </div>
 
@@ -295,6 +248,26 @@
 </footer>
 
 <script>
+    // --- BAZA DE DATE A SERVICIILOR (PENTRU RECOMANDĂRI) ---
+    const servicesDB = [
+        { name: 'Asamblare Desktop', price: 250, img: 'poza-editare.jpg', link: 'servicii/asamblare-desktop.html', note: '', tags: ['desktop', 'hardware', 'nou'] },
+        { name: 'Consultanță SH', price: 100, img: 'poza-editare.jpg', link: 'servicii/consultanta-achizitie.html', note: '', tags: ['consultanta', 'sh', 'achizitie'] },
+        { name: 'Diagnosticare', price: 50, img: 'poza-editare.jpg', link: 'servicii/diagnosticare.html', note: 'Gratuit dacă se repară la noi.', tags: ['diagnosticare', 'problema', 'mentenanta'] },
+        { name: 'Instalare Windows', price: 100, img: 'instalare-windows.jpg', link: 'servicii/instalare-windows.html', note: '', tags: ['software', 'os', 'windows', 'optimizare', 'nou'] },
+        { name: 'Baterie BIOS', price: 50, img: 'poza-editare.jpg', link: 'servicii/inlocuire-baterie-bios.html', note: '', tags: ['hardware', 'mentenanta', 'desktop'] },
+        { name: 'Montaj baterie', price: 120, img: 'montaj-baterie.jpg', link: 'servicii/manopera-montaj-baterie.html', note: '', tags: ['hardware', 'baterie', 'laptop'] },
+        { name: 'Mentenanță Consolă', price: 250, img: 'poza-editare.jpg', link: 'servicii/mentenanta-consola.html', note: 'PS4, PS5, Xbox', tags: ['consola', 'mentenanta', 'curatare'] },
+        { name: 'Mentenanță Desktop', price: 220, img: 'poza-editare.jpg', link: 'servicii/mentenanta-desktop.html', note: 'Aer sau AIO. Fără Custom Loop.', tags: ['desktop', 'mentenanta', 'curatare'] },
+        { name: 'Mentenanță Laptop', price: 200, img: 'mentenanta-laptop.jpg', link: 'servicii/mentenanta-laptop.html', note: '', tags: ['laptop', 'mentenanta', 'curatare'] },
+        { name: 'Mentenanță GPU', price: 80, img: 'poza-editare.jpg', link: 'servicii/mentenanta-placa-video.html', note: 'GPU ieșit din garanție.', tags: ['desktop', 'hardware', 'mentenanta', 'curatare'] },
+        { name: 'Optimizare Tuning PC', price: 100, img: 'poza-editare.jpg', link: 'servicii/optimizare-os-tuning.html', note: 'Temperaturi minime sau performanță.', tags: ['software', 'os', 'optimizare', 'viteza'] },
+        { name: 'Revitalizare Laptop', price: 275, img: 'pachet-revitalizare.jpg', link: 'servicii/pachet-revitalizare.html', note: 'Mentenanță completă + OS', tags: ['laptop', 'mentenanta', 'software', 'pachet'] },
+        { name: 'Upgrade RAM', price: 80, img: 'upgrade-ram.jpg', link: 'servicii/upgrade-ram.html', note: '', tags: ['hardware', 'upgrade', 'viteza', 'laptop', 'desktop'] },
+        { name: 'Upgrade SSD/HDD', price: 80, img: 'upgrade-ssd-hdd.jpg', link: 'servicii/upgrade-ssd-hdd.html', note: '', tags: ['hardware', 'upgrade', 'viteza', 'laptop', 'desktop'] }
+    ];
+
+    const shieldHTML = `<span class="tooltip-container"><svg class="shield-icon"><use href="#icon-shield"></use></svg><span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span></span>`;
+
     // --- SISTEM TEME ---
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
@@ -304,13 +277,8 @@
     // --- LOGICĂ COȘ ---
     let discountMultiplier = 0;
 
-    function getCart() {
-        return JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
-    }
-
-    function saveCart(cart) {
-        localStorage.setItem('ethhofar_cart', JSON.stringify(cart));
-    }
+    function getCart() { return JSON.parse(localStorage.getItem('ethhofar_cart')) || []; }
+    function saveCart(cart) { localStorage.setItem('ethhofar_cart', JSON.stringify(cart)); }
 
     function updateCartBadge() {
         const cart = getCart();
@@ -323,17 +291,22 @@
         cart = cart.filter(item => item.id !== id);
         saveCart(cart);
         renderCart();
+        generateRecommendations(); // Regenerează recomandările (dacă ștergi ceva, poate fi recomandat iar)
     }
 
-    function addToCart(name, price) {
+    // Această funcție o vei apela din cardurile de recomandare
+    function addToCart(name, price, tags = []) {
         const cart = getCart();
         const id = Date.now() + Math.random();
         cart.push({ id, name, price });
         saveCart(cart); 
         
-        renderCart(); 
+        // Punctăm interesul și la recomandări
+        trackInterests(tags, 3);
         
-        // Animație iconiță navbar
+        renderCart(); 
+        generateRecommendations(); // Ascundem cartonașul cu produsul tocmai adăugat
+        
         const cartIcon = document.getElementById('navCartIcon');
         cartIcon.style.transform = 'scale(1.2)';
         cartIcon.style.color = 'var(--primary)';
@@ -393,7 +366,6 @@
         
         cart.forEach((item) => {
             baseTotal += item.price;
-            
             const itemDiv = document.createElement('div');
             itemDiv.className = 'cart-item';
             itemDiv.innerHTML = `
@@ -418,17 +390,73 @@
             totalEl.innerText = baseTotal + " RON";
         }
 
-        // Populează câmpurile ascunse pentru formular
         hiddenServices.value = servicesText;
         hiddenTotal.value = finalTotal.toFixed(2) + " RON";
+    }
+
+    // --- MOTOR DE RECOMANDĂRI ---
+    function trackInterests(tags, weight) {
+        let interests = JSON.parse(localStorage.getItem('ethhofar_interese')) || {};
+        tags.forEach(tag => { interests[tag] = (interests[tag] || 0) + weight; });
+        localStorage.setItem('ethhofar_interese', JSON.stringify(interests));
+    }
+
+    function generateRecommendations() {
+        const cart = getCart();
+        const interests = JSON.parse(localStorage.getItem('ethhofar_interese')) || {};
+        const grid = document.getElementById('recommendationsGrid');
+        grid.innerHTML = '';
+
+        // Excludem ce e deja în coș
+        const cartNames = cart.map(item => item.name);
+        const availableServices = servicesDB.filter(srv => !cartNames.includes(srv.name));
+
+        // Calculăm scorul fiecărui serviciu
+        availableServices.forEach(srv => {
+            let score = 0;
+            srv.tags.forEach(tag => {
+                if (interests[tag]) score += interests[tag];
+            });
+            srv.score = score;
+        });
+
+        // Sortăm descrescător după scor (în caz de egalitate se sortează aleatoriu)
+        availableServices.sort((a, b) => b.score - a.score || 0.5 - Math.random());
+
+        // Selectăm top 3
+        const top3 = availableServices.slice(0, 3);
+
+        top3.forEach(srv => {
+            const noteHtml = srv.note ? `<p class="details-note">${srv.note}</p>` : '';
+            // Transmitem array-ul de tag-uri ca string formatat pentru funcția addToCart
+            const tagsString = JSON.stringify(srv.tags).replace(/"/g, "'");
+
+            const card = document.createElement('div');
+            card.className = 'card-container';
+            card.innerHTML = `
+                <div class="card-front card">
+                    <div>
+                        <img src="${srv.img}" alt="${srv.name}" class="service-img">
+                        <h3>${srv.name} ${shieldHTML}</h3>
+                        <p class="price">${srv.price} RON</p>
+                        ${noteHtml}
+                    </div>
+                    <div class="button-group">
+                        <a href="${srv.link}" class="btn-flip" onclick="trackInterests(${tagsString}, 2)"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                        <button class="btn-cart" onclick="addToCart('${srv.name}', ${srv.price}, ${tagsString})"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
         renderCart();
+        generateRecommendations();
     });
 </script>
-
 </body>
 </html>
