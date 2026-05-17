@@ -87,6 +87,9 @@
         .theme-dark { background: #1a1a1a; border-color: #555; }
         .theme-warm { background: #fdf6e3; border-color: #d35400; }
 
+        /* ICOANE GENERALE */
+        .icon { width: 18px; height: 18px; fill: currentColor; }
+
         /* STRUCTURA PAGINII PRODUS */
         .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
         .product-page-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--border-color); padding: 30px; }
@@ -190,6 +193,7 @@
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
     <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></symbol>
     <symbol id="icon-whatsapp" viewBox="0 0 32 32"><path d="M16 0c-8.836 0-16 7.164-16 16 0 2.805 0.726 5.441 1.996 7.742l-2.28 8.243 8.441-2.215c2.247 1.156 4.792 1.82 7.502 1.82 8.836 0 16-7.164 16-16s-7.164-16-16-16zM23.167 19.333c-0.344-0.177-2.026-0.995-2.344-1.109s-0.547-0.177-0.776 0.177c-0.229 0.354-0.891 1.109-1.089 1.339-0.198 0.229-0.401 0.26-0.745 0.083-0.344-0.177-1.448-0.531-2.755-1.698-1.016-0.906-1.703-2.026-1.901-2.38s-0.021-0.542 0.151-0.714c0.156-0.156 0.344-0.406 0.516-0.609 0.172-0.203 0.229-0.354 0.344-0.589 0.115-0.234 0.057-0.443-0.026-0.615s-0.776-1.875-1.063-2.568c-0.281-0.677-0.563-0.583-0.776-0.594-0.198-0.01-0.427-0.01-0.656-0.01s-0.604 0.083-0.917 0.427c-0.313 0.344-1.203 1.177-1.203 2.875s1.234 3.339 1.406 3.568c0.172 0.229 2.438 3.719 5.896 5.214 0.823 0.354 1.464 0.568 1.964 0.729 0.823 0.26 1.573 0.224 2.167 0.135 0.661-0.099 2.026-0.828 2.313-1.625 0.286-0.797 0.286-1.484 0.203-1.625-0.083-0.146-0.313-0.234-0.656-0.411z"/></symbol>
+    <symbol id="icon-support" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></symbol>
 </svg>
 
 <!-- WIDGET WHATSAPP -->
@@ -199,10 +203,10 @@
 <div id="wa-help-popup" class="wa-popup">
     <div class="wa-popup-content">
         <span class="wa-close" onclick="closeWaPopup()" title="Închide">&times;</span>
-        <h4><svg class="icon" style="color: var(--primary);"><use href="#icon-support"></use></svg> Ai nevoie de îndrumare?</h4>
-        <p>Senzorul mouse-ului tău sare sau rotița dă rateuri? Cere sfatul unui specialist ETHHOFAR. Scrie-ne!</p>
+        <h4><svg class="icon" style="color: var(--primary);"><use href="#icon-support"></use></svg> Mouse-ul îți face probleme?</h4>
+        <p>A început să aibă momente când nu mai reacționează sau se simte rigid? Un tehnician ETHHOFAR te poate îndruma. Scrie-ne!</p>
     </div>
-    <a href="https://wa.me/40779316979?text=Salut,%20ETHHOFAR!%20Am%20nevoie%20de%20ajutor%20cu%20mentenanta%20unui%20mouse." target="_blank" class="wa-popup-icon">
+    <a href="https://wa.me/40779316979?text=Salut,%20ETHHOFAR!%20Am%20nevoie%20de%20ajutor%20cu%20mentenanta%20mouse-ului." target="_blank" class="wa-popup-icon">
         <svg class="icon" style="width: 32px; height: 32px;"><use href="#icon-whatsapp"></use></svg>
     </a>
 </div>
@@ -239,7 +243,7 @@
     <div class="product-page-container">
         <!-- GALERIE FOTO -->
         <div class="gallery-area">
-            <img id="main-product-image" src="../mentenanta-mouse.jpg" alt="Mentenanță Mouse Curățare și Skate-uri" class="main-image" onerror="this.src='../poza-editare.jpg'">
+            <img id="main-product-image" src="../mentenanta-mouse.jpg" alt="Mentenanță Mouse Profesionistă" class="main-image" onerror="this.src='../poza-editare.jpg'">
             <div class="thumbnails">
                 <img src="../mentenanta-mouse.jpg" class="active" onclick="changeImage(this)" alt="Imagine principala" onerror="this.src='../poza-editare.jpg'">
                 <img src="../poza-editare.jpg" onclick="changeImage(this)" alt="Imagine detaliu 1">
@@ -259,7 +263,7 @@
                     <span class="main-price">50</span>
                     <span class="currency">RON</span>
                 </div>
-                <span class="details-note-main">Curățare profundă și înlocuirea piciorușelor uzate (skate-uri).</span>
+                <span class="details-note-main">Curățare profundă și schimbare skate-uri pentru o alunecare perfectă ca în prima zi.</span>
                 
                 <button class="btn-add-to-cart" onclick="addToCart('Mentenanță Mouse', 50)">
                     <svg class="icon" style="width:24px; height:24px;"><use href="#icon-cart"></use></svg> Adaugă în Coș
@@ -269,14 +273,15 @@
             <div class="description-container">
                 <h3 style="margin-top: 0; color: var(--primary);">Descriere Serviciu</h3>
                 <div class="description-content" id="descContent">
-                    <p>Mouse-ul tău de gaming nu mai alunecă fin pe mousepad, senzorul tinde să "sară" în momentele critice sau rotița de scroll adună impurități și dă rateuri? O curățare internă completă și o împrospătare a elementelor de fricțiune îi vor reda precizia din prima zi.</p>
+                    <p>Mousu-rile de gaming sau cele de birou acumulează în timp praf, transpirație și reziduuri sub butoane și în zona senzorului optic. Această uzură externă blochează click-urile, reduce precizia senzorului sau îngreunează alunecarea pe mousepad din cauza deteriorării patinelor (skate-urilor).</p>
                     <ul>
-                        <li><strong>Dezasamblare și Igienizare:</strong> Desfacerea carcasei mouse-ului și curățarea mecanică/chimică a fiecărui element din plastic pentru a elimina praful, sebumul și depunerile.</li>
-                        <li><strong>Curățare Senzor și Rotiță:</strong> Suflarea optică a lentilei senzorului și degresarea encoderului de scroll (murdăria de pe rotiță este cauza principală a derulării sacadate).</li>
-                        <li><strong>Schimbare Skate-uri (Teflon):</strong> Îndepărtarea vechilor piciorușe zgâriate sau tocite și aplicarea unui set nou de skate-uri din PTFE pur (teflon), asigurând o alunecare impecabilă.</li>
-                        <li><strong>Verificare Micro-Switch-uri:</strong> Suflarea cu spray de contacte a switch-urilor principale (Left/Right click) pentru a elimina eventualele impurități care cauzează dublu-click nedorit.</li>
+                        <li><strong>Dezasamblare și Igienizare Completă:</strong> Demontarea completă a carcasei și eliminarea tuturor impurităților organice și a prafului de pe switch-uri și rotița de scroll.</li>
+                        <li><strong>Curățare Senzor Optic/Laser:</strong> Îndepărtarea particulelor fine de praf de pe lentila senzorului pentru a restabili acuratețea mișcărilor (pixel-perfect tracking).</li>
+                        <li><strong>Verificare și Degresare Switch-uri:</strong> Inspectarea contactelor electrice ale butoanelor principale și laterale pentru prevenirea problemelor de contact.</li>
+                        <li><strong>Schimbare / Recondiționare Skate-uri:</strong> Înlocuirea patinelor uzate cu un set nou (sau curățarea metodică a celor actuale) pentru reducerea coeficientului de frecare.</li>
+                        <li><strong>Testare Diagnostic Final:</strong> Verificarea polling rate-ului, a răspunsului la click-uri și a fluidității glisării pe suprafețe de test.</li>
                     </ul>
-                    <p><em>*Notă: Serviciul include manopera de mentenanță și un set standard de skate-uri universale din PTFE. În cazul în care switch-urile sunt complet defecte fizic și necesită înlocuire prin cositorire, se va aplica tariful pentru serviciul de "Reparare Mouse".</em></p>
+                    <p><em>*Notă: Schimbarea fizică a switch-urilor defecte (dublu-click) sau a encoderului de scroll intră la serviciul separat de "Reparare Mouse".</em></p>
                 </div>
                 <div class="fade-overlay" id="descOverlay"></div>
                 <button class="btn-toggle-desc" id="btnToggleDesc" onclick="toggleDescription()">Vezi mai mult ▼</button>
@@ -382,7 +387,7 @@
 
     // --- Logica Avansată de Recomandare și Învățare ---
     function initRecommendations() {
-        const currentService = "Mentenanță Mouse"; // ACTUALIZAT PENTRU ACEASTĂ PAGINĂ
+        const currentService = "Mentenanță Mouse"; // MODIFICAT DIRECT PENTRU ACEASTĂ PAGINĂ
         const cart = getCart();
         const cartNames = cart.map(item => item.name);
         
