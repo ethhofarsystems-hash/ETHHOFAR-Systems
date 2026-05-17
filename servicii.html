@@ -21,29 +21,6 @@
 
         [data-theme="dark"] {
             --primary: #4da3ff; 
-            --dark: #f4f4f4; <!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicii | ETHHOFAR Systems</title>
-    <link rel="icon" type="image/png" href="logo_fara_text-cerc.png">
-    <style>
-        /* Variabile pentru Teme */
-        :root { 
-            --primary: #005bb7; 
-            --dark: #1a1a1a; 
-            --light: #f4f4f4; 
-            --card-bg: #ffffff; 
-            --border-color: #ddd;
-            --accent: #27ae60;
-            --text-color: #1a1a1a;
-            --btn-text: #ffffff;
-            --shield-color: #e74c3c;
-        }
-
-        [data-theme="dark"] {
-            --primary: #4da3ff; 
             --dark: #f4f4f4; 
             --light: #121212; 
             --card-bg: #1e1e1e; 
@@ -299,15 +276,6 @@
         <input type="text" id="searchInput" class="search-input" placeholder="Căutare servicii (ex: baterie, curățare, OS)..." onkeyup="filterCards()">
     </div>
     
-    <script>
-        const shieldHTML = `
-            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-            </span>
-        `;
-    </script>
-
     <div class="letter-section" id="sec-A" data-letter="A">
         <div class="letter-header">A</div>
         <div class="grid">
@@ -315,7 +283,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Asamblare Unitate Desktop <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Asamblare Unitate Desktop
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">250 RON</p>
                     </div>
                     <div class="button-group">
@@ -373,7 +347,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="instalare-windows.jpg" alt="Imagine Instalare Windows" class="service-img">
-                        <h3>Instalare Windows <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Instalare Windows
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
@@ -392,7 +372,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Înlocuire baterie BIOS <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Înlocuire baterie BIOS
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">50 RON</p>
                     </div>
                     <div class="button-group">
@@ -412,7 +398,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="montaj-baterie.jpg" alt="Imagine Montaj Baterie" class="service-img">
-                        <h3>Manoperă Montaj Baterie <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Manoperă Montaj Baterie
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">120 RON</p>
                     </div>
                     <div class="button-group">
@@ -426,7 +418,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Mentenanță Controlere <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Mentenanță Controlere
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">60 RON</p>
                         <p class="details-note">Curățare și prevenire drift</p>
                     </div>
@@ -441,7 +439,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Mentenanță Consolă <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Mentenanță Consolă
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">250 RON</p>
                         <p class="details-note">PS4, PS5, Xbox</p>
                     </div>
@@ -456,7 +460,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Mentenanță Desktop <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Mentenanță Desktop
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">220 RON</p>
                         <p class="details-note">Aer sau AIO. Fără Custom Loop.</p>
                     </div>
@@ -471,7 +481,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="mentenanta-laptop.jpg" alt="Imagine Mentenanță Laptop" class="service-img">
-                        <h3>Mentenanță Laptop <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Mentenanță Laptop
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">200 RON</p>
                     </div>
                     <div class="button-group">
@@ -485,7 +501,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Mentenanță Mouse <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Mentenanță Mouse
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">50 RON</p>
                         <p class="details-note">Curățare și schimbare skate-uri</p>
                     </div>
@@ -500,7 +522,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Mentenanță Placă Video <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Mentenanță Placă Video
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">80 RON</p>
                         <p class="details-note">GPU ieșit din garanție.</p>
                     </div>
@@ -520,7 +548,7 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Optimizare OS & Tuning </h3>
+                        <h3>Optimizare OS & Tuning</h3>
                         <p class="price">100 RON</p>
                         <p class="details-note">Temperaturi minime sau performanță.</p>
                     </div>
@@ -540,7 +568,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="pachet-revitalizare.jpg" alt="Imagine Pachet Revitalizare" class="service-img">
-                        <h3>Pachet Revitalizare <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Pachet Revitalizare
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">275 RON</p>
                         <p class="details-note">Mentenanță completă + OS</p>
                     </div>
@@ -555,7 +589,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Porturi USB modulare <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Porturi USB modulare
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
@@ -574,7 +614,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Reparare Mouse <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Reparare Mouse
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">70 RON</p>
                         <p class="details-note">Schimbare switch-uri sau scroll</p>
                     </div>
@@ -595,7 +641,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare balamale <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare balamale
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
@@ -609,7 +661,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare boxe laptop <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare boxe laptop
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">70 RON</p>
                     </div>
                     <div class="button-group">
@@ -623,7 +681,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare butoane <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare butoane
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">70 RON</p>
                         <p class="details-note">Pentru controllere</p>
                     </div>
@@ -638,7 +702,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare ecran/panel <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare ecran/panel
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">200 RON</p>
                     </div>
                     <div class="button-group">
@@ -652,7 +722,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare placă bază <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare placă bază
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">250 RON</p>
                         <p class="details-note">Procedură modulară de mutare</p>
                     </div>
@@ -667,7 +743,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="schimbare-wifi.jpg" alt="Imagine Schimbare Wi-Fi" class="service-img">
-                        <h3>Schimbare placă Wi-Fi <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare placă Wi-Fi
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
@@ -681,7 +763,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="schimbare-radiator.jpg" alt="Imagine Schimbare Radiator" class="service-img">
-                        <h3>Schimbare radiator/vent. <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare radiator/vent.
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
@@ -695,7 +783,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare tastatură <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare tastatură
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">100 RON</p>
                         <p class="details-note">Modele modulare cu clipsuri</p>
                     </div>
@@ -710,7 +804,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare Touchpad <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare Touchpad
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">90 RON</p>
                     </div>
                     <div class="button-group">
@@ -724,7 +824,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Schimbare webcam/mic. <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Schimbare webcam/mic.
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
@@ -745,7 +851,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="upgrade-ram.jpg" alt="Imagine Upgrade RAM" class="service-img">
-                        <h3>Upgrade RAM <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Upgrade RAM
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
@@ -759,7 +871,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="upgrade-ssd-hdd.jpg" alt="Imagine Upgrade SSD" class="service-img">
-                        <h3>Upgrade SSD sau HDD <script>document.write(shieldHTML);</script></h3>
+                        <h3>
+                            Upgrade SSD sau HDD
+                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+                            </span>
+                        </h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
