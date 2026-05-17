@@ -16,6 +16,7 @@
             --accent: #27ae60;
             --text-color: #1a1a1a;
             --btn-text: #ffffff;
+            --shield-color: #e74c3c;
         }
 
         [data-theme="dark"] {
@@ -27,6 +28,7 @@
             --accent: #2ecc71;
             --text-color: #f4f4f4;
             --btn-text: #121212; 
+            --shield-color: #ff6b6b;
         }
 
         [data-theme="warm"] {
@@ -38,6 +40,7 @@
             --accent: #27ae60;
             --text-color: #4e342e;
             --btn-text: #ffffff;
+            --shield-color: #c0392b;
         }
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
@@ -50,8 +53,9 @@
         
         .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
         .nav-cart { cursor: pointer; font-size: 1.5rem; position: relative; display: flex; align-items: center; padding: 10px; border-radius: 50%; transition: 0.3s; z-index: 10; background: transparent; }
+        .nav-cart:hover { transform: scale(1.1); }
         
-        /* Efect Cerc Roșu MUTEZAT LA ADAUGARE */
+        /* Efect Cerc Roșu LA ADAUGARE */
         .cart-highlight { animation: ring-pulse 2s ease-out; }
         @keyframes ring-pulse {
             0% { box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.7); }
@@ -63,6 +67,9 @@
         .cart-popup { display: none; position: absolute; top: 120%; right: 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 260px; text-align: center; z-index: 1001; cursor: default; }
         .cart-popup.active { display: block; animation: popupAnim 0.3s ease; }
         @keyframes popupAnim { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-go-cart { background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 12px; transition: 0.3s; text-decoration: none; display: inline-block; box-sizing: border-box;}
+        .btn-go-cart:hover { background: var(--accent); }
 
         /* Teme și Litere */
         .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
@@ -80,7 +87,7 @@
         .alphabet-nav a.active, .alphabet-nav a:hover { background: var(--primary); color: var(--btn-text); transform: scale(1.2); }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 20px; padding-right: 60px; }
-        .warranty-banner { text-align: center; background: rgba(39, 174, 96, 0.1); border: 1px dashed var(--accent); color: var(--accent); padding: 15px; border-radius: 8px; font-weight: bold; margin-bottom: 30px; font-size: 1.1rem; }
+        
         .search-container { margin-bottom: 30px; }
         .search-input { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid var(--primary); font-size: 1.1rem; background: var(--card-bg); color: var(--text-color); box-sizing: border-box; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .search-input:focus { box-shadow: 0 4px 12px rgba(0, 91, 183, 0.2); }
@@ -95,7 +102,6 @@
         .card-front { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; background-color: var(--card-bg); color: var(--text-color); box-sizing: border-box; }
         .card-front:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 91, 183, 0.1); border-color: var(--primary); }
         
-        /* CSS pentru poza serviciului */
         .service-img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; background-color: var(--border-color); font-size: 0.85rem; color: #777; text-align: center; }
 
         .card-front h3 { margin-top: 0; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: flex-start; }
@@ -106,99 +112,68 @@
         .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
         .btn-flip { width: 100%; box-sizing: border-box; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; text-align: center; text-decoration: none; display: block; }
         .btn-flip:hover { background: var(--primary); color: var(--btn-text); }
-        .btn-cart { width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-cart:hover { filter: brightness(1.1); } 
         
-        #cart-container { background: var(--card-bg); border: 2px solid var(--primary); padding: 30px; border-radius: 8px; margin-top: 40px; }
+        /* BUTONUL DE ADĂUGARE VERDE LA HOVER */
+        .btn-cart { width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s, transform 0.2s; }
+        .btn-cart:hover { background: var(--accent); transform: scale(1.02); } 
         
-        /* LISTA COȘ CU ELIMINARE */
-        #cart-list { list-style: none; padding: 0; margin: 0; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.03); margin-bottom: 8px; padding: 10px 15px; border-radius: 4px; border: 1px solid var(--border-color); font-weight: bold; }
-        .btn-remove { background: #ff4d4d; color: white; border: none; border-radius: 4px; width: 25px; height: 25px; cursor: pointer; font-weight: bold; font-size: 1rem; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
-        .btn-remove:hover { background: #cc0000; transform: scale(1.1); }
+        /* SCUTUL DE GARANȚIE ȘI TOOLTIP */
+        .tooltip-container { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
+        .shield-icon { width: 22px; height: 22px; color: var(--shield-color); transition: transform 0.3s; margin-left: 8px; }
+        .tooltip-container:hover .shield-icon { transform: scale(1.2) rotate(5deg); }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 220px;
+            background-color: var(--text-color);
+            color: var(--card-bg);
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 130%;
+            right: -10px; /* Aliniat spre dreapta */
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            font-size: 0.85rem;
+            font-weight: normal;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            right: 15px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--text-color) transparent transparent transparent;
+        }
+        .tooltip-container:hover .tooltip-text, .tooltip-container.active .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
 
         /* WIDGET WHATSAPP POPUP & MINIMIZAT */
-        .wa-popup {
-            position: fixed;
-            right: -400px;
-            bottom: 30px;
-            display: flex;
-            align-items: flex-end;
-            gap: 15px;
-            z-index: 1005;
-            transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-        .wa-popup.show {
-            right: 40px;
-        }
-        .wa-popup-content {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            padding: 15px 20px;
-            border-radius: 12px;
-            max-width: 250px;
-            position: relative;
-            color: var(--text-color);
-        }
-        .wa-popup-content::after {
-            content: '';
-            position: absolute;
-            right: -10px;
-            bottom: 20px;
-            border-width: 10px 0 10px 10px;
-            border-style: solid;
-            border-color: transparent transparent transparent var(--card-bg);
-        }
+        .wa-popup { position: fixed; right: -400px; bottom: 30px; display: flex; align-items: flex-end; gap: 15px; z-index: 1005; transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .wa-popup.show { right: 40px; }
+        .wa-popup-content { background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 15px 20px; border-radius: 12px; max-width: 250px; position: relative; color: var(--text-color); }
+        .wa-popup-content::after { content: ''; position: absolute; right: -10px; bottom: 20px; border-width: 10px 0 10px 10px; border-style: solid; border-color: transparent transparent transparent var(--card-bg); }
         .wa-popup-content h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--primary); }
         .wa-popup-content p { margin: 0; font-size: 0.85rem; line-height: 1.4; color: #777; }
         [data-theme="dark"] .wa-popup-content p { color: #ccc; }
         .wa-close { position: absolute; top: 5px; right: 8px; cursor: pointer; font-size: 1.2rem; color: #999; line-height: 1; }
         .wa-close:hover { color: red; }
-        
-        .wa-popup-icon {
-            background: #25D366;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            transition: transform 0.3s;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .wa-popup-icon:hover {
-            transform: scale(1.1);
-        }
-
-        /* Bara minimizată WhatsApp */
-        .wa-minimized {
-            position: fixed;
-            right: -40px; 
-            bottom: 30px; 
-            background: #25D366;
-            color: white;
-            padding: 15px 5px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            border-radius: 5px 0 0 5px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: bold;
-            transition: right 0.4s ease;
-            z-index: 1004;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.15);
-        }
-        .wa-minimized.active {
-            right: 0;
-        }
-        .wa-minimized:hover {
-            background: #1ebc59;
-        }
+        .wa-popup-icon { background: #25D366; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: transform 0.3s; cursor: pointer; flex-shrink: 0; }
+        .wa-popup-icon:hover { transform: scale(1.1); }
+        .wa-minimized { position: fixed; right: -40px; bottom: 30px; background: #25D366; color: white; padding: 15px 5px; writing-mode: vertical-rl; text-orientation: mixed; border-radius: 5px 0 0 5px; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: right 0.4s ease; z-index: 1004; box-shadow: -2px 0 10px rgba(0,0,0,0.15); }
+        .wa-minimized.active { right: 0; }
+        .wa-minimized:hover { background: #1ebc59; }
     </style>
 </head>
 <body>
@@ -227,14 +202,14 @@
     </div>
 
     <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
-        <div class="nav-cart" id="navCartIcon" onclick="scrollToCart()">
+        <div class="nav-cart" id="navCartIcon" onclick="window.location.href='cos.html'">
             🛒 <span class="cart-badge" id="cartBadge">0</span>
         </div>
         
         <div class="cart-popup" id="cartPopup">
             <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
-            <p style="color: var(--text-color); font-size: 0.95rem;">Momentan ai <strong id="popupCount" style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
-            <p style="font-size: 0.85rem; color: #888; margin-bottom: 5px;">Când ești pregătit, apasă pe iconița de coș pentru a vedea prețurile.</p>
+            <p style="color: var(--text-color); font-size: 0.95rem;">Ai <strong id="popupCount" style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
+            <a href="cos.html" class="btn-go-cart">Mergi la coș ➔</a>
         </div>
     </div>
 </nav>
@@ -250,15 +225,22 @@
 
 <div class="container">
     <h2 style="text-align: center; margin-bottom: 20px;">Toate Serviciile Noastre</h2>
-    
-    <div class="warranty-banner">
-        🛡️ Toate serviciile marcate cu acest simbol beneficiază de o garanție a manoperei de 90 de zile.
-    </div>
 
     <div class="search-container">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 Caută un serviciu (ex: baterie, curatare, OS)..." onkeyup="filterCards()">
     </div>
     
+    <script>
+        const shieldHTML = `
+            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                <svg class="shield-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                </svg>
+                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+            </span>
+        `;
+    </script>
+
     <div class="letter-section" id="sec-A" data-letter="A">
         <div class="letter-header">A</div>
         <div class="grid">
@@ -266,12 +248,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Asamblare Unitate Desktop <span>🛡️</span></h3>
+                        <h3>Asamblare Unitate Desktop <script>document.write(shieldHTML);</script></h3>
                         <p class="price">250 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/asamblare-desktop.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -290,7 +272,7 @@
                     </div>
                     <div class="button-group">
                         <a href="servicii/consultanta-achizitie.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Consultanță SH', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Consultanță SH', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -310,7 +292,7 @@
                     </div>
                     <div class="button-group">
                         <a href="servicii/diagnosticare.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -323,12 +305,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Instalare Windows <span>🛡️</span></h3>
+                        <h3>Instalare Windows <script>document.write(shieldHTML);</script></h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/instalare-windows.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Instalare Windows', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Instalare Windows', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -342,12 +324,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Înlocuire baterie BIOS <span>🛡️</span></h3>
+                        <h3>Înlocuire baterie BIOS <script>document.write(shieldHTML);</script></h3>
                         <p class="price">50 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/inlocuire-baterie-bios.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Baterie BIOS', 50)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Baterie BIOS', 50)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -361,12 +343,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Manoperă Montaj Baterie <span>🛡️</span></h3>
+                        <h3>Manoperă Montaj Baterie <script>document.write(shieldHTML);</script></h3>
                         <p class="price">120 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/manopera-montaj-baterie.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -375,13 +357,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Mentenanță Consolă <span>🛡️</span></h3>
+                        <h3>Mentenanță Consolă <script>document.write(shieldHTML);</script></h3>
                         <p class="price">250 RON</p>
                         <p class="details-note">PS4, PS5, Xbox</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/mentenanta-consola.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -390,13 +372,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Mentenanță Desktop <span>🛡️</span></h3>
+                        <h3>Mentenanță Desktop <script>document.write(shieldHTML);</script></h3>
                         <p class="price">220 RON</p>
                         <p class="details-note">Aer sau AIO. Fără Custom Loop.</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/mentenanta-desktop.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -404,12 +386,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Mentenanță Laptop <span>🛡️</span></h3>
+                        <h3>Mentenanță Laptop <script>document.write(shieldHTML);</script></h3>
                         <p class="price">200 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/mentenanta-laptop.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -418,13 +400,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Mentenanță Placă Video <span>🛡️</span></h3>
+                        <h3>Mentenanță Placă Video <script>document.write(shieldHTML);</script></h3>
                         <p class="price">80 RON</p>
                         <p class="details-note">GPU ieșit din garanție.</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/mentenanta-placa-video.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță GPU', 80)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Mentenanță GPU', 80)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -444,7 +426,7 @@
                     </div>
                     <div class="button-group">
                         <a href="servicii/optimizare-os-tuning.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -457,13 +439,13 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Pachet Revitalizare <span>🛡️</span></h3>
+                        <h3>Pachet Revitalizare <script>document.write(shieldHTML);</script></h3>
                         <p class="price">275 RON</p>
                         <p class="details-note">Mentenanță completă + OS</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/pachet-revitalizare.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Revitalizare Laptop', 275)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Revitalizare Laptop', 275)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -472,12 +454,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Porturi USB modulare <span>🛡️</span></h3>
+                        <h3>Porturi USB modulare <script>document.write(shieldHTML);</script></h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/porturi-usb.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Porturi USB', 80)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -492,12 +474,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare balamale <span>🛡️</span></h3>
+                        <h3>Schimbare balamale <script>document.write(shieldHTML);</script></h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-balamale.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -506,12 +488,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare boxe laptop <span>🛡️</span></h3>
+                        <h3>Schimbare boxe laptop <script>document.write(shieldHTML);</script></h3>
                         <p class="price">70 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-boxe.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -520,13 +502,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare butoane <span>🛡️</span></h3>
+                        <h3>Schimbare butoane <script>document.write(shieldHTML);</script></h3>
                         <p class="price">70 RON</p>
                         <p class="details-note">Pentru controllere</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-butoane.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare butoane', 70)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare butoane', 70)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -535,12 +517,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare ecran/panel <span>🛡️</span></h3>
+                        <h3>Schimbare ecran/panel <script>document.write(shieldHTML);</script></h3>
                         <p class="price">200 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-ecran.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare ecran', 200)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare ecran', 200)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -549,13 +531,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare placă bază <span>🛡️</span></h3>
+                        <h3>Schimbare placă bază <script>document.write(shieldHTML);</script></h3>
                         <p class="price">250 RON</p>
                         <p class="details-note">Procedură modulară de mutare</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-placa-baza.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare placă bază', 250)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare placă bază', 250)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -563,12 +545,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Schimbare placă Wi-Fi <span>🛡️</span></h3>
+                        <h3>Schimbare placă Wi-Fi <script>document.write(shieldHTML);</script></h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-placa-wifi.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare placă Wi-Fi', 80)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare placă Wi-Fi', 80)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -576,12 +558,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Schimbare radiator/vent. <span>🛡️</span></h3>
+                        <h3>Schimbare radiator/vent. <script>document.write(shieldHTML);</script></h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-radiator.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -590,13 +572,13 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare tastatură <span>🛡️</span></h3>
+                        <h3>Schimbare tastatură <script>document.write(shieldHTML);</script></h3>
                         <p class="price">100 RON</p>
                         <p class="details-note">Modele modulare cu clipsuri</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-tastatura.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -605,12 +587,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare Touchpad <span>🛡️</span></h3>
+                        <h3>Schimbare Touchpad <script>document.write(shieldHTML);</script></h3>
                         <p class="price">90 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-touchpad.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -619,12 +601,12 @@
                 <div class="card-front card">
                     <div>
                         <img src="poza-editare.jpg" alt="Poza pentru aceste servicii este inca in camera de editare" class="service-img">
-                        <h3>Schimbare webcam/mic. <span>🛡️</span></h3>
+                        <h3>Schimbare webcam/mic. <script>document.write(shieldHTML);</script></h3>
                         <p class="price">100 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/schimbare-webcam.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -639,12 +621,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Upgrade RAM <span>🛡️</span></h3>
+                        <h3>Upgrade RAM <script>document.write(shieldHTML);</script></h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/upgrade-ram.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Upgrade RAM', 80)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Upgrade RAM', 80)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -652,12 +634,12 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
-                        <h3>Upgrade SSD sau HDD <span>🛡️</span></h3>
+                        <h3>Upgrade SSD sau HDD <script>document.write(shieldHTML);</script></h3>
                         <p class="price">80 RON</p>
                     </div>
                     <div class="button-group">
                         <a href="servicii/upgrade-ssd-hdd.html" class="btn-flip">📖 Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Upgrade SSD/HDD', 80)">🛒 Adaugă</button>
+                        <button class="btn-cart" onclick="addToCart('Upgrade SSD/HDD', 80)">🛒 Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -665,40 +647,6 @@
         </div>
     </div>
 
-   <div id="cart-container" style="display:none;">
-        <h3 style="margin-top:0;">Finalizare Comandă</h3>
-        <p>Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la final.</p>
-        
-        <ul id="cart-list"></ul>
-        
-        <div style="margin: 20px 0; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; border: 1px dashed var(--border-color);">
-            <label style="display: block; font-size: 0.9rem; margin-bottom: 5px;">Ai un cod de reducere? (Opțional)</label>
-            <div style="display: flex; gap: 10px;">
-                <input type="text" id="promoInput" placeholder="Introdu codul" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; flex-grow: 1; background: var(--card-bg); color: var(--text-color);">
-                <button type="button" onclick="applyPromo()" style="padding: 10px 20px; background: var(--primary); color: var(--btn-text); border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Validare</button>
-            </div>
-            <p id="promoMessage" style="font-size: 0.9rem; margin-top: 8px; margin-bottom: 0; font-weight: bold;"></p>
-        </div>
-
-        <p style="font-size: 1.2rem;"><strong>Total estimat manoperă: <span id="cart-total" style="color: var(--accent);">0</span> RON</strong></p>
-
-        <form id="order-form" action="https://formspree.io/f/mdaboreo" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin-top: 20px;">
-            <input type="text" name="Nume" placeholder="Numele tău complet" required style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-color);">
-            <input type="email" name="Email" placeholder="Adresa de email" required style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-color);">
-            <input type="tel" name="Telefon" placeholder="Număr de telefon" required style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-color);">
-            
-            <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 5px; margin-bottom: 5px;">
-                <label style="font-size: 0.9rem; color: var(--text-color); line-height: 1.4;">
-                    Te rugăm să introduci marca și modelul complet pentru a-l identifica mai ușor:
-                </label>
-                <input type="text" name="Model_Echipament" placeholder="Ex: LENOVO IdeaPad Gaming 3 15ARH05" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--card-bg); color: var(--text-color);">
-            </div>
-            <input type="hidden" name="Servicii_Comandate" id="hidden-services">
-            <input type="hidden" name="Total_Estimata" id="hidden-total">
-
-            <button type="submit" style="background: var(--primary); color: var(--btn-text); border: none; padding: 15px; font-size: 1.1rem; border-radius: 4px; cursor: pointer; font-weight: bold;">Trimite Comanda</button>
-        </form>
-    </div>
 </div>
 
 <footer>
@@ -743,9 +691,12 @@
         }, observerOptions);
         
         sections.forEach(sec => observer.observe(sec));
+        
+        // Inițializăm indicatorul de coș la încărcare
+        updateCartBadge();
     });
 
-    // --- 3. FUNCȚIA BAREI DE CĂUTARE INTELIGENTĂ ---
+    // --- 3. BARA DE CĂUTARE INTELIGENTĂ ---
     function filterCards() {
         const filter = document.getElementById('searchInput').value.toLowerCase();
         const sections = document.querySelectorAll('.letter-section');
@@ -772,35 +723,44 @@
         });
     }
 
-    // --- 4. LOGICA COȘULUI NOU (SINCRONIZAT CU PAGINILE DE PRODUSE) ---
-    // Citim coșul din memorie sau creăm unul gol
-    let cart = JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
-    let total = cart.reduce((sum, item) => sum + item.price, 0);
-    let discountMultiplier = 0;
+    // --- 4. LOGICA SIMPLIFICATĂ A COȘULUI ---
     let popupTimeout;
     let highlightTimeout;
 
-    // Funcție nouă pentru salvarea coșului în memorie
-    function saveCart() {
+    function getCart() {
+        return JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
+    }
+
+    function saveCart(cart) {
         localStorage.setItem('ethhofar_cart', JSON.stringify(cart));
     }
 
+    function updateCartBadge() {
+        const cart = getCart();
+        const badge = document.getElementById('cartBadge');
+        const popupCount = document.getElementById('popupCount');
+        
+        if(badge) badge.innerText = cart.length;
+        if(popupCount) popupCount.innerText = cart.length;
+    }
+
     function addToCart(name, price) {
+        const cart = getCart();
         const id = Date.now() + Math.random();
         cart.push({ id, name, price });
-        total += price;
-        saveCart(); // Salvăm modificarea
-        updateCartUI();
+        saveCart(cart); 
         
-        // Afișează fereastra de popup
+        updateCartBadge();
+        
+        // Afișare fereastră Popup
         const popup = document.getElementById('cartPopup');
         popup.classList.add('active');
         if(popupTimeout) clearTimeout(popupTimeout);
         popupTimeout = setTimeout(() => {
             popup.classList.remove('active');
-        }, 4000);
+        }, 5000); // Ținem popup-ul deschis un pic mai mult pt a citi și apăsa butonul
 
-        // Declanșează inelul roșu
+        // Animație Inel Roșu
         const cartIcon = document.getElementById('navCartIcon');
         cartIcon.classList.remove('cart-highlight');
         void cartIcon.offsetWidth; 
@@ -811,88 +771,10 @@
             cartIcon.classList.remove('cart-highlight');
         }, 2000);
     }
-    
-    function removeItem(id) {
-        const index = cart.findIndex(item => item.id === id);
-        if (index !== -1) {
-            total -= cart[index].price;
-            cart.splice(index, 1);
-            saveCart(); // Salvăm modificarea
-            updateCartUI();
-        }
-    }
 
     function closePopupIfOpen() {
         document.getElementById('cartPopup').classList.remove('active');
     }
-
-    function scrollToCart() {
-        const cartContainer = document.getElementById('cart-container');
-        cartContainer.style.display = 'block'; 
-        cartContainer.scrollIntoView({ behavior: 'smooth' });
-        closePopupIfOpen(); 
-    }
-
-    function applyPromo() {
-        const code = document.getElementById('promoInput').value.trim().toLowerCase();
-        const msg = document.getElementById('promoMessage');
-        if (code === 'motanel10') { 
-            discountMultiplier = 0.10; 
-            msg.innerText = "✅ Cod valid! 10% reducere aplicată totalului."; 
-            msg.style.color = "var(--accent)"; 
-        } 
-        else if (code === '') { 
-            msg.innerText = "Introduceți un cod înainte de validare."; 
-            msg.style.color = "#e67e22"; 
-        } 
-        else { 
-            discountMultiplier = 0; 
-            msg.innerText = "❌ Cod invalid. Verifică și încearcă din nou."; 
-            msg.style.color = "red"; 
-        }
-        updateCartUI();
-    }
-
-    function updateCartUI() {
-        const list = document.getElementById('cart-list');
-        const totalEl = document.getElementById('cart-total');
-        const hiddenServices = document.getElementById('hidden-services');
-        const hiddenTotal = document.getElementById('hidden-total');
-        const cartBadge = document.getElementById('cartBadge');
-        const popupCount = document.getElementById('popupCount');
-        
-        cartBadge.innerText = cart.length;
-        popupCount.innerText = cart.length;
-        
-        list.innerHTML = '';
-        let servicesText = "";
-        
-        cart.forEach((item) => {
-            const li = document.createElement('li');
-            li.className = 'cart-item';
-            li.innerHTML = `
-                <span>${item.name} - ${item.price} RON</span>
-                <button class="btn-remove" onclick="removeItem(${item.id})" title="Elimină serviciul">✖</button>
-            `;
-            list.appendChild(li);
-            servicesText += item.name + " (" + item.price + " RON), ";
-        });
-        
-        let finalTotal = total - (total * discountMultiplier);
-        
-        if (discountMultiplier > 0) {
-            totalEl.innerHTML = `<s style="color: #999;">${total}</s> <span style="color: var(--accent);">${finalTotal.toFixed(2)}</span>`;
-            servicesText += ` | *** Reducere: Motanel10 (-10%) ***`;
-        } else {
-            totalEl.innerText = total;
-        }
-
-        hiddenServices.value = servicesText;
-        hiddenTotal.value = finalTotal.toFixed(2) + " RON";
-    }
-
-    // Încărcăm datele în UI imediat ce se deschide pagina
-    updateCartUI();
 
     // --- 5. WIDGET WHATSAPP ---
     setTimeout(() => {
