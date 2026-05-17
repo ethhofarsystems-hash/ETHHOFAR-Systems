@@ -1,8 +1,168 @@
-<h1>Diagnosticare Hardware & Software</h1>
-<p class="price-tag">Preț: 50 RON (Gratuit dacă se repară la noi)</p>
-<h3>Ce include serviciul:</h3>
-<ul>
-    <li>Identificarea exactă a piesei defecte.</li>
-    <li>Verificarea erorilor de sistem (Blue Screen, blocaje).</li>
-    <li>Estimarea costului total de reparație înainte de execuție.</li>
-</ul>
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosticare Hardware & Software - ETHHOFAR Systems</title>
+    <link rel="icon" type="image/png" href="../logo_fara_text-cerc.png">
+    <style>
+        /* Variabile de culoare ETHHOFAR */
+        :root { 
+            --primary: #005bb7; 
+            --light-bg: #f4f4f4; 
+            --card-bg: #ffffff; 
+            --text-main: #1a1a1a;
+            --text-muted: #555;
+            --accent-green: #27ae60;
+            --price-color: #e67e22;
+            --border: #ddd;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--light-bg); color: var(--text-main); margin: 0; padding: 0; }
+
+        /* Structura Paginii (Layout e-Commerce) */
+        .product-page-container { max-width: 1200px; margin: 40px auto; padding: 20px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--border); }
+        @media (max-width: 768px) { .product-page-container { grid-template-columns: 1fr; gap: 20px; } }
+
+        /* Coloana Stângă: Imaginea */
+        .product-image-area { display: flex; justify-content: center; align-items: flex-start; }
+        .product-image-area img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); object-fit: cover; }
+
+        /* Coloana Dreaptă: Detalii */
+        .product-details-area { display: flex; flex-direction: column; }
+        h1 { font-size: 2.2rem; color: var(--primary); margin-top: 0; margin-bottom: 10px; }
+        .warranty-badge { display: inline-block; background: rgba(39, 174, 96, 0.1); color: var(--accent-green); padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 20px; border: 1px dashed var(--accent-green); align-self: flex-start;}
+
+        /* Zona de Preț și Acțiune */
+        .price-action-box { background: rgba(0,0,0,0.02); border: 1px solid var(--border); padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 15px; }
+        .price-label { font-size: 1rem; color: var(--text-muted); }
+        .main-price { font-size: 2.5rem; font-weight: bold; color: var(--price-color); }
+        .currency { font-size: 1.2rem; color: var(--price-color); font-weight: bold; }
+        .details-note { font-size: 0.9rem; color: var(--text-muted); font-style: italic; margin-top: -10px; margin-bottom: 15px; display: block; }
+
+        /* Butonul Mare de Adăugare (Stil eMAG) */
+        .btn-add-to-cart { background-color: var(--primary); color: white; border: none; padding: 18px 30px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.3s, transform 0.1s; width: 100%; max-width: 300px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 6px rgba(0, 91, 183, 0.2); }
+        .btn-add-to-cart:hover { background-color: #004494; transform: translateY(-2px); }
+        .btn-add-to-cart:active { transform: translateY(0); }
+
+        /* Descriere Detaliată */
+        .description-section h3 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-top: 0; }
+        .description-section ul { list-style-type: none; padding: 0; margin: 0; }
+        .description-section li { position: relative; padding-left: 30px; margin-bottom: 12px; font-size: 1.05rem; line-height: 1.6; color: var(--text-muted); }
+        .description-section li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-green); font-weight: bold; font-size: 1.2rem; }
+
+        /* Link Înapoi */
+        .back-link { display: inline-block; margin-top: 30px; text-decoration: none; color: var(--text-muted); font-size: 0.9rem; transition: color 0.3s; }
+        .back-link:hover { color: var(--primary); }
+
+        /* --- STILURI PENTRU COȘUL EXISTENT (COPIATE PT FUNCTIONALITATE) --- */
+        #cart-container { display: none; position: fixed; bottom: 20px; right: 20px; background: var(--card-bg); border: 2px solid var(--primary); padding: 20px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; width: 300px;}
+        #cart-list { list-style: none; padding: 0; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+        .btn-remove { background: #ff4d4d; color: white; border: none; border-radius: 4px; padding: 2px 6px; cursor: pointer;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="product-page-container">
+        
+        <div class="product-image-area">
+            <img src="diagnosticare.jpg" alt="Diagnosticare Laptop ETHHOFAR Systems">
+        </div>
+
+        <div class="product-details-area">
+            <h1>Diagnosticare Hardware & Software</h1>
+            <div class="warranty-badge">🛡️ Serviciu cu Garanție ETHHOFAR</div>
+
+            <div class="price-action-box">
+                <div class="price-row">
+                    <span class="price-label">Preț Manoperă:</span>
+                    <span class="main-price">50</span>
+                    <span class="currency">RON</span>
+                </div>
+                <span class="details-note">Gratuit dacă alegi să efectuezi reparația la noi.</span>
+                
+                <button class="btn-add-to-cart" onclick="addToCartPage('Diagnosticare PC', 50)">
+                    🛒 Adaugă în Coș
+                </button>
+            </div>
+
+            <div class="description-section">
+                <h3>Specificații Serviciu</h3>
+                <ul>
+                    <li><strong>Identificare Defect:</strong> Verificarea componentelor interne (RAM, HDD/SSD, Procesor, Placă de bază) pentru a găsi sursa problemei.</li>
+                    <li><strong>Evaluare Software:</strong> Diagnosticarea erorilor de Windows, a driverelor conflictuale sau a prezenței malware-ului.</li>
+                    <li><strong>Raport Detaliat:</strong> Îți explicăm exact ce nu funcționează și de ce.</li>
+                    <li><strong>Estimare Costuri:</strong> Primești un deviz clar pentru piesele necesare și manopera de reparație, fără obligații.</li>
+                    <li><strong>Timp de Execuție:</strong> De obicei, diagnosticarea se face pe loc sau în maxim 24 de ore.</li>
+                </ul>
+            </div>
+
+            <a href="../servicii.html" class="back-link">← Înapoi la toate serviciile</a>
+        </div>
+    </div>
+</div>
+
+<div id="cart-container">
+    <h3>Coșul Tău</h3>
+    <ul id="cart-list"></ul>
+    <p>Total: <span id="cart-total">0</span> RON</p>
+    <button onclick="document.getElementById('cart-container').style.display='none'">Închide</button>
+</div>
+
+<script>
+    // --- SISTEMUL DE COȘ PENTRU PAGINA DE PRODUS ---
+    // Folosim localStorage pentru a persista coșul între pagini
+    let cart = JSON.parse(localStorage.getItem('ethhofar_cart')) || [];
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+    function addToCartPage(name, price) {
+        const id = Date.now() + Math.random();
+        cart.push({ id, name, price });
+        total += price;
+        saveCart();
+        updateCartUI();
+        alert(`Serviciul "${name}" a fost adăugat în coș!`);
+        // Opțional: Deschide coșul automat
+        document.getElementById('cart-container').style.display = 'block';
+    }
+    
+    function removeItem(id) {
+        const index = cart.findIndex(item => item.id === id);
+        if (index !== -1) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            saveCart();
+            updateCartUI();
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('ethhofar_cart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+        const list = document.getElementById('cart-list');
+        const totalEl = document.getElementById('cart-total');
+        
+        list.innerHTML = '';
+        cart.forEach((item) => {
+            const li = document.createElement('li');
+            li.className = 'cart-item';
+            li.innerHTML = `
+                <span>${item.name} - ${item.price} RON</span>
+                <button class="btn-remove" onclick="removeItem(${item.id})">✖</button>
+            `;
+            list.appendChild(li);
+        });
+        totalEl.innerText = total.toFixed(2);
+    }
+
+    // Inițializează UI-ul coșului la încărcarea paginii
+    updateCartUI();
+</script>
+
+</body>
+</html>
