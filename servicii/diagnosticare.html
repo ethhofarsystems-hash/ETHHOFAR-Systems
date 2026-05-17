@@ -6,7 +6,7 @@
     <title>Diagnosticare Hardware & Software - ETHHOFAR Systems</title>
     <link rel="icon" type="image/png" href="../logo_fara_text-cerc.png">
     <style>
-        /* Variabile pentru Teme (preluate din modelul principal) */
+        /* Variabile pentru Teme */
         :root { 
             --primary: #005bb7; 
             --dark: #1a1a1a; 
@@ -47,7 +47,7 @@
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--light); color: var(--text-color); margin: 0; padding: 0; transition: background 0.3s, color 0.3s; }
 
-        /* BARĂ NAVIGAȚIE (Din model) */
+        /* BARĂ NAVIGAȚIE */
         nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
         .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
         nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
@@ -68,7 +68,7 @@
         .product-page-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--border-color); padding: 30px; }
         @media (max-width: 768px) { .product-page-container { grid-template-columns: 1fr; gap: 20px; padding: 15px;} }
 
-        /* GALERIE FOTO MULTIPLĂ */
+        /* GALERIE FOTO */
         .gallery-area { display: flex; flex-direction: column; gap: 15px; }
         .main-image { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover; aspect-ratio: 4/3; }
         .thumbnails { display: flex; gap: 10px; overflow-x: auto; }
@@ -90,7 +90,7 @@
         .btn-add-to-cart { background-color: var(--primary); color: var(--btn-text); border: none; padding: 18px 30px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; width: 100%; max-width: 350px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-add-to-cart:hover { background-color: var(--accent); transform: translateY(-2px); }
 
-        /* DESCRIERE ASCUNSĂ (EMAG STYLE) */
+        /* DESCRIERE ASCUNSĂ */
         .description-container { border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; position: relative; overflow: hidden; background: var(--card-bg); margin-bottom: 30px;}
         .description-content { max-height: 150px; overflow: hidden; transition: max-height 0.5s ease; color: var(--text-muted); line-height: 1.6; }
         .description-content.expanded { max-height: 2000px; }
@@ -104,7 +104,7 @@
         .btn-toggle-desc { display: block; width: 100%; background: none; border: none; border-top: 1px solid var(--border-color); color: var(--primary); font-weight: bold; padding: 15px 0 0 0; cursor: pointer; font-size: 1rem; transition: 0.3s; margin-top: 10px;}
         .btn-toggle-desc:hover { color: var(--accent); }
 
-        /* SECȚIUNE RECOMANDĂRI (CARDURI) */
+        /* SECȚIUNE RECOMANDĂRI */
         .recommendations-section { margin-top: 60px; }
         .recommendations-section h2 { font-size: 1.5rem; color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
@@ -118,7 +118,7 @@
         .btn-flip { display: flex; align-items: center; justify-content: center; gap: 8px; background: none; border: 1px solid var(--primary); color: var(--primary); padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; text-decoration: none; font-size: 0.9rem;}
         .btn-cart { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); color: var(--btn-text); border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.9rem;}
         
-        /* Icoane SVG Ascunse */
+        /* Icoane SVG */
         .svg-defs { display: none; }
     </style>
 </head>
@@ -153,12 +153,12 @@
         
         <!-- SECȚIUNE GALERIE FOTO -->
         <div class="gallery-area">
-            <img id="main-product-image" src="poza-editare.jpg" alt="Diagnosticare Hardware" class="main-image">
+            <!-- Poza principală și thumbnail-urile cu fallback corect -->
+            <img id="main-product-image" src="../diagnosticare.jpg" alt="Diagnosticare Hardware" class="main-image" onerror="this.src='../poza-editare.jpg'">
             <div class="thumbnails">
-                <img src="poza-editare.jpg" class="active" onclick="changeImage(this)" alt="Thumb 1">
-                <!-- Se adaugă poze suplimentare cand le vei avea. Exemplu: -->
-                <img src="poza-editare.jpg" onclick="changeImage(this)" alt="Thumb 2">
-                <img src="poza-editare.jpg" onclick="changeImage(this)" alt="Thumb 3">
+                <img src="../diagnosticare.jpg" class="active" onclick="changeImage(this)" alt="Imagine principala" onerror="this.src='../poza-editare.jpg'">
+                <img src="../poza-editare.jpg" onclick="changeImage(this)" alt="Imagine detaliu 1">
+                <img src="../poza-editare.jpg" onclick="changeImage(this)" alt="Imagine detaliu 2">
             </div>
         </div>
 
@@ -181,7 +181,7 @@
                 </button>
             </div>
 
-            <!-- DESCRIERE EXPANDABILĂ TIPO EMAG -->
+            <!-- DESCRIERE EXPANDABILĂ -->
             <div class="description-container">
                 <h3 style="margin-top: 0; color: var(--primary);">Descriere Serviciu</h3>
                 <div class="description-content" id="descContent">
@@ -202,11 +202,11 @@
         </div>
     </div>
 
-    <!-- SECȚIUNE RECOMANDĂRI -->
+    <!-- SECȚIUNE RECOMANDĂRI BAZATE PE INTERES -->
     <div class="recommendations-section">
         <h2>Clienții care s-au uitat la acest serviciu, au mai fost interesați de:</h2>
         <div class="grid" id="recommendationsGrid">
-            <!-- Cardurile vor fi generate automat de JS -->
+            <!-- Cardurile se vor genera din JS pe baza scorului de potrivire (tag-uri) -->
         </div>
     </div>
 
@@ -266,15 +266,20 @@
         document.getElementById('cartPopup').classList.remove('active');
     }
 
-    // === SISTEM DE RECOMANDĂRI INTELIGENT ===
-    // Baza de date simulată cu servicii
+    // === SISTEM DE RECOMANDĂRI BAZAT PE TAG-URI / INTERESE ===
+    // Am inclus serviciile tale și pozele exact așa cum sunt în site-ul tău principal
     const serviceCatalog = [
-        { name: "Instalare Windows", price: 100, tags: ["software", "diagnosticare"], link: "instalare-windows.html" },
-        { name: "Mentenanță Desktop", price: 220, tags: ["hardware", "curatare", "diagnosticare"], link: "mentenanta-desktop.html" },
-        { name: "Mentenanță Laptop", price: 200, tags: ["hardware", "curatare", "diagnosticare"], link: "mentenanta-laptop.html" },
-        { name: "Upgrade SSD sau HDD", price: 80, tags: ["hardware", "upgrade"], link: "upgrade-ssd-hdd.html" },
-        { name: "Pachet Revitalizare", price: 275, tags: ["hardware", "software", "complet"], link: "pachet-revitalizare.html" },
-        { name: "Optimizare OS & Tuning", price: 100, tags: ["software", "performanta"], link: "optimizare-os-tuning.html" }
+        { name: "Asamblare Unitate Desktop", price: 250, tags: ["hardware", "desktop", "asamblare"], link: "asamblare-desktop.html", img: "../poza-editare.jpg" },
+        { name: "Diagnosticare Hardware & Software", price: 50, tags: ["hardware", "software", "diagnosticare"], link: "diagnosticare.html", img: "../diagnosticare.jpg" },
+        { name: "Instalare Windows", price: 100, tags: ["software", "os", "diagnosticare"], link: "instalare-windows.html", img: "../instalare-windows.jpg" },
+        { name: "Mentenanță Desktop", price: 220, tags: ["hardware", "curatare", "desktop"], link: "mentenanta-desktop.html", img: "../poza-editare.jpg" },
+        { name: "Mentenanță Laptop", price: 200, tags: ["hardware", "curatare", "laptop"], link: "mentenanta-laptop.html", img: "../mentenanta-laptop.jpg" },
+        { name: "Upgrade SSD sau HDD", price: 80, tags: ["hardware", "upgrade", "stocare", "laptop", "desktop"], link: "upgrade-ssd-hdd.html", img: "../upgrade-ssd-hdd.jpg" },
+        { name: "Upgrade RAM", price: 80, tags: ["hardware", "upgrade", "laptop", "desktop"], link: "upgrade-ram.html", img: "../upgrade-ram.jpg" },
+        { name: "Pachet Revitalizare", price: 275, tags: ["hardware", "software", "complet", "curatare", "os"], link: "pachet-revitalizare.html", img: "../pachet-revitalizare.jpg" },
+        { name: "Optimizare OS & Tuning", price: 100, tags: ["software", "performanta", "os"], link: "optimizare-os-tuning.html", img: "../poza-editare.jpg" },
+        { name: "Mentenanță Mouse", price: 50, tags: ["hardware", "curatare", "periferice"], link: "mentenanta-mouse.html", img: "../mentenanta-mouse.jpg" },
+        { name: "Schimbare placă Wi-Fi", price: 80, tags: ["hardware", "reparatie", "laptop"], link: "schimbare-placa-wifi.html", img: "../schimbare-wifi.jpg" }
     ];
 
     function initRecommendations() {
@@ -282,36 +287,52 @@
         const cart = getCart();
         const cartNames = cart.map(item => item.name);
         
-        // Înregistrăm vizualizarea curentă în istoric
+        // 1. Înregistrăm vizualizarea în istoric
         let history = JSON.parse(localStorage.getItem('ethhofar_history')) || [];
-        if (!history.includes(currentService)) {
+        if (history[history.length - 1] !== currentService) {
             history.push(currentService);
-            if (history.length > 5) history.shift(); // Păstrăm doar ultimele 5
+            if (history.length > 5) history.shift(); // Păstrăm ultimele 5 pagini vizitate
             localStorage.setItem('ethhofar_history', JSON.stringify(history));
         }
 
-        // Logica de recomandare: Filtram serviciile
-        let suggestions = serviceCatalog.filter(service => {
-            // Nu recomandăm serviciul curent
-            if (service.name === currentService) return false;
-            // Nu recomandăm ceva ce este deja în coș
+        // 2. Extragem toate tag-urile din istoricul utilizatorului pentru a înțelege ce caută
+        let userInterestTags = [];
+        history.forEach(histName => {
+            let histItem = serviceCatalog.find(s => s.name === histName);
+            if (histItem) {
+                userInterestTags.push(...histItem.tags);
+            }
+        });
+
+        // 3. Calculăm un scor pentru fiecare produs din catalog bazat pe potrivirea cu tag-urile
+        let scoredCatalog = serviceCatalog.map(service => {
+            let score = 0;
+            service.tags.forEach(tag => {
+                if (userInterestTags.includes(tag)) score++;
+            });
+            return { ...service, score };
+        });
+
+        // 4. Excludem pagina curentă și produsele deja aflate în coș
+        let suggestions = scoredCatalog.filter(service => {
+            if (service.name === currentService) return false; 
             if (cartNames.includes(service.name)) return false;
             return true;
         });
 
-        // Aici ai putea sorta sugestiile în funcție de tag-uri potrivite cu istoricul,
-        // dar pentru simplitate și estetică, luăm primele 4 cele mai potrivite rămase.
+        // 5. Sortăm descrescător după scor și limităm la top 4
+        suggestions.sort((a, b) => b.score - a.score);
         suggestions = suggestions.slice(0, 4);
 
-        // Randăm cardurile
+        // 6. Generăm cardurile în HTML
         const grid = document.getElementById('recommendationsGrid');
-        grid.innerHTML = ''; // Curățăm containerul
+        grid.innerHTML = ''; 
 
         suggestions.forEach(service => {
             const cardHTML = `
                 <div class="card-front">
                     <div>
-                        <img src="poza-editare.jpg" alt="${service.name}" class="service-img">
+                        <img src="${service.img}" alt="${service.name}" class="service-img" onerror="this.src='../poza-editare.jpg'">
                         <h3>${service.name}</h3>
                         <p class="price">${service.price} RON</p>
                     </div>
@@ -325,7 +346,6 @@
         });
     }
 
-    // Inițializare scripturi la încărcarea paginii
     document.addEventListener("DOMContentLoaded", () => {
         updateCartBadge();
         initRecommendations();
