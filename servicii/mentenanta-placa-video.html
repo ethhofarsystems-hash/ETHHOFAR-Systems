@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentenanță Placă Video - ETHHOFAR Systems</title>
+    <link rel="icon" type="image/png" href="../logo_fara_text-cerc.png">
+    <style>
+        /* Variabile pentru Teme */
+        :root { 
+            --primary: #005bb7; 
+            --dark: #1a1a1a; 
+            --light: #f4f4f4; 
+            --card-bg: #ffffff; 
+            --border-color: #ddd;
+            --accent: #27ae60;
+            --text-color: #1a1a1a;
+            --text-muted: #555;
+            --price-color: #e67e22;
+            --btn-text: #ffffff;
+            --shield-color: #e74c3c;
+        }
+
+        [data-theme="dark"] {
+            --primary: #4da3ff; 
+            --dark: #f4f4f4; 
+            --light: #121212; 
+            --card-bg: #1e1e1e; 
+            --border-color: #333;
+            --accent: #2ecc71;
+            --text-color: #f4f4f4;
+            --text-muted: #aaa;
+            --price-color: #f39c12;
+            --btn-text: #121212; 
+            --shield-color: #ff6b6b;
+        }
+
+        [data-theme="warm"] {
+            --primary: #d35400; 
+            --light: #fdf6e3; 
+            --card-bg: #fffbf0; 
+            --border-color: #eaddc5;
+            --accent: #27ae60;
+            --text-color: #4e342e;
+            --text-muted: #7f6a65;
+            --btn-text: #ffffff;
+            --shield-color: #c0392b;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
+
+        /* BARĂ NAVIGAȚIE ȘI COȘ */
+        nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; transition: 0.3s; border-bottom: 1px solid var(--border-color); }
+        .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
+        nav a:hover { color: var(--primary); }
+        
+        .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
+        .nav-cart { cursor: pointer; position: relative; display: flex; align-items: center; padding: 10px; border-radius: 50%; transition: 0.3s; z-index: 10; background: transparent; color: var(--text-color); }
+        .nav-cart:hover { transform: scale(1.1); color: var(--primary); }
+        .nav-cart .icon { width: 26px; height: 26px; }
+        
+        /* Efect Cerc Roșu LA ADAUGARE */
+        .cart-highlight { animation: ring-pulse 2s ease-out; }
+        @keyframes ring-pulse {
+            0% { box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.7); }
+            100% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
+        }
+
+        .cart-badge { position: absolute; top: 0px; right: 0px; background: var(--accent); color: white; font-size: 0.8rem; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--card-bg); }
+        
+        .cart-popup { display: none; position: absolute; top: 120%; right: 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 260px; text-align: center; z-index: 1001; cursor: default; }
+        .cart-popup.active { display: block; animation: popupAnim 0.3s ease; }
+        @keyframes popupAnim { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-go-cart { background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 12px; transition: 0.3s; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; box-sizing: border-box;}
+        .btn-go-cart:hover { background: var(--accent); }
+
+        /* Teme Switcher */
+        .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
+        .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
+        [data-theme="dark"] .theme-ring { left: 42px; } 
+        [data-theme="warm"] .theme-ring { left: 78px; } 
+        .theme-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ccc; cursor: pointer; transition: 0.3s; }
+        .theme-btn:hover { transform: scale(1.1); }
+        .theme-light { background: #f4f4f4; }
+        .theme-dark { background: #1a1a1a; border-color: #555; }
+        .theme-warm { background: #fdf6e3; border-color: #d35400; }
+
+        /* ICOANE GENERALE */
+        .icon { width: 18px; height: 18px; fill: currentColor; }
+
+        /* STRUCTURA PAGINII PRODUS */
+        .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
+        .product-page-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid var(--border-color); padding: 30px; }
+        @media (max-width: 768px) { .product-page-container { grid-template-columns: 1fr; gap: 20px; padding: 15px;} }
+
+        /* GALERIE FOTO */
+        .gallery-area { display: flex; flex-direction: column; gap: 15px; }
+        .main-image { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); object-fit: cover; aspect-ratio: 4/3; }
+        .thumbnails { display: flex; gap: 10px; overflow-x: auto; }
+        .thumbnails img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; border: 2px solid transparent; cursor: pointer; transition: 0.3s; opacity: 0.7; }
+        .thumbnails img:hover, .thumbnails img.active { border-color: var(--primary); opacity: 1; }
+
+        /* DETALII PRODUS CURENT */
+        .product-details-area { display: flex; flex-direction: column; }
+        h1 { font-size: 2.2rem; color: var(--text-color); margin-top: 0; margin-bottom: 10px; }
+        
+        /* SCUT GARANȚIE - HEADER */
+        .warranty-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(39, 174, 96, 0.1); color: var(--accent); padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 20px; border: 1px dashed var(--accent); align-self: flex-start;}
+
+        /* PREȚ ȘI ACȚIUNI */
+        .price-action-box { background: rgba(0,0,0,0.02); border: 1px solid var(--border-color); padding: 25px; border-radius: 8px; margin-bottom: 30px; }
+        .price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 5px; }
+        .main-price { font-size: 2.8rem; font-weight: bold; color: var(--price-color); }
+        .currency { font-size: 1.2rem; color: var(--price-color); font-weight: bold; }
+        .details-note-main { font-size: 0.95rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px; display: block; }
+
+        .btn-add-to-cart { background-color: var(--primary); color: var(--btn-text); border: none; padding: 18px 30px; font-size: 1.2rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background 0.3s, transform 0.2s; width: 100%; max-width: 350px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-add-to-cart:hover { background-color: var(--accent); transform: scale(1.02); }
+
+        /* DESCRIERE ASCUNSĂ */
+        .description-container { border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; position: relative; overflow: hidden; background: var(--card-bg); margin-bottom: 30px;}
+        .description-content { max-height: 150px; overflow: hidden; transition: max-height 0.5s ease; color: var(--text-muted); line-height: 1.6; }
+        .description-content.expanded { max-height: 2000px; }
+        .description-content ul { list-style-type: none; padding-left: 0; }
+        .description-content li { position: relative; padding-left: 25px; margin-bottom: 10px; }
+        .description-content li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+        .fade-overlay { position: absolute; bottom: 50px; left: 0; width: 100%; height: 80px; background: linear-gradient(transparent, var(--card-bg)); transition: opacity 0.3s; }
+        .fade-overlay.hidden { opacity: 0; pointer-events: none; }
+        .btn-toggle-desc { display: block; width: 100%; background: none; border: none; border-top: 1px solid var(--border-color); color: var(--primary); font-weight: bold; padding: 15px 0 0 0; cursor: pointer; font-size: 1rem; transition: 0.3s; margin-top: 10px;}
+        .btn-toggle-desc:hover { color: var(--accent); }
+
+        /* SECȚIUNE RECOMANDĂRI */
+        .recommendations-section { margin-top: 60px; }
+        .recommendations-section h2 { font-size: 1.5rem; color: var(--text-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        
+        .card-container-rec { display: flex; height: 100%; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        .card-front { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; background-color: var(--card-bg); color: var(--text-color); box-sizing: border-box; }
+        .card-front:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 91, 183, 0.1); border-color: var(--primary); }
+        .service-img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; background-color: var(--border-color); font-size: 0.85rem; text-align: center;}
+        
+        .card-front h3 { margin-top: 0; font-size: 1.05rem; display: flex; justify-content: space-between; align-items: flex-start; line-height: 1.3; margin-bottom: 5px;}
+        .price { font-size: 1.3rem; font-weight: bold; color: var(--primary); margin: 5px 0 10px 0; transition: color 0.3s ease; }
+        .card-front:hover .price { color: var(--accent); }
+        .details-note { font-size: 0.8rem; color: #888; margin-bottom: 15px; font-style: italic; }
+
+        .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+        .btn-flip { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: none; border: 2px solid var(--primary); color: var(--primary); padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; text-decoration: none; font-size: 0.9rem;}
+        .btn-flip:hover { background: var(--primary); color: var(--btn-text); }
+        
+        .btn-cart { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 8px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s, transform 0.2s; font-size: 0.9rem;}
+        .btn-cart:hover { background: var(--accent); transform: scale(1.02); } 
+
+        /* SCUT GARANȚIE - TOOLTIP */
+        .tooltip-container { position: relative; display: inline-flex; align-items: center; cursor: pointer; margin-left: 8px; flex-shrink: 0;}
+        .shield-icon { width: 18px; height: 18px; color: var(--shield-color); transition: transform 0.3s; fill: currentColor; }
+        .tooltip-container:hover .shield-icon { transform: scale(1.2) rotate(5deg); }
+        .tooltip-text {
+            visibility: hidden; width: 200px; background-color: var(--text-color); color: var(--card-bg); text-align: center; border-radius: 6px; padding: 8px; position: absolute; z-index: 10; bottom: 130%; right: -10px; opacity: 0; transition: opacity 0.3s, transform 0.3s; font-size: 0.8rem; font-weight: normal; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: translateY(10px); pointer-events: none;
+        }
+        .tooltip-text::after { content: ""; position: absolute; top: 100%; right: 15px; border-width: 6px; border-style: solid; border-color: var(--text-color) transparent transparent transparent; }
+        .tooltip-container:hover .tooltip-text, .tooltip-container.active .tooltip-text { visibility: visible; opacity: 1; transform: translateY(0); }
+
+        /* WIDGET WHATSAPP POPUP & MINIMIZAT */
+        .wa-popup { position: fixed; right: -400px; bottom: 30px; display: flex; align-items: flex-end; gap: 15px; z-index: 1005; transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        .wa-popup.show { right: 40px; }
+        .wa-popup-content { background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 15px 20px; border-radius: 12px; max-width: 250px; position: relative; color: var(--text-color); }
+        .wa-popup-content::after { content: ''; position: absolute; right: -10px; bottom: 20px; border-width: 10px 0 10px 10px; border-style: solid; border-color: transparent transparent transparent var(--card-bg); }
+        .wa-popup-content h4 { margin: 0 0 8px 0; font-size: 1rem; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .wa-popup-content p { margin: 0; font-size: 0.85rem; line-height: 1.4; color: #777; }
+        [data-theme="dark"] .wa-popup-content p { color: #ccc; }
+        .wa-close { position: absolute; top: 5px; right: 8px; cursor: pointer; font-size: 1.2rem; color: #999; line-height: 1; }
+        .wa-close:hover { color: red; }
+        .wa-popup-icon { background: #25D366; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: transform 0.3s; cursor: pointer; flex-shrink: 0; color: white;}
+        .wa-popup-icon:hover { transform: scale(1.1); }
+        
+        .wa-minimized { position: fixed; right: -40px; bottom: 30px; background: #25D366; color: white; padding: 15px 5px; writing-mode: vertical-rl; text-orientation: mixed; border-radius: 5px 0 0 5px; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: right 0.4s ease; z-index: 1004; box-shadow: -2px 0 10px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 8px; }
+        .wa-minimized.active { right: 0; }
+        .wa-minimized:hover { background: #1ebc59; }
+        .wa-minimized .icon { transform: rotate(90deg); margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+    <symbol id="icon-details" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 32 32"><path d="M16 0c-8.836 0-16 7.164-16 16 0 2.805 0.726 5.441 1.996 7.742l-2.28 8.243 8.441-2.215c2.247 1.156 4.792 1.82 7.502 1.82 8.836 0 16-7.164 16-16s-7.164-16-16-16zM23.167 19.333c-0.344-0.177-2.026-0.995-2.344-1.109s-0.547-0.177-0.776 0.177c-0.229 0.354-0.891 1.109-1.089 1.339-0.198 0.229-0.401 0.26-0.745 0.083-0.344-0.177-1.448-0.531-2.755-1.698-1.016-0.906-1.703-2.026-1.901-2.38s-0.021-0.542 0.151-0.714c0.156-0.156 0.344-0.406 0.516-0.609 0.172-0.203 0.229-0.354 0.344-0.589 0.115-0.234 0.057-0.443-0.026-0.615s-0.776-1.875-1.063-2.568c-0.281-0.677-0.563-0.583-0.776-0.594-0.198-0.01-0.427-0.01-0.656-0.01s-0.604 0.083-0.917 0.427c-0.313 0.344-1.203 1.177-1.203 2.875s1.234 3.339 1.406 3.568c0.172 0.229 2.438 3.719 5.896 5.214 0.823 0.354 1.464 0.568 1.964 0.729 0.823 0.26 1.573 0.224 2.167 0.135 0.661-0.099 2.026-0.828 2.313-1.625 0.286-0.797 0.286-1.484 0.203-1.625-0.083-0.146-0.313-0.234-0.656-0.411z"/></symbol>
+    <symbol id="icon-support" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></symbol>
+</svg>
+
+<!-- WIDGET WHATSAPP -->
+<div id="wa-minimized-bar" class="wa-minimized" onclick="openWaPopup()">
+    <svg class="icon"><use href="#icon-chat"></use></svg> Sfat Tehnician
+</div>
+<div id="wa-help-popup" class="wa-popup">
+    <div class="wa-popup-content">
+        <span class="wa-close" onclick="closeWaPopup()" title="Închide">&times;</span>
+        <h4><svg class="icon" style="color: var(--primary);"><use href="#icon-support"></use></svg> Placa video se încinge?</h4>
+        <p>Ai observat artefacte vizuale, temperaturi de peste 80°C sau drop-uri masive de FPS? Cere sfatul unui tehnician ETHHOFAR!</p>
+    </div>
+    <a href="https://wa.me/40779316979?text=Salut,%20ETHHOFAR!%20Am%20nevoie%20de%20ajutor%20cu%20mentenanta%20placii%20video." target="_blank" class="wa-popup-icon">
+        <svg class="icon" style="width: 32px; height: 32px;"><use href="#icon-whatsapp"></use></svg>
+    </a>
+</div>
+
+<nav>
+    <div style="width: 50px;"></div> 
+    <div class="nav-links">
+        <a href="../index.html">Acasă</a>
+        <a href="../servicii.html">Toate Serviciile</a>
+    </div>
+    <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
+        <div class="nav-cart" id="navCartIcon" onclick="window.location.href='../cos.html'">
+            <svg class="icon"><use href="#icon-cart"></use></svg>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        <div class="cart-popup" id="cartPopup">
+            <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
+            <p id="popupText" style="color: var(--text-color); font-size: 0.95rem;">Ai <strong style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
+            <a href="../cos.html" class="btn-go-cart">
+                Mergi la coș <svg class="icon"><use href="#icon-arrow"></use></svg>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="theme-switcher">
+    <div class="theme-ring" id="theme-ring"></div>
+    <button class="theme-btn theme-light" onclick="setTheme('light')" title="Temă Luminoasă"></button>
+    <button class="theme-btn theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"></button>
+    <button class="theme-btn theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"></button>
+</div>
+
+<div class="container">
+    <div class="product-page-container">
+        <!-- GALERIE FOTO -->
+        <div class="gallery-area">
+            <img id="main-product-image" src="../mentenanta-placa-video.jpg" alt="Mentenanță Placă Video" class="main-image" onerror="this.src='../poza-editare.jpg'">
+            <div class="thumbnails">
+                <img src="../mentenanta-placa-video.jpg" class="active" onclick="changeImage(this)" alt="Imagine principala" onerror="this.src='../poza-editare.jpg'">
+                <img src="../poza-editare.jpg" onclick="changeImage(this)" alt="Imagine detaliu 1">
+            </div>
+        </div>
+
+        <!-- DETALII PRODUS -->
+        <div class="product-details-area">
+            <h1>Mentenanță Placă Video</h1>
+            
+            <div class="warranty-badge">
+                <svg class="icon" style="color: var(--accent);"><use href="#icon-shield"></use></svg> Serviciu cu Garanție ETHHOFAR
+            </div>
+
+            <div class="price-action-box">
+                <div class="price-row">
+                    <span class="main-price">80</span>
+                    <span class="currency">RON</span>
+                </div>
+                <span class="details-note-main">Tarif manoperă pentru GPU ieșit din garanție. Recuperează performanța termică din fabrică.</span>
+                
+                <button class="btn-add-to-cart" onclick="addToCart('Mentenanță GPU', 80)">
+                    <svg class="icon" style="width:24px; height:24px;"><use href="#icon-cart"></use></svg> Adaugă în Coș
+                </button>
+            </div>
+
+            <div class="description-container">
+                <h3 style="margin-top: 0; color: var(--primary);">Descriere Serviciu</h3>
+                <div class="description-content" id="descContent">
+                    <p>Plăcile video sunt cele mai solicitate componente dintr-un PC de gaming sau stație de lucru. În timp, pasta termică de pe cipul grafic (die) se pietrifică, iar pad-urile termice care răcesc memoriile VRAM și fazele de alimentare (VRM) își pierd proprietățile elastice și uleiurile siliconice, ducând la supraîncălzire și instabilitate.</p>
+                    <ul>
+                        <li><strong>Dezasamblare și Curățare Radiator:</strong> Demontarea completă a carcasei, a ventilatoarelor și curățarea mecanică a lamelelor radiatorului de blocajele de praf.</li>
+                        <li><strong>Curățare Soluție Termică Veche:</strong> Înlăturarea cu atenție a pastei arse de pe pastila GPU folosind alcool izopropilic de înaltă puritate, pentru a nu afecta componentele SMD din jur.</li>
+                        <li><strong>Aplicare Pastă Termică Premium:</strong> Recondiționarea stratului termoconductor cu paste de top (ex: Noctua NT-H1 / Arctic MX-6) adaptate pentru densitatea mare de căldură a GPU-urilor.</li>
+                        <li><strong>Evaluare Thermal Pad-uri:</strong> Verificarea pad-urilor de pe memorii. *Dacă sunt complet compromise sau rupte, acestea se înlocuiesc (costul pad-urilor noi se discută separat, în funcție de grosimile specifice brandului).</li>
+                        <li><strong>Diagnostic și Stress Test:</strong> Reasamblarea corectă cu strângere în cruce la cuplu optim, urmată de teste sintetice (FurMark / 3DMark) pentru monitorizarea temperaturilor pe nucleu și pe Hotspot.</li>
+                    </ul>
+                    <p><em>*Recomandare: O placă video utilizată intens în gaming sau randări 3D are nevoie de o revizie termică o dată la 1-2 ani pentru a evita degradarea siliciului.</em></p>
+                </div>
+                <div class="fade-overlay" id="descOverlay"></div>
+                <button class="btn-toggle-desc" id="btnToggleDesc" onclick="toggleDescription()">Vezi mai mult ▼</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECȚIUNE RECOMANDĂRI -->
+    <div class="recommendations-section">
+        <h2>Clienții care s-au uitat la acest serviciu, au mai fost interesați de:</h2>
+        <div class="grid" id="recommendationsGrid">
+            <!-- Cardurile generate dinamic -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Teme & WhatsApp Logic ---
+    function setTheme(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+        localStorage.setItem('ethhofar_theme', themeName);
+    }
+    
+    setTimeout(() => { document.getElementById('wa-help-popup').classList.add('show'); }, 60000); 
+
+    function closeWaPopup() {
+        document.getElementById('wa-help-popup').classList.remove('show');
+        document.getElementById('wa-minimized-bar').classList.add('active');
+    }
+    function openWaPopup() {
+        document.getElementById('wa-help-popup').classList.add('show');
+        document.getElementById('wa-minimized-bar').classList.remove('active');
+    }
+
+    // --- UI Logic Produs ---
+    function changeImage(element) {
+        document.getElementById('main-product-image').src = element.src;
+        let thumbs = document.querySelectorAll('.thumbnails img');
+        thumbs.forEach(img => img.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    function toggleDescription() {
+        const content = document.getElementById('descContent');
+        const overlay = document.getElementById('descOverlay');
+        const btn = document.getElementById('btnToggleDesc');
+        if (content.classList.contains('expanded')) {
+            content.classList.remove('expanded');
+            overlay.classList.remove('hidden');
+            btn.innerHTML = "Vezi mai mult ▼";
+        } else {
+            content.classList.add('expanded');
+            overlay.classList.add('hidden');
+            btn.innerHTML = "Vezi mai puțin ▲";
+        }
+    }
+
+    // --- Coș și Animații ---
+    let popupTimeout;
+    let highlightTimeout;
+
+    function getCart() { return JSON.parse(localStorage.getItem('ethhofar_cart')) || []; }
+    function saveCart(cart) { localStorage.setItem('ethhofar_cart', JSON.stringify(cart)); }
+    
+    function updateCartBadge() {
+        const cart = getCart();
+        const badge = document.getElementById('cartBadge');
+        const popupText = document.getElementById('popupText');
+        
+        if(badge) badge.innerText = cart.length;
+        if(popupText) {
+            let cuvant = cart.length === 1 ? "serviciu" : "servicii";
+            popupText.innerHTML = `Ai <strong style="color: var(--accent); font-size: 1.1rem;">${cart.length}</strong> ${cuvant} în coș.`;
+        }
+    }
+
+    // --- Catalog Date Complete ---
+    const serviceCatalog = [
+        { name: "Asamblare Unitate Desktop", price: 250, tags: ["hardware", "desktop", "asamblare"], link: "asamblare-desktop.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Diagnosticare Hardware & Software", price: 50, tags: ["hardware", "software", "diagnosticare"], link: "diagnosticare.html", img: "../diagnosticare.jpg", hasShield: false, note: "Gratuit dacă se repară la noi." },
+        { name: "Instalare Windows", price: 100, tags: ["software", "os", "diagnosticare"], link: "instalare-windows.html", img: "../instalare-windows.jpg", hasShield: true, note: "" },
+        { name: "Înlocuire baterie BIOS", price: 50, tags: ["hardware", "desktop", "laptop", "baterie"], link: "inlocuire-baterie-bios.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Manoperă Montaj Baterie", price: 120, tags: ["hardware", "laptop", "baterie", "reparatie"], link: "manopera-montaj-baterie.html", img: "../montaj-baterie.jpg", hasShield: true, note: "" },
+        { name: "Mentenanță Controlere", price: 60, tags: ["hardware", "curatare", "periferice", "consola"], link: "mentenanta-controlere.html", img: "../mentenanta-controlere.jpg", hasShield: true, note: "Curățare și prevenire drift" },
+        { name: "Mentenanță Consolă", price: 250, tags: ["hardware", "curatare", "consola"], link: "mentenanta-consola.html", img: "../poza-editare.jpg", hasShield: true, note: "PS4, PS5, Xbox" },
+        { name: "Mentenanță Desktop", price: 220, tags: ["hardware", "curatare", "desktop"], link: "mentenanta-desktop.html", img: "../poza-editare.jpg", hasShield: true, note: "Aer sau AIO. Fără Custom Loop." },
+        { name: "Mentenanță Laptop", price: 200, tags: ["hardware", "curatare", "laptop"], link: "mentenanta-laptop.html", img: "../mentenanta-laptop.jpg", hasShield: true, note: "" },
+        { name: "Mentenanță Mouse", price: 50, tags: ["hardware", "curatare", "periferice"], link: "mentenanta-mouse.html", img: "../mentenanta-mouse.jpg", hasShield: true, note: "Curățare și schimbare skate-uri" },
+        { name: "Mentenanță Placă Video", price: 80, tags: ["hardware", "curatare", "desktop", "gpu"], link: "mentenanta-placa-video.html", img: "../poza-editare.jpg", hasShield: true, note: "GPU ieșit din garanție." },
+        { name: "Upgrade SSD sau HDD", price: 80, tags: ["hardware", "upgrade", "stocare", "laptop", "desktop"], link: "upgrade-ssd-hdd.html", img: "../upgrade-ssd-hdd.jpg", hasShield: true, note: "" },
+        { name: "Upgrade RAM", price: 80, tags: ["hardware", "upgrade", "laptop", "desktop"], link: "upgrade-ram.html", img: "../upgrade-ram.jpg", hasShield: true, note: "" },
+        { name: "Pachet Revitalizare", price: 275, tags: ["hardware", "software", "complet", "curatare", "os"], link: "pachet-revitalizare.html", img: "../pachet-revitalizare.jpg", hasShield: true, note: "Mentenanță completă + OS" },
+        { name: "Optimizare OS & Tuning", price: 100, tags: ["software", "performanta", "os"], link: "optimizare-os-tuning.html", img: "../poza-editare.jpg", hasShield: false, note: "Temperaturi minime sau performanță." },
+        { name: "Schimbare placă Wi-Fi", price: 80, tags: ["hardware", "reparatie", "laptop"], link: "schimbare-placa-wifi.html", img: "../schimbare-wifi.jpg", hasShield: true, note: "" }
+    ];
+
+    const shieldHTML = `
+        <span class="tooltip-container" onclick="this.classList.toggle('active')">
+            <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+            <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+        </span>
+    `;
+
+    // --- Logica Avansată de Recomandare și Învățare ---
+    function initRecommendations() {
+        const currentService = "Mentenanță Placă Video"; // SETAT SĂ CORESPUNDĂ NUMELUI EXACT DIN CATALOG
+        const cart = getCart();
+        const cartNames = cart.map(item => item.name);
+        
+        let history = JSON.parse(localStorage.getItem('ethhofar_history')) || [];
+        if (history[history.length - 1] !== currentService) {
+            history.push(currentService);
+            if (history.length > 5) history.shift();
+            localStorage.setItem('ethhofar_history', JSON.stringify(history));
+        }
+
+        // SCORARE: 1 pct pt vizualizare, 3 pct pt adăugare în coș
+        let tagScores = {};
+        history.forEach(histName => {
+            let s = serviceCatalog.find(x => x.name === histName);
+            if(s) s.tags.forEach(t => tagScores[t] = (tagScores[t] || 0) + 1);
+        });
+
+        cartNames.forEach(cName => {
+            let s = serviceCatalog.find(x => x.name === cName);
+            if(s) s.tags.forEach(t => tagScores[t] = (tagScores[t] || 0) + 3);
+        });
+
+        let scoredCatalog = serviceCatalog.map(service => {
+            let score = 0;
+            service.tags.forEach(tag => {
+                if (tagScores[tag]) score += tagScores[tag];
+            });
+            score += Math.random() * 0.5; // Randomizare mică pt varietate
+            return { ...service, score };
+        });
+
+        // Elimină produsul curent și produsele deja aflate în coș
+        let suggestions = scoredCatalog.filter(service => {
+            if (service.name === currentService) return false; 
+            if (cartNames.includes(service.name)) return false;
+            return true;
+        });
+
+        suggestions.sort((a, b) => b.score - a.score);
+        suggestions = suggestions.slice(0, 4);
+
+        renderRecommendations(suggestions);
+    }
+
+    function renderRecommendations(suggestions) {
+        const grid = document.getElementById('recommendationsGrid');
+        grid.innerHTML = ''; 
+
+        suggestions.forEach(service => {
+            const hasShieldStr = service.hasShield ? shieldHTML : "";
+            const noteStr = service.note ? `<p class="details-note">${service.note}</p>` : "";
+
+            const cardHTML = `
+                <div class="card-container-rec">
+                    <div class="card-front">
+                        <div>
+                            <img src="${service.img}" alt="${service.name}" class="service-img" onerror="this.src='../poza-editare.jpg'">
+                            <h3>${service.name} ${hasShieldStr}</h3>
+                            <p class="price">${service.price} RON</p>
+                            ${noteStr}
+                        </div>
+                        <div class="button-group">
+                            <a href="${service.link}" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCartAndRefresh('${service.name}', ${service.price})"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            grid.innerHTML += cardHTML;
+        });
+    }
+
+    // Funcția apelată din interiorul recomandărilor
+    function addToCartAndRefresh(name, price) {
+        addToCart(name, price); // Adaugă în localStorage și face animația
+        initRecommendations();  // Recalculează și șterge instantaneu cardul tocmai adăugat
+    }
+
+    // Funcția generală de adăugat în coș + Animații UI
+    function addToCart(name, price) {
+        const cart = getCart();
+        cart.push({ id: Date.now(), name, price });
+        saveCart(cart); 
+        updateCartBadge();
+        
+        // Efect popup
+        const popup = document.getElementById('cartPopup');
+        popup.classList.add('active');
+        if(popupTimeout) clearTimeout(popupTimeout);
+        popupTimeout = setTimeout(() => { popup.classList.remove('active'); }, 4000); 
+
+        // Efect puls roșu iconiță navbar
+        const cartIcon = document.getElementById('navCartIcon');
+        cartIcon.classList.remove('cart-highlight');
+        void cartIcon.offsetWidth; // Trigger reflow 
+        cartIcon.classList.add('cart-highlight');
+        
+        if(highlightTimeout) clearTimeout(highlightTimeout);
+        highlightTimeout = setTimeout(() => { cartIcon.classList.remove('cart-highlight'); }, 2000);
+    }
+
+    function closePopupIfOpen() {
+        document.getElementById('cartPopup').classList.remove('active');
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        setTheme(localStorage.getItem('ethhofar_theme') || 'light');
+        updateCartBadge();
+        initRecommendations();
+    });
+</script>
+
+</body>
+</html>
