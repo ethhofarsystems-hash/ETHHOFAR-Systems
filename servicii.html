@@ -179,7 +179,7 @@
         .wa-minimized { position: fixed; right: -40px; bottom: 30px; background: #25D366; color: white; padding: 15px 5px; writing-mode: vertical-rl; text-orientation: mixed; border-radius: 5px 0 0 5px; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: right 0.4s ease; z-index: 1004; box-shadow: -2px 0 10px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 8px; }
         .wa-minimized.active { right: 0; }
         .wa-minimized:hover { background: #1ebc59; }
-        .wa-minimized .icon { transform: rotate(90deg); margin-top: 5px; } /* Corectare orientare iconiță în bara verticală */
+        .wa-minimized .icon { transform: rotate(90deg); margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -242,7 +242,7 @@
         
         <div class="cart-popup" id="cartPopup">
             <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
-            <p style="color: var(--text-color); font-size: 0.95rem;">Ai <strong id="popupCount" style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
+            <p id="popupText" style="color: var(--text-color); font-size: 0.95rem;">Ai <strong style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
             <a href="cos.html" class="btn-go-cart">
                 Mergi la coș <svg class="icon"><use href="#icon-arrow"></use></svg>
             </a>
@@ -395,6 +395,21 @@
             <div class="card-container">
                 <div class="card-front card">
                     <div>
+                        <img src="mentenanta-controlere.jpg" alt="Imagine Mentenanță Controlere" class="service-img">
+                        <h3>Mentenanță Controlere <script>document.write(shieldHTML);</script></h3>
+                        <p class="price">60 RON</p>
+                        <p class="details-note">Curățare și prevenire drift</p>
+                    </div>
+                    <div class="button-group">
+                        <a href="servicii/mentenanta-controlere.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                        <button class="btn-cart" onclick="addToCart('Mentenanță Controlere', 60)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container">
+                <div class="card-front card">
+                    <div>
                         <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
                         <h3>Mentenanță Consolă <script>document.write(shieldHTML);</script></h3>
                         <p class="price">250 RON</p>
@@ -432,6 +447,21 @@
                     <div class="button-group">
                         <a href="servicii/mentenanta-laptop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
                         <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-container">
+                <div class="card-front card">
+                    <div>
+                        <img src="mentenanta-mouse.jpg" alt="Imagine Mentenanță Mouse" class="service-img">
+                        <h3>Mentenanță Mouse <script>document.write(shieldHTML);</script></h3>
+                        <p class="price">50 RON</p>
+                        <p class="details-note">Curățare și schimbare skate-uri</p>
+                    </div>
+                    <div class="button-group">
+                        <a href="servicii/mentenanta-mouse.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                        <button class="btn-cart" onclick="addToCart('Mentenanță Mouse', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -501,6 +531,26 @@
                     <div class="button-group">
                         <a href="servicii/porturi-usb.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
                         <button class="btn-cart" onclick="addToCart('Porturi USB', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="letter-section" id="sec-R" data-letter="R">
+        <div class="letter-header">R</div>
+        <div class="grid">
+            <div class="card-container">
+                <div class="card-front card">
+                    <div>
+                        <img src="reparare-mouse.jpg" alt="Imagine Reparare Mouse" class="service-img">
+                        <h3>Reparare Mouse <script>document.write(shieldHTML);</script></h3>
+                        <p class="price">70 RON</p>
+                        <p class="details-note">Schimbare switch-uri sau scroll</p>
+                    </div>
+                    <div class="button-group">
+                        <a href="servicii/reparare-mouse.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                        <button class="btn-cart" onclick="addToCart('Reparare Mouse', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
                     </div>
                 </div>
             </div>
@@ -699,7 +749,6 @@
 </footer>
 
 <script>
-    // --- 1. SISTEMUL DE TEME ---
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
@@ -709,7 +758,6 @@
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
         
-        // --- 2. GENERARE GRILĂ ALFABETICĂ ---
         const navContainer = document.getElementById('alphabet-nav');
         const sections = document.querySelectorAll('.letter-section');
         
@@ -737,11 +785,9 @@
         
         sections.forEach(sec => observer.observe(sec));
         
-        // Inițializăm indicatorul de coș la încărcare
         updateCartBadge();
     });
 
-    // --- 3. BARA DE CĂUTARE INTELIGENTĂ ---
     function filterCards() {
         const filter = document.getElementById('searchInput').value.toLowerCase();
         const sections = document.querySelectorAll('.letter-section');
@@ -768,7 +814,6 @@
         });
     }
 
-    // --- 4. LOGICA SIMPLIFICATĂ A COȘULUI ---
     let popupTimeout;
     let highlightTimeout;
 
@@ -783,10 +828,14 @@
     function updateCartBadge() {
         const cart = getCart();
         const badge = document.getElementById('cartBadge');
-        const popupCount = document.getElementById('popupCount');
+        const popupText = document.getElementById('popupText');
         
         if(badge) badge.innerText = cart.length;
-        if(popupCount) popupCount.innerText = cart.length;
+        
+        if(popupText) {
+            let cuvant = cart.length === 1 ? "serviciu" : "servicii";
+            popupText.innerHTML = `Ai <strong style="color: var(--accent); font-size: 1.1rem;">${cart.length}</strong> ${cuvant} în coș.`;
+        }
     }
 
     function addToCart(name, price) {
@@ -797,7 +846,6 @@
         
         updateCartBadge();
         
-        // Afișare fereastră Popup
         const popup = document.getElementById('cartPopup');
         popup.classList.add('active');
         if(popupTimeout) clearTimeout(popupTimeout);
@@ -805,7 +853,6 @@
             popup.classList.remove('active');
         }, 5000); 
 
-        // Animație Inel Roșu
         const cartIcon = document.getElementById('navCartIcon');
         cartIcon.classList.remove('cart-highlight');
         void cartIcon.offsetWidth; 
@@ -821,7 +868,6 @@
         document.getElementById('cartPopup').classList.remove('active');
     }
 
-    // --- 5. WIDGET WHATSAPP ---
     setTimeout(() => {
         document.getElementById('wa-help-popup').classList.add('show');
     }, 300000); 
