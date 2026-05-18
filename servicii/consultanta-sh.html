@@ -6,7 +6,7 @@
     <title>Consultanță Achiziție SH | ETHHOFAR Systems</title>
     <link rel="icon" type="image/png" href="../logo_fara_text-cerc.png">
     <style>
-        /* Variabile pentru Teme preluate din modelul principal */
+        /* Variabile pentru Teme */
         :root { 
             --primary: #005bb7; 
             --dark: #1a1a1a; 
@@ -162,7 +162,6 @@
     </symbol>
 </svg>
 
-<!-- WIDGET WHATSAPP -->
 <div id="wa-minimized-bar" class="wa-minimized" onclick="openWaPopup()">
     <svg class="icon"><use href="#icon-chat"></use></svg> Sfat Tehnician
 </div>
@@ -216,7 +215,6 @@
 
     <div class="product-page">
         <div class="product-image-container">
-            <!-- Poți schimba calea imaginii cu o imagine relevantă pentru consultanță -->
             <img src="../poza-editare.jpg" alt="Consultanță Achiziție SH" class="product-image">
         </div>
 
@@ -233,7 +231,7 @@
             <ul class="features-list">
                 <li>
                     <svg class="icon-large"><use href="#icon-check"></use></svg>
-                    <span><strong>Analiza pieței și ofertelor:</strong> Căutăm și selectăm cele mai bune anunțuri (OLX, etc.) care se potrivesc bugetului și nevoilor tale reale.</span>
+                    <span><strong>Analiza pieței și ofertelor:</strong> Căutăm și selectăm cele mai bune anunțuri care se potrivesc bugetului și nevoilor tale reale.</span>
                 </li>
                 <li>
                     <svg class="icon-large"><use href="#icon-check"></use></svg>
@@ -261,7 +259,6 @@
 </footer>
 
 <script>
-    // Setare Tema
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
@@ -273,7 +270,6 @@
         updateCartBadge();
     });
 
-    // Logica pentru Coș
     let popupTimeout;
     let highlightTimeout;
 
@@ -328,10 +324,9 @@
         document.getElementById('cartPopup').classList.remove('active');
     }
 
-    // WhatsApp Logica
     setTimeout(() => {
         document.getElementById('wa-help-popup').classList.add('show');
-    }, 15000); // 15 secunde delay pe pagina produsului pentru a nu deveni deranjant instantaneu
+    }, 15000); 
 
     function closeWaPopup() {
         document.getElementById('wa-help-popup').classList.remove('show');
