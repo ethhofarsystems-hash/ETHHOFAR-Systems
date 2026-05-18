@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
@@ -56,7 +56,6 @@
         .nav-cart:hover { transform: scale(1.1); color: var(--primary); }
         .nav-cart .icon { width: 26px; height: 26px; }
         
-        /* Efect Cerc Roșu LA ADAUGARE */
         .cart-highlight { animation: ring-pulse 2s ease-out; }
         @keyframes ring-pulse {
             0% { box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.7); }
@@ -72,7 +71,7 @@
         .btn-go-cart { background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 12px; transition: 0.3s; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; box-sizing: border-box;}
         .btn-go-cart:hover { background: var(--accent); }
 
-        /* Teme și Litere */
+        /* Teme și Litere/Filtre */
         .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
         .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
         [data-theme="dark"] .theme-ring { left: 42px; } 
@@ -83,19 +82,27 @@
         .theme-dark { background: #1a1a1a; border-color: #555; }
         .theme-warm { background: #fdf6e3; border-color: #d35400; }
 
-        .alphabet-nav { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; background: var(--card-bg); padding: 10px 5px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); z-index: 999; gap: 2px; }
-        .alphabet-nav a { color: var(--text-color); text-decoration: none; font-size: 0.85rem; font-weight: bold; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
-        .alphabet-nav a.active, .alphabet-nav a:hover { background: var(--primary); color: var(--btn-text); transform: scale(1.2); }
+        /* Bara laterală (dreapta) modificată pentru a susține și texte (ex: <100) */
+        .alphabet-nav { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; background: var(--card-bg); padding: 10px 5px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); z-index: 999; gap: 4px; max-width: 50px; }
+        .alphabet-nav a { color: var(--text-color); text-decoration: none; font-size: 0.8rem; font-weight: bold; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; text-align: center; }
+        .alphabet-nav a.active, .alphabet-nav a:hover { background: var(--primary); color: var(--btn-text); transform: scale(1.1); }
+        .alphabet-nav a.text-nav { border-radius: 8px; font-size: 0.75rem; line-height: 1.1; padding: 2px; }
 
-        .container { max-width: 1200px; margin: 20px auto; padding: 20px; padding-right: 60px; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; padding-right: 70px; }
         
         .students-note { text-align: center; color: #888; font-style: italic; max-width: 700px; margin: 0 auto 30px auto; font-size: 0.95rem; line-height: 1.5; }
         [data-theme="dark"] .students-note { color: #aaa; }
 
-        .search-container { margin-bottom: 30px; position: relative; }
+        /* CONTROL BARE (Căutare + Sortare) */
+        .controls-wrapper { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .search-container { position: relative; flex-grow: 1; }
         .search-input { width: 100%; padding: 15px 15px 15px 45px; border-radius: 8px; border: 2px solid var(--primary); font-size: 1.1rem; background: var(--card-bg); color: var(--text-color); box-sizing: border-box; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .search-input:focus { box-shadow: 0 4px 12px rgba(0, 91, 183, 0.2); }
         .search-icon-wrapper { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); pointer-events: none; display: flex; }
+        
+        .sort-container { flex-shrink: 0; min-width: 200px; }
+        .sort-select { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid var(--border-color); font-size: 1rem; background: var(--card-bg); color: var(--text-color); outline: none; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .sort-select:hover, .sort-select:focus { border-color: var(--primary); }
 
         .letter-section { scroll-margin-top: 100px; margin-bottom: 40px; }
         .letter-header { display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: var(--primary); margin: 20px 0 30px 0; }
@@ -114,7 +121,6 @@
         .card-front:hover .price { color: var(--accent); }
         .details-note { font-size: 0.8rem; color: #888; margin-bottom: 15px; font-style: italic; }
         
-        /* ICOANE GENERALE */
         .icon { width: 18px; height: 18px; fill: currentColor; }
 
         .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
@@ -124,49 +130,16 @@
         .btn-cart { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s, transform 0.2s; }
         .btn-cart:hover { background: var(--accent); transform: scale(1.02); } 
         
-        /* SCUTUL DE GARANȚIE ȘI TOOLTIP */
         .tooltip-container { position: relative; display: inline-flex; align-items: center; cursor: pointer; margin-left: 8px; }
         .shield-icon { width: 20px; height: 20px; color: var(--shield-color); transition: transform 0.3s; fill: currentColor; }
         .tooltip-container:hover .shield-icon { transform: scale(1.2) rotate(5deg); }
         
-        .tooltip-text {
-            visibility: hidden;
-            width: 220px;
-            background-color: var(--text-color);
-            color: var(--card-bg);
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 10;
-            bottom: 130%;
-            right: -10px; 
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            font-size: 0.85rem;
-            font-weight: normal;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transform: translateY(10px);
-            pointer-events: none;
-        }
-        .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            right: 15px;
-            border-width: 6px;
-            border-style: solid;
-            border-color: var(--text-color) transparent transparent transparent;
-        }
-        .tooltip-container:hover .tooltip-text, .tooltip-container.active .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .tooltip-text { visibility: hidden; width: 220px; background-color: var(--text-color); color: var(--card-bg); text-align: center; border-radius: 6px; padding: 10px; position: absolute; z-index: 10; bottom: 130%; right: -10px; opacity: 0; transition: opacity 0.3s, transform 0.3s; font-size: 0.85rem; font-weight: normal; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: translateY(10px); pointer-events: none; }
+        .tooltip-text::after { content: ""; position: absolute; top: 100%; right: 15px; border-width: 6px; border-style: solid; border-color: var(--text-color) transparent transparent transparent; }
+        .tooltip-container:hover .tooltip-text, .tooltip-container.active .tooltip-text { visibility: visible; opacity: 1; transform: translateY(0); }
 
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
 
-        /* WIDGET WHATSAPP POPUP & MINIMIZAT */
         .wa-popup { position: fixed; right: -400px; bottom: 30px; display: flex; align-items: flex-end; gap: 15px; z-index: 1005; transition: right 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         .wa-popup.show { right: 40px; }
         .wa-popup-content { background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 15px 20px; border-radius: 12px; max-width: 250px; position: relative; color: var(--text-color); }
@@ -188,30 +161,14 @@
 <body>
 
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-    <symbol id="icon-cart" viewBox="0 0 24 24">
-        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-    </symbol>
-    <symbol id="icon-details" viewBox="0 0 24 24">
-        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
-    </symbol>
-    <symbol id="icon-shield" viewBox="0 0 24 24">
-        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
-    </symbol>
-    <symbol id="icon-search" viewBox="0 0 24 24">
-        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-    </symbol>
-    <symbol id="icon-chat" viewBox="0 0 24 24">
-        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
-    </symbol>
-    <symbol id="icon-whatsapp" viewBox="0 0 32 32">
-        <path d="M16 0c-8.836 0-16 7.164-16 16 0 2.805 0.726 5.441 1.996 7.742l-2.28 8.243 8.441-2.215c2.247 1.156 4.792 1.82 7.502 1.82 8.836 0 16-7.164 16-16s-7.164-16-16-16zM23.167 19.333c-0.344-0.177-2.026-0.995-2.344-1.109s-0.547-0.177-0.776 0.177c-0.229 0.354-0.891 1.109-1.089 1.339-0.198 0.229-0.401 0.26-0.745 0.083-0.344-0.177-1.448-0.531-2.755-1.698-1.016-0.906-1.703-2.026-1.901-2.38s-0.021-0.542 0.151-0.714c0.156-0.156 0.344-0.406 0.516-0.609 0.172-0.203 0.229-0.354 0.344-0.589 0.115-0.234 0.057-0.443-0.026-0.615s-0.776-1.875-1.063-2.568c-0.281-0.677-0.563-0.583-0.776-0.594-0.198-0.01-0.427-0.01-0.656-0.01s-0.604 0.083-0.917 0.427c-0.313 0.344-1.203 1.177-1.203 2.875s1.234 3.339 1.406 3.568c0.172 0.229 2.438 3.719 5.896 5.214 0.823 0.354 1.464 0.568 1.964 0.729 0.823 0.26 1.573 0.224 2.167 0.135 0.661-0.099 2.026-0.828 2.313-1.625 0.286-0.797 0.286-1.484 0.203-1.625-0.083-0.146-0.313-0.234-0.656-0.411z"/>
-    </symbol>
-    <symbol id="icon-support" viewBox="0 0 24 24">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-    </symbol>
-    <symbol id="icon-arrow" viewBox="0 0 24 24">
-        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-    </symbol>
+    <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+    <symbol id="icon-details" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 32 32"><path d="M16 0c-8.836 0-16 7.164-16 16 0 2.805 0.726 5.441 1.996 7.742l-2.28 8.243 8.441-2.215c2.247 1.156 4.792 1.82 7.502 1.82 8.836 0 16-7.164 16-16s-7.164-16-16-16zM23.167 19.333c-0.344-0.177-2.026-0.995-2.344-1.109s-0.547-0.177-0.776 0.177c-0.229 0.354-0.891 1.109-1.089 1.339-0.198 0.229-0.401 0.26-0.745 0.083-0.344-0.177-1.448-0.531-2.755-1.698-1.016-0.906-1.703-2.026-1.901-2.38s-0.021-0.542 0.151-0.714c0.156-0.156 0.344-0.406 0.516-0.609 0.172-0.203 0.229-0.354 0.344-0.589 0.115-0.234 0.057-0.443-0.026-0.615s-0.776-1.875-1.063-2.568c-0.281-0.677-0.563-0.583-0.776-0.594-0.198-0.01-0.427-0.01-0.656-0.01s-0.604 0.083-0.917 0.427c-0.313 0.344-1.203 1.177-1.203 2.875s1.234 3.339 1.406 3.568c0.172 0.229 2.438 3.719 5.896 5.214 0.823 0.354 1.464 0.568 1.964 0.729 0.823 0.26 1.573 0.224 2.167 0.135 0.661-0.099 2.026-0.828 2.313-1.625 0.286-0.797 0.286-1.484 0.203-1.625-0.083-0.146-0.313-0.234-0.656-0.411z"/></symbol>
+    <symbol id="icon-support" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
 </svg>
 
 <div id="wa-minimized-bar" class="wa-minimized" onclick="openWaPopup()">
@@ -269,675 +226,540 @@
         * Timpul studenților din cadrul ETHHOFAR este împărțit pe mai multe fronturi, așadar o parte dintre imaginile serviciilor se află încă la ușa studioului de editare. Îți mulțumim pentru înțelegere!
     </p>
 
-    <div class="search-container">
-        <div class="search-icon-wrapper">
-            <svg class="icon"><use href="#icon-search"></use></svg>
+    <div class="controls-wrapper">
+        <div class="search-container">
+            <div class="search-icon-wrapper">
+                <svg class="icon"><use href="#icon-search"></use></svg>
+            </div>
+            <input type="text" id="searchInput" class="search-input" placeholder="Caută servicii (ex: cpu, praf, windows, baterie)..." onkeyup="filterCards()">
         </div>
-        <input type="text" id="searchInput" class="search-input" placeholder="Căutare servicii (ex: baterie, curățare, OS)..." onkeyup="filterCards()">
+        <div class="sort-container">
+            <select id="sortSelect" class="sort-select" onchange="sortAndRenderCards()">
+                <option value="alpha">A-Z (Alfabetic)</option>
+                <option value="popular">Top Recomandate</option>
+                <option value="price-asc">Preț (crescător)</option>
+                <option value="price-desc">Preț (descrescător)</option>
+            </select>
+        </div>
     </div>
     
-    <div class="letter-section" id="sec-A" data-letter="A">
-        <div class="letter-header">A</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Asamblare Unitate Desktop
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">250 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/asamblare-desktop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+    <script>
+        const shieldHTML = `
+            <span class="tooltip-container" onclick="this.classList.toggle('active')">
+                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
+                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
+            </span>
+        `;
+    </script>
+
+    <div id="dynamic-grid-container">
+
+        <div class="letter-section" data-letter="A" data-label="A">
+            <div class="letter-header">A</div>
+            <div class="grid">
+                <div class="card-container" data-price="250" data-pop="70" data-kw="pc calculatoare build piese constructie wire management">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Asamblare Unitate Desktop <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">250 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/asamblare-desktop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Asamblare Desktop', 250)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-C" data-letter="C">
-        <div class="letter-header">C</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Consultanță Achiziție SH</h3>
-                        <p class="price">100 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/consultanta-achizitie.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Consultanță SH', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="C" data-label="C">
+            <div class="letter-header">C</div>
+            <div class="grid">
+                <div class="card-container" data-price="100" data-pop="50" data-kw="second hand olx laptop vechi verificare teapa testare">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Consultanță Achiziție SH</h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/consultanta-achizitie.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Consultanță SH', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-D" data-letter="D">
-        <div class="letter-header">D</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Diagnosticare</h3>
-                        <p class="price">50 RON</p>
-                        <p class="details-note">Gratuit dacă se repară la noi.</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/diagnosticare.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="D" data-label="D">
+            <div class="letter-header">D</div>
+            <div class="grid">
+                <div class="card-container" data-price="50" data-pop="80" data-kw="problema defect nu porneste ecran negru eroare reparatie stricat">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Diagnosticare</h3>
+                            <p class="price">50 RON</p>
+                            <p class="details-note">Gratuit dacă se repară la noi.</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/diagnosticare.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Diagnosticare', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-I" data-letter="I">
-        <div class="letter-header">I</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="instalare-windows.jpg" alt="Imagine Instalare Windows" class="service-img">
-                        <h3>
-                            Instalare Windows
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">100 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/instalare-windows.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Instalare Windows', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="I" data-label="I">
+            <div class="letter-header">I</div>
+            <div class="grid">
+                <div class="card-container" data-price="100" data-pop="95" data-kw="os sistem operare formatare reinstalare drivere office curat antivirus">
+                    <div class="card-front card">
+                        <div>
+                            <img src="instalare-windows.jpg" alt="Imagine Instalare Windows" class="service-img">
+                            <h3>Instalare Windows <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/instalare-windows.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Instalare Windows', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-Î" data-letter="Î">
-        <div class="letter-header">Î</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Înlocuire baterie BIOS
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">50 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/inlocuire-baterie-bios.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Baterie BIOS', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="Î" data-label="Î">
+            <div class="letter-header">Î</div>
+            <div class="grid">
+                <div class="card-container" data-price="50" data-pop="40" data-kw="ora data eroare bios cmos placa de baza resetare">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Înlocuire baterie BIOS <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">50 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/inlocuire-baterie-bios.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Baterie BIOS', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-M" data-letter="M">
-        <div class="letter-header">M</div>
-        <div class="grid">
-            
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="montaj-baterie.jpg" alt="Imagine Montaj Baterie" class="service-img">
-                        <h3>
-                            Manoperă Montaj Baterie
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">120 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/manopera-montaj-baterie.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="M" data-label="M">
+            <div class="letter-header">M</div>
+            <div class="grid">
+                
+                <div class="card-container" data-price="120" data-pop="85" data-kw="acumulator nu se incarca umflat laptop mort curent">
+                    <div class="card-front card">
+                        <div>
+                            <img src="montaj-baterie.jpg" alt="Imagine Montaj Baterie" class="service-img">
+                            <h3>Manoperă Montaj Baterie <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">120 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/manopera-montaj-baterie.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Montaj baterie', 120)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Mentenanță Controlere
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">60 RON</p>
-                        <p class="details-note">Curățare și prevenire drift</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/mentenanta-controlere.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Controlere', 60)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="60" data-pop="75" data-kw="ps4 ps5 xbox drift joystick analog curatare praf controller maneta">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Mentenanță Controlere <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">60 RON</p>
+                            <p class="details-note">Curățare și prevenire drift</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/mentenanta-controlere.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Controlere', 60)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Mentenanță Consolă
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">250 RON</p>
-                        <p class="details-note">PS4, PS5, Xbox</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/mentenanta-consola.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="250" data-pop="80" data-kw="ps4 ps5 xbox curatare praf pasta termoconductoare zgomot avion ventilator incalzire">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Mentenanță Consolă <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">250 RON</p>
+                            <p class="details-note">PS4, PS5, Xbox</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/mentenanta-consola.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Consolă', 250)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Mentenanță Desktop
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">220 RON</p>
-                        <p class="details-note">Aer sau AIO. Fără Custom Loop.</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/mentenanta-desktop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="220" data-pop="85" data-kw="curatare praf procesor cpu pasta termoconductoare gpu pc calculator racire">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Mentenanță Desktop <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">220 RON</p>
+                            <p class="details-note">Aer sau AIO. Fără Custom Loop.</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/mentenanta-desktop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Desktop', 220)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="mentenanta-laptop.jpg" alt="Imagine Mentenanță Laptop" class="service-img">
-                        <h3>
-                            Mentenanță Laptop
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">200 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/mentenanta-laptop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="200" data-pop="100" data-kw="curatare praf procesor cpu pasta termoconductoare gpu incalzeste fierbinte zgomot">
+                    <div class="card-front card">
+                        <div>
+                            <img src="mentenanta-laptop.jpg" alt="Imagine Mentenanță Laptop" class="service-img">
+                            <h3>Mentenanță Laptop <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">200 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/mentenanta-laptop.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Laptop', 200)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Mentenanță Mouse
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">50 RON</p>
-                        <p class="details-note">Curățare și schimbare skate-uri</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/mentenanta-mouse.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță Mouse', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="50" data-pop="60" data-kw="curatare praf skate uri picioruse senzor optic laser mouse">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Mentenanță Mouse <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">50 RON</p>
+                            <p class="details-note">Curățare și schimbare skate-uri</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/mentenanta-mouse.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță Mouse', 50)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Mentenanță Placă Video
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">80 RON</p>
-                        <p class="details-note">GPU ieșit din garanție.</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/mentenanta-placa-video.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Mentenanță GPU', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="80" data-pop="65" data-kw="gpu placa video curatare praf pasta termoconductoare paduri termice temperaturi mari">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Mentenanță Placă Video <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">80 RON</p>
+                            <p class="details-note">GPU ieșit din garanție.</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/mentenanta-placa-video.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Mentenanță GPU', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-O" data-letter="O">
-        <div class="letter-header">O</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>Optimizare OS & Tuning</h3>
-                        <p class="price">100 RON</p>
-                        <p class="details-note">Temperaturi minime sau performanță.</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/optimizare-os-tuning.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="O" data-label="O">
+            <div class="letter-header">O</div>
+            <div class="grid">
+                <div class="card-container" data-price="100" data-pop="60" data-kw="fps lag blocaj windows lent debounce debloat gaming fluid">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Optimizare OS & Tuning </h3>
+                            <p class="price">100 RON</p>
+                            <p class="details-note">Temperaturi minime sau performanță.</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/optimizare-os-tuning.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Optimizare Tuning PC', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-P" data-letter="P">
-        <div class="letter-header">P</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="pachet-revitalizare.jpg" alt="Imagine Pachet Revitalizare" class="service-img">
-                        <h3>
-                            Pachet Revitalizare
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">275 RON</p>
-                        <p class="details-note">Mentenanță completă + OS</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/pachet-revitalizare.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Revitalizare Laptop', 275)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="P" data-label="P">
+            <div class="letter-header">P</div>
+            <div class="grid">
+                <div class="card-container" data-price="275" data-pop="90" data-kw="curatare praf pasta termoconductoare windows formatare full reinstalare pachet complet">
+                    <div class="card-front card">
+                        <div>
+                            <img src="pachet-revitalizare.jpg" alt="Imagine Pachet Revitalizare" class="service-img">
+                            <h3>Pachet Revitalizare <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">275 RON</p>
+                            <p class="details-note">Mentenanță completă + OS</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/pachet-revitalizare.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Revitalizare Laptop', 275)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Porturi USB modulare
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">80 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/porturi-usb.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Porturi USB', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="80" data-pop="30" data-kw="usb stricat rupt nu citeste mufa periferice port">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Porturi USB modulare <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/porturi-usb.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Porturi USB', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-R" data-letter="R">
-        <div class="letter-header">R</div>
-        <div class="grid">
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Reparare Mouse
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">70 RON</p>
-                        <p class="details-note">Schimbare switch-uri sau scroll</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/reparare-mouse.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Reparare Mouse', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="R" data-label="R">
+            <div class="letter-header">R</div>
+            <div class="grid">
+                <div class="card-container" data-price="70" data-pop="55" data-kw="click dublu scroll nu merge stricat inlocuire switch uri omron kailh">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Reparare Mouse <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">70 RON</p>
+                            <p class="details-note">Schimbare switch-uri sau scroll</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/reparare-mouse.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Reparare Mouse', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-S" data-letter="S">
-        <div class="letter-header">S</div>
-        <div class="grid">
-            
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare balamale
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">100 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-balamale.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="S" data-label="S">
+            <div class="letter-header">S</div>
+            <div class="grid">
+                
+                <div class="card-container" data-price="100" data-pop="50" data-kw="balamale rupte carcasa desfacuta ecran joaca plastice dezlipite">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare balamale <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-balamale.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare balamale', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare boxe laptop
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">70 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-boxe.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="70" data-pop="40" data-kw="sunet distorsionat bazaie nu se aude deloc difuzoare stricate audio">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare boxe laptop <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">70 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-boxe.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare boxe', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare butoane
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">70 RON</p>
-                        <p class="details-note">Pentru controllere</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-butoane.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare butoane', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="70" data-pop="40" data-kw="ps4 ps5 xbox r1 l1 r2 l2 triggere nu apasa defect controller maneta">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare butoane <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">70 RON</p>
+                            <p class="details-note">Pentru controllere</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-butoane.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare butoane', 70)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare ecran/panel
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">200 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-ecran.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare ecran', 200)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="200" data-pop="70" data-kw="display spart dungi ecran crăpat monitor laptop pixeli morti">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare ecran/panel <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">200 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-ecran.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare ecran', 200)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare placă bază
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">250 RON</p>
-                        <p class="details-note">Procedură modulară de mutare</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-placa-baza.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare placă bază', 250)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="250" data-pop="30" data-kw="motherboard ars defect total nu primeste curent mutare piese">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare placă bază <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">250 RON</p>
+                            <p class="details-note">Procedură modulară de mutare</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-placa-baza.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare placă bază', 250)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="schimbare-wifi.jpg" alt="Imagine Schimbare Wi-Fi" class="service-img">
-                        <h3>
-                            Schimbare placă Wi-Fi
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">80 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-placa-wifi.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare placă Wi-Fi', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="80" data-pop="40" data-kw="internet nu merge semnal slab wireless retea deconecteaza placa de retea">
+                    <div class="card-front card">
+                        <div>
+                            <img src="schimbare-wifi.jpg" alt="Imagine Schimbare Wi-Fi" class="service-img">
+                            <h3>Schimbare placă Wi-Fi <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-placa-wifi.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare placă Wi-Fi', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="schimbare-radiator.jpg" alt="Imagine Schimbare Radiator" class="service-img">
-                        <h3>
-                            Schimbare radiator/vent.
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">100 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-radiator.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="100" data-pop="60" data-kw="ventilator zgomot haraie cooler racire blocat piesa defecta procesor">
+                    <div class="card-front card">
+                        <div>
+                            <img src="schimbare-radiator.jpg" alt="Imagine Schimbare Radiator" class="service-img">
+                            <h3>Schimbare radiator/vent. <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-radiator.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare ventilator', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare tastatură
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">100 RON</p>
-                        <p class="details-note">Modele modulare cu clipsuri</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-tastatura.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="100" data-pop="80" data-kw="taste nu merg lichid varsat butoane cazute blocat keyboard">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare tastatură <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">100 RON</p>
+                            <p class="details-note">Modele modulare cu clipsuri</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-tastatura.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare tastatură', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare Touchpad
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">90 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-touchpad.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="90" data-pop="30" data-kw="mousepad laptop nu click scroll blocat cursor">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare Touchpad <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">90 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-touchpad.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare Touchpad', 90)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
-                        <h3>
-                            Schimbare webcam/mic.
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">100 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/schimbare-webcam.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="100" data-pop="20" data-kw="camera microfon nu ma aud nu ma vad intunecat defect imagine">
+                    <div class="card-front card">
+                        <div>
+                            <img src="poza-editare.jpg" alt="Poza în editare" class="service-img">
+                            <h3>Schimbare webcam/mic. <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">100 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/schimbare-webcam.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Schimbare webcam', 100)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
 
-    <div class="letter-section" id="sec-U" data-letter="U">
-        <div class="letter-header">U</div>
-        <div class="grid">
-            
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="upgrade-ram.jpg" alt="Imagine Upgrade RAM" class="service-img">
-                        <h3>
-                            Upgrade RAM
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">80 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/upgrade-ram.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Upgrade RAM', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+        <div class="letter-section" data-letter="U" data-label="U">
+            <div class="letter-header">U</div>
+            <div class="grid">
+                
+                <div class="card-container" data-price="80" data-pop="85" data-kw="memorie laptop pc ddr4 ddr5 lent adaugare placute de rami">
+                    <div class="card-front card">
+                        <div>
+                            <img src="upgrade-ram.jpg" alt="Imagine Upgrade RAM" class="service-img">
+                            <h3>Upgrade RAM <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/upgrade-ram.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Upgrade RAM', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-container">
-                <div class="card-front card">
-                    <div>
-                        <img src="upgrade-ssd-hdd.jpg" alt="Imagine Upgrade SSD" class="service-img">
-                        <h3>
-                            Upgrade SSD sau HDD
-                            <span class="tooltip-container" onclick="this.classList.toggle('active')">
-                                <svg class="shield-icon"><use href="#icon-shield"></use></svg>
-                                <span class="tooltip-text">Garanția este inclusă în preț și este oferită la finalul tranzacției.</span>
-                            </span>
-                        </h3>
-                        <p class="price">80 RON</p>
-                    </div>
-                    <div class="button-group">
-                        <a href="servicii/upgrade-ssd-hdd.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('Upgrade SSD/HDD', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                <div class="card-container" data-price="80" data-pop="90" data-kw="stocare spatiu m2 nvme sata hard disk lent windows adaugare memorie">
+                    <div class="card-front card">
+                        <div>
+                            <img src="upgrade-ssd-hdd.jpg" alt="Imagine Upgrade SSD" class="service-img">
+                            <h3>Upgrade SSD sau HDD <script>document.write(shieldHTML);</script></h3>
+                            <p class="price">80 RON</p>
+                        </div>
+                        <div class="button-group">
+                            <a href="servicii/upgrade-ssd-hdd.html" class="btn-flip"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
+                            <button class="btn-cart" onclick="addToCart('Upgrade SSD/HDD', 80)"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
 
-</div>
+    </div> </div>
 
 <footer>
     &copy; 2026 ETHHOFAR Systems. Toate drepturile rezervate.
 </footer>
 
 <script>
+    // --- 1. SISTEM DE TEME ---
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
     }
 
+    // Variabile globale pentru stocarea tuturor cardurilor la incarcarea paginii
+    let allCardsData = [];
+    let myObserver = null;
+
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
         
-        const navContainer = document.getElementById('alphabet-nav');
-        const sections = document.querySelectorAll('.letter-section');
-        
-        sections.forEach(sec => {
-            const letter = sec.getAttribute('data-letter');
-            if(letter) {
-                const link = document.createElement('a');
-                link.href = `#sec-${letter}`;
-                link.innerText = letter;
-                navContainer.appendChild(link);
-            }
+        // 1. Salvăm toate cardurile originale în memorie pentru a le putea sorta
+        const originalCards = document.querySelectorAll('.card-container');
+        originalCards.forEach(card => {
+            allCardsData.push({
+                element: card.cloneNode(true),
+                name: card.querySelector('h3').innerText.trim().toUpperCase(),
+                price: parseInt(card.getAttribute('data-price') || "0"),
+                pop: parseInt(card.getAttribute('data-pop') || "0"),
+                kw: (card.getAttribute('data-kw') || "").toLowerCase(),
+                letter: card.closest('.letter-section').getAttribute('data-letter')
+            });
         });
 
-        const observerOptions = { rootMargin: "-100px 0px -70% 0px" };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const letter = entry.target.getAttribute('data-letter');
-                    document.querySelectorAll('.alphabet-nav a').forEach(a => a.classList.remove('active'));
-                    const activeLink = document.querySelector(`.alphabet-nav a[href="#sec-${letter}"]`);
-                    if (activeLink) activeLink.classList.add('active');
-                }
-            });
-        }, observerOptions);
-        
-        sections.forEach(sec => observer.observe(sec));
-        
+        // Generam nav-ul pentru prima data (Alfabetic)
+        buildNavigation();
         updateCartBadge();
     });
 
+    // --- 2. SISTEMUL DE CĂUTARE INTELIGENTĂ ---
     function filterCards() {
-        const filter = document.getElementById('searchInput').value.toLowerCase();
+        const filter = document.getElementById('searchInput').value.toLowerCase().trim();
         const sections = document.querySelectorAll('.letter-section');
         
         sections.forEach(sec => {
@@ -945,8 +767,12 @@
             const cards = sec.querySelectorAll('.card-container');
             
             cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                if (text.includes(filter)) {
+                // Căutăm atât în textul vizibil, cât și în cuvintele cheie (data-kw)
+                const visibleText = card.innerText.toLowerCase();
+                const keywords = card.getAttribute('data-kw') ? card.getAttribute('data-kw').toLowerCase() : "";
+                const searchPool = visibleText + " " + keywords;
+
+                if (searchPool.includes(filter)) {
                     card.style.display = ""; 
                     hasVisibleCards = true;
                 } else {
@@ -954,6 +780,7 @@
                 }
             });
 
+            // Ascundem secțiunea complet dacă nu are niciun card vizibil
             if(hasVisibleCards) {
                 sec.style.display = "block";
             } else {
@@ -962,6 +789,141 @@
         });
     }
 
+    // --- 3. SISTEMUL DE SORTARE ȘI RECONSTRUIRE A GRILĂ ---
+    function sortAndRenderCards() {
+        const sortType = document.getElementById('sortSelect').value;
+        const container = document.getElementById('dynamic-grid-container');
+        
+        // Curățăm complet containerul vizual
+        container.innerHTML = "";
+        let sortedCards = [...allCardsData]; // Copie a array-ului
+
+        // Grupăm/Sortăm în funcție de opțiune
+        let groupedData = {}; // Obiect pentru a ține secțiunile
+
+        if (sortType === 'alpha') {
+            // Sortează alfabetic
+            sortedCards.sort((a, b) => a.name.localeCompare(b.name));
+            sortedCards.forEach(card => {
+                if(!groupedData[card.letter]) groupedData[card.letter] = [];
+                groupedData[card.letter].push(card.element);
+            });
+
+        } else if (sortType === 'price-asc' || sortType === 'price-desc') {
+            // Sortează preț
+            if(sortType === 'price-asc') sortedCards.sort((a, b) => a.price - b.price);
+            if(sortType === 'price-desc') sortedCards.sort((a, b) => b.price - a.price);
+
+            sortedCards.forEach(card => {
+                let intervalLabel = "";
+                let idCode = "";
+                if (card.price < 100) { intervalLabel = "Sub 100 RON"; idCode = "<100"; }
+                else if (card.price <= 200) { intervalLabel = "100 - 200 RON"; idCode = "100-200"; }
+                else { intervalLabel = "Peste 200 RON"; idCode = ">200"; }
+
+                if(!groupedData[intervalLabel]) groupedData[intervalLabel] = { label: idCode, cards: [] };
+                groupedData[intervalLabel].cards.push(card.element);
+            });
+        } else if (sortType === 'popular') {
+            // Sortează popularitate (cel mai mare numar pop la început)
+            sortedCards.sort((a, b) => b.pop - a.pop);
+            
+            sortedCards.forEach((card, index) => {
+                let categoryLabel = "";
+                let idCode = "";
+                if (index < 6) { categoryLabel = "Top Recomandate ⭐⭐⭐"; idCode = "Top"; }
+                else if (index < 15) { categoryLabel = "Frecvente ⭐⭐"; idCode = "Frecvente"; }
+                else { categoryLabel = "Ocazionale ⭐"; idCode = "Ocazionale"; }
+
+                if(!groupedData[categoryLabel]) groupedData[categoryLabel] = { label: idCode, cards: [] };
+                groupedData[categoryLabel].cards.push(card.element);
+            });
+        }
+
+        // Construim DOM-ul din nou
+        if(sortType === 'alpha') {
+            // Reconstruim cum era original (bazat pe litere)
+            for (let key in groupedData) {
+                let sec = createSection(key, key, groupedData[key]);
+                container.appendChild(sec);
+            }
+        } else {
+            // Reconstruim bazat pe preț sau popularitate
+            for (let header in groupedData) {
+                let data = groupedData[header];
+                let sec = createSection(header, data.label, data.cards);
+                container.appendChild(sec);
+            }
+        }
+
+        // Relansăm funcțiile de căutare (dacă userul a scris ceva) și reconstruim meniul lateral
+        buildNavigation();
+        filterCards();
+    }
+
+    // Funcție de ajutor pentru crearea blocului HTML de secțiune
+    function createSection(headerText, navLabel, elementsArray) {
+        const section = document.createElement('div');
+        section.className = 'letter-section';
+        section.setAttribute('data-letter', navLabel); // ID pentru meniul din dreapta
+        
+        const header = document.createElement('div');
+        header.className = 'letter-header';
+        header.innerText = headerText;
+        
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+        
+        elementsArray.forEach(el => grid.appendChild(el));
+        
+        section.appendChild(header);
+        section.appendChild(grid);
+        return section;
+    }
+
+    // --- 4. RECONSTRUIREA MENIULUI DIN DREAPTA ---
+    function buildNavigation() {
+        const navContainer = document.getElementById('alphabet-nav');
+        const sections = document.querySelectorAll('.letter-section');
+        navContainer.innerHTML = ""; // Golim vechiul meniu
+
+        if(myObserver) myObserver.disconnect(); // Oprim observer-ul vechi
+
+        sections.forEach((sec, index) => {
+            const label = sec.getAttribute('data-letter');
+            if(label) {
+                // Generam un ID unic (sec-0, sec-1, etc) ca href sa mearga bine fara caractere dubioase
+                sec.id = `scroll-sec-${index}`;
+
+                const link = document.createElement('a');
+                link.href = `#scroll-sec-${index}`;
+                link.innerText = label;
+                
+                // Daca label-ul e mai lung decat o litera (ex: "<100", "Top"), adaugam o clasa speciala
+                if(label.length > 1) link.classList.add('text-nav');
+
+                navContainer.appendChild(link);
+            }
+        });
+
+        // Repornim Observer-ul pentru Highlighting în meniu
+        const observerOptions = { rootMargin: "-100px 0px -70% 0px" };
+        myObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    document.querySelectorAll('.alphabet-nav a').forEach(a => a.classList.remove('active'));
+                    const activeLink = document.querySelector(`.alphabet-nav a[href="#${id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(sec => myObserver.observe(sec));
+    }
+
+
+    // --- 5. LOGICA DE COȘ (Originală, neschimbată) ---
     let popupTimeout;
     let highlightTimeout;
 
