@@ -1,22 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Pagina Principala -->
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/index.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+  </url>
 
-<url>
-  <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/index.html</loc>
-  <lastmod>2026-05-11T04:48:06+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii.html</loc>
-  <lastmod>2026-05-11T04:48:06+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+  <!-- Pagina Generala Servicii -->
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
 
+  <!-- LISTA COMPLETA DE SERVICII (28 Pagini) -->
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/asamblare-desktop.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/consultanta-achizitie.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/diagnosticare.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/instalare-windows.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/inlocuire-baterie-bios.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/manopera-montaj-baterie.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/mentenanta-controlere.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/mentenanta-consola.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/mentenanta-desktop.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/mentenanta-laptop.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/mentenanta-mouse.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/mentenanta-placa-video.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/optimizare-os-tuning.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/pachet-revitalizare.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/porturi-usb.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/reparare-mouse.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-balamale.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-boxe.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-butoane.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-ecran.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-placa-baza.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-placa-wifi.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-radiator.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-tastatura.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-touchpad.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/schimbare-webcam.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/upgrade-ram.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://ethhofarsystems-hash.github.io/ETHHOFAR-Systems/servicii/upgrade-ssd-hdd.html</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
 
 </urlset>
