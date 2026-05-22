@@ -54,17 +54,22 @@
         .led-text { width: 160px; height: 40px; }
         .led-text text { font-size: 26px; font-weight: 900; font-family: 'Segoe UI', sans-serif; letter-spacing: 2px; }
         .text-bg { fill: var(--text-color); opacity: 0.9; transition: fill 0.3s; }
-        .text-light {
+       .text-light {
             fill: transparent;
-            stroke: #00e5ff; 
+            stroke: #00e5ff;
             stroke-width: 2px;
-            stroke-dasharray: 40 250; 
-            animation: drawLaser 4s linear infinite;
-            filter: drop-shadow(0 0 6px #00e5ff);
+            /* Lungime mare pentru a acoperi tot cuvântul */
+            stroke-dasharray: 600; 
+            stroke-dashoffset: 600;
+            animation: cometEffect 4s linear infinite;
+            filter: drop-shadow(0 0 8px #00e5ff);
         }
-        @keyframes drawLaser {
-            0% { stroke-dashoffset: 290; }
-            100% { stroke-dashoffset: 0; }
+
+        @keyframes cometEffect {
+            0% { stroke-dashoffset: 600; opacity: 0; }
+            10% { opacity: 1; } /* Apare brusc la început */
+            80% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 0; } /* Dispare treptat la final */
         }
 
         .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
@@ -209,7 +214,7 @@
     </div>
 
     <div class="logo-container" onclick="window.location.href='index.html'" style="cursor: pointer;">
-        <svg class="led-text" viewBox="0 0 180 40">
+       <svg class="led-text" viewBox="0 0 180 40">
             <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" class="text-bg">ETHHOFAR</text>
             <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" class="text-light">ETHHOFAR</text>
         </svg>
