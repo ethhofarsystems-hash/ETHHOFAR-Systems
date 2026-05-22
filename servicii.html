@@ -160,59 +160,76 @@
         .wa-minimized .icon { transform: rotate(90deg); margin-top: 5px; }
 
        /* =================================================== */
-        /* ADAPTĂRI PENTRU TELEFON (MOBILE RESPONSIVE)         */
+        /* ADAPTĂRI PENTRU TELEFON (MOBILE RESPONSIVE PREMIUM) */
         /* =================================================== */
         @media (max-width: 768px) {
+            /* 1. Meniu elegant pe coloană */
             nav {
                 flex-direction: column;
-                padding: 15px;
-                position: relative;
+                padding: 20px 15px;
+                gap: 15px;
             }
-            /* Centrarea linkurilor și crearea spațiului pentru coș */
             .nav-links {
                 display: flex;
-                justify-content: center; 
                 flex-wrap: wrap;
+                justify-content: center;
                 gap: 15px;
                 width: 100%;
-                margin-top: 25px; /* Împinge meniul mai jos ca să nu se bată cu coșul */
             }
-            
             nav > div[style*="width: 50px"] {
-                display: none;
+                display: none; /* Eliminăm distanțierele goale de pe desktop */
             }
             
-            /* Coșul rămâne fix în dreapta-sus, liber */
+            /* 2. Coșul mutat fix sub Recenzii și centrat */
             .nav-cart-wrapper {
-                position: absolute;
-                top: 15px;
-                right: 20px;
+                position: relative;
+                top: 0;
+                right: 0;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-top: 5px;
+            }
+            
+            /* Pop-up-ul coșului re-centrat ca să nu iasă din ecran */
+            .cart-popup {
+                right: 50%;
+                transform: translateX(50%) translateY(15px);
+                top: 100%;
+                margin-top: 10px;
+            }
+            .cart-popup.active {
+                transform: translateX(50%) translateY(0);
             }
 
-            /* Fixarea temelor în stânga-jos, peste orice alt element */
+            /* 3. Butoanele de temă centrate jos, ca la aplicațiile mobile */
             .theme-switcher {
                 position: fixed;
                 top: auto;
                 bottom: 20px;
-                left: 15px;
-                transform: scale(0.9);
+                left: 50%;
+                transform: translateX(-50%);
                 box-shadow: 0 4px 15px rgba(0,0,0,0.3);
                 z-index: 1000;
             }
+            
+            /* Spațiu invizibil la finalul paginii ca temele să nu acopere textul de la subsol */
+            footer {
+                padding-bottom: 90px; 
+            }
 
+            /* 4. Spații, aliniamente și bara de litere */
             .container {
                 padding: 15px;
-                padding-right: 35px;
+                padding-right: 45px; /* Loc generos pentru bara de litere */
             }
-            
             .alphabet-nav {
                 right: 2px;
                 transform: scale(0.85) translateY(-50%);
-                transform-origin: right center;
             }
-            
-            h1, h2 {
-                font-size: 1.4rem;
+            h1, h2 { 
+                font-size: 1.4rem; 
+                text-align: center; 
             }
         }
     </style>
