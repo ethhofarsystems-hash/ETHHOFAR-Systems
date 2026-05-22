@@ -159,51 +159,52 @@
         .wa-minimized:hover { background: #1ebc59; }
         .wa-minimized .icon { transform: rotate(90deg); margin-top: 5px; }
 
-        /* =================================================== */
+       /* =================================================== */
         /* ADAPTĂRI PENTRU TELEFON (MOBILE RESPONSIVE)         */
         /* =================================================== */
         @media (max-width: 768px) {
-            /* 1. Reparație Bară de Navigație */
             nav {
                 flex-direction: column;
-                padding: 15px 10px;
-                gap: 12px;
+                padding: 15px;
                 position: relative;
             }
+            /* Centrarea linkurilor și crearea spațiului pentru coș */
             .nav-links {
-                gap: 15px;
+                display: flex;
+                justify-content: center; 
                 flex-wrap: wrap;
-                font-size: 0.95rem;
+                gap: 15px;
                 width: 100%;
+                margin-top: 25px; /* Împinge meniul mai jos ca să nu se bată cu coșul */
             }
             
-            /* Ascundem spațiatorii invizibili care stricau centrarea pe telefon */
             nav > div[style*="width: 50px"] {
                 display: none;
             }
             
-            /* Mutăm coșul în colțul dreapta-sus, ancorat independent */
+            /* Coșul rămâne fix în dreapta-sus, liber */
             .nav-cart-wrapper {
                 position: absolute;
                 top: 15px;
-                right: 15px;
+                right: 20px;
             }
 
-            /* 2. Mutare Butoane Temă (Stânga-Jos) */
+            /* Fixarea temelor în stânga-jos, peste orice alt element */
             .theme-switcher {
+                position: fixed;
                 top: auto;
                 bottom: 20px;
                 left: 15px;
                 transform: scale(0.9);
                 box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                z-index: 1000;
             }
 
-            /* 3. Ajustare Spații Generale și Bara cu Litere (Servicii) */
             .container {
                 padding: 15px;
-                padding-right: 35px; /* Loc optimizat pentru litere */
-                margin-top: 10px;
+                padding-right: 35px;
             }
+            
             .alphabet-nav {
                 right: 2px;
                 transform: scale(0.85) translateY(-50%);
