@@ -158,6 +158,62 @@
         .wa { background: #25D366; }
 
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: var(--text-color); background: var(--feature-bg); border-top: 1px solid var(--border-color); transition: 0.3s; }
+  /* =================================================== */
+        /* ADAPTĂRI PENTRU TELEFON (MOBILE RESPONSIVE)         */
+        /* =================================================== */
+        @media (max-width: 768px) {
+            /* 1. Reparație Bară de Navigație */
+            nav {
+                flex-direction: column;
+                padding: 15px 10px;
+                gap: 12px;
+                position: relative;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                font-size: 0.95rem;
+                width: 100%;
+            }
+            
+            /* Ascundem spațiatorii invizibili care stricau centrarea pe telefon */
+            nav > div[style*="width: 50px"] {
+                display: none;
+            }
+            
+            /* Mutăm coșul în colțul dreapta-sus, ancorat independent */
+            .nav-cart-wrapper {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+
+            /* 2. Mutare Butoane Temă (Stânga-Jos) */
+            .theme-switcher {
+                top: auto;
+                bottom: 20px;
+                left: 15px;
+                transform: scale(0.9);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            }
+
+            /* 3. Ajustare Spații Generale și Bara cu Litere (Servicii) */
+            .container {
+                padding: 15px;
+                padding-right: 35px; /* Loc optimizat pentru litere */
+                margin-top: 10px;
+            }
+            .alphabet-nav {
+                right: 2px;
+                transform: scale(0.85) translateY(-50%);
+                transform-origin: right center;
+            }
+            
+            h1, h2 {
+                font-size: 1.4rem;
+            }
+        }
+    
     </style>
 </head>
 <body>
