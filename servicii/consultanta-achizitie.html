@@ -208,13 +208,6 @@
 </div>
 
 <nav>
-    <div style="width: 50px;"></div> 
-    <div class="nav-links">
-        <a href="../index.html">Acasă</a>
-        <a href="../servicii.html">Toate Serviciile</a>
-        <a href="../recenzii.html">Recenzii</a>
-    </div>
-    <nav>
     <div class="hamburger" onclick="toggleMobileMenu()">
         <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/></svg>
     </div>
@@ -223,6 +216,11 @@
             <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" class="text-bg">ETHHOFAR</text>
             <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" class="text-light" style="letter-spacing: -2px;">ETHHOFAR</text>
         </svg>
+    </div>
+    <div class="nav-links desktop-only">
+        <a href="../index.html">Acasă</a>
+        <a href="../servicii.html">Toate Serviciile</a>
+        <a href="../recenzii.html">Recenzii</a>
     </div>
     <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
         <div class="nav-cart" id="navCartIcon" onclick="window.location.href='../cos.html'">
@@ -236,17 +234,14 @@
         </div>
     </div>
 </nav>
-        <div class="nav-cart" id="navCartIcon" onclick="window.location.href='../cos.html'">
-            <svg class="icon"><use href="#icon-cart"></use></svg>
-            <span class="cart-badge" id="cartBadge">0</span>
-        </div>
-        <div class="cart-popup" id="cartPopup">
-            <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
-            <p id="popupText" style="color: var(--text-color); font-size: 0.95rem;">Ai <strong style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
-            <a href="../cos.html" class="btn-go-cart">Mergi la coș <svg class="icon"><use href="#icon-arrow"></use></svg></a>
-        </div>
-    </div>
-</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header"><span class="close-menu" onclick="toggleMobileMenu()">&times;</span></div>
+    <a href="../index.html">Acasă</a>
+    <a href="../servicii.html">Servicii și Tarife</a>
+    <a href="../recenzii.html">Recenzii</a>
+</div>
 
 <div class="theme-switcher">
     <div class="theme-ring" id="theme-ring"></div>
