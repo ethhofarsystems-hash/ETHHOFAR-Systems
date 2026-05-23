@@ -45,16 +45,17 @@
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
         
-        /* BARA NAVIGAȚIE PRINCIPALĂ (DESKTOP) */
+        /* BARA NAVIGAȚIE PRINCIPALĂ (UNIVERSALĂ) */
         nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
         
-        /* LOGO TEXT ETHHOFAR */
-        .logo-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+        .hamburger { cursor: pointer; color: var(--text-color); display: flex; align-items: center; justify-content: center; z-index: 1001; }
+        .hamburger svg { width: 30px; height: 30px; fill: currentColor; transition: transform 0.3s; }
+        .hamburger:hover svg { transform: scale(1.1); color: var(--primary); }
+        
+        /* LOGO CENTRAT */
+        .logo-container { position: absolute; left: 50%; transform: translateX(-50%); cursor: pointer; display: flex; align-items: center; }
         .logo-text { font-size: 26px; font-weight: 900; font-family: 'Segoe UI', sans-serif; letter-spacing: 2px; color: var(--text-color); margin: 0; transition: color 0.3s; }
-
-        .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
-        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
-        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .logo-text:hover { color: var(--primary); }
 
         /* Coș Cumpărături */
         .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
@@ -62,31 +63,39 @@
         .nav-cart:hover { color: var(--primary); }
         .nav-cart .icon { width: 28px; height: 28px; fill: currentColor; }
         .cart-badge { position: absolute; top: -8px; right: -10px; background: var(--accent); color: white; font-size: 0.75rem; font-weight: bold; padding: 2px 6px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .cart-popup { position: absolute; top: 130%; right: 0; background: var(--card-bg); border: 1px solid var(--border-color); box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 8px; padding: 15px; width: 220px; text-align: center; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: 0.3s; z-index: 1000; }
-        .cart-popup.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .btn-go-cart { display: flex; align-items: center; justify-content: center; gap: 5px; background: var(--primary); color: white; text-decoration: none; padding: 10px; border-radius: 5px; font-weight: bold; margin-top: 10px; transition: 0.3s; }
-        .btn-go-cart:hover { background: #004494; }
-        .btn-go-cart .icon { width: 16px; height: 16px; fill: white; }
-
-        /* Meniul Lateral Glisant (Mobil) */
-        .hamburger { display: none; cursor: pointer; color: var(--text-color); }
-        .hamburger svg { width: 30px; height: 30px; fill: currentColor; }
         
-        .mobile-menu {
-            position: fixed; top: 0; left: -280px; width: 250px; height: 100vh;
+        /* MENIU LATERAL ELEGANT */
+        .side-menu {
+            position: fixed; top: 0; left: -300px; width: 280px; height: 100vh;
             background: var(--card-bg); border-right: 1px solid var(--border-color);
-            z-index: 2005; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 20px;
-            display: flex; flex-direction: column; gap: 15px; box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+            z-index: 2005; transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex; flex-direction: column; box-shadow: 5px 0 25px rgba(0,0,0,0.15);
         }
-        .mobile-menu.open { left: 0; }
-        .mobile-menu-header { display: flex; justify-content: flex-end; margin-bottom: 10px; }
-        .close-menu { font-size: 2.5rem; cursor: pointer; color: var(--text-color); line-height: 0.8; }
-        .mobile-menu a { color: var(--text-color); text-decoration: none; font-size: 1.1rem; font-weight: bold; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; transition: 0.3s; }
-        .mobile-menu a:hover { color: var(--primary); padding-left: 10px; }
+        .side-menu.open { left: 0; }
+        
+        .side-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .side-menu-header h2 { margin: 0; font-size: 20px; font-weight: 900; letter-spacing: 1px; color: var(--primary); }
+        .close-menu { cursor: pointer; color: var(--text-color); transition: 0.3s; display: flex; }
+        .close-menu:hover { color: #e74c3c; transform: rotate(90deg); }
+        .close-menu svg { width: 28px; height: 28px; fill: currentColor; }
+
+        .side-menu-links { flex-grow: 1; padding: 20px 0; display: flex; flex-direction: column; gap: 5px; overflow-y: auto; }
+        .side-menu-links a { color: var(--text-color); text-decoration: none; font-size: 1.1rem; font-weight: 600; padding: 12px 25px; transition: 0.3s; display: flex; align-items: center; }
+        .side-menu-links a:hover { background: var(--light); color: var(--primary); padding-left: 35px; }
+        .side-menu-links a.active { color: var(--primary); background: rgba(0, 91, 183, 0.08); border-left: 4px solid var(--primary); padding-left: 21px; }
+
+        /* THEME SWITCHER IN MENU */
+        .menu-theme-switcher { padding: 20px; border-top: 1px solid var(--border-color); }
+        .theme-title { font-size: 0.85rem; color: #888; font-weight: bold; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .theme-buttons { display: flex; gap: 10px; }
+        .theme-btn { flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--light); color: var(--text-color); cursor: pointer; transition: 0.3s; }
+        .theme-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .theme-btn.active-theme { background: var(--primary); color: white; border-color: var(--primary); }
         
         .mobile-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2004; opacity: 0; visibility: hidden; transition: 0.3s;
+            background: rgba(0,0,0,0.6); z-index: 2004; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s; backdrop-filter: blur(2px);
         }
         .mobile-overlay.open { opacity: 1; visibility: visible; }
         
@@ -101,7 +110,6 @@
         .cta-section { flex: 1; min-width: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid var(--border-color); padding-right: 20px; }
         .cta-section h2 { margin-top: 0; color: var(--text-color); font-size: 1.4rem; }
         
-        /* Grup Butoane CTA */
         .cta-buttons { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 220px; }
         .btn-review { background: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: block; box-shadow: 0 4px 6px rgba(0,0,183,0.2); }
         .btn-review:hover { background: #004494; transform: scale(1.05); }
@@ -110,12 +118,15 @@
         .btn-qr-trigger:hover { background: #e68a00; transform: scale(1.05); }
 
         /* Modal QR */
-        .qr-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; }
-        .qr-modal.active { display: flex; }
-        .qr-modal-content { background: white; padding: 25px; border-radius: 12px; text-align: center; max-width: 90vw; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .qr-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .qr-modal.active { display: flex; animation: fadeIn 0.3s ease-out; }
+        .qr-modal-content { background: white; padding: 25px; border-radius: 12px; text-align: center; max-width: 90vw; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: translateY(0); animation: slideUp 0.3s ease-out; }
         .qr-modal-content img { width: 100%; max-width: 350px; height: auto; border-radius: 8px; border: 1px solid #ddd; }
         .close-modal { margin-top: 20px; padding: 10px 20px; background: #333; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
         .close-modal:hover { background: #555; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); } to { transform: translateY(0); } }
 
         .chart-section { flex: 1.5; min-width: 300px; }
         .chart-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
@@ -136,16 +147,12 @@
         select:focus { border-color: var(--primary); }
 
         /* DESIGN RECENZII */
-        /* stretch asigură carduri cu înălțime identică pe fiecare rând, automat */
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; align-items: stretch; }
         
-        /* display: flex și flex-direction: column pe card ne ajută să împingem subsolul (data) în jos */
         .review-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; }
         .review-card:hover { transform: translateY(-3px); border-color: var(--primary); }
         
         .review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
-        
-        /* Dimensiune fixă și împiedicare de micșorare a pozei (flex-shrink: 0) */
         .avatar { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; color: white; flex-shrink: 0; }
         
         .reviewer-info { flex-grow: 1; }
@@ -157,35 +164,21 @@
         .stars { display: flex; gap: 2px; margin-bottom: 15px; color: var(--star-color); }
         .stars svg { width: 16px; height: 16px; fill: currentColor; }
         
-        /* flex-grow: 1 face textul să ocupe tot spațiul liber, împingând footer-ul în jos */
         .review-text { font-size: 0.95rem; line-height: 1.5; color: var(--text-color); flex-grow: 1; margin-bottom: 20px; }
 
-        /* Noul container pentru Data, la baza cardului */
         .review-footer { display: flex; justify-content: flex-end; align-items: center; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: auto; }
         .review-date { font-size: 0.8rem; color: #888; font-weight: normal; }
 
-        /* Teme Switcher (Desktop) */
-        .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
-        .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
-        [data-theme="dark"] .theme-ring { left: 42px; } 
-        [data-theme="warm"] .theme-ring { left: 78px; } 
-        .theme-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ccc; cursor: pointer; transition: 0.3s; }
-        .theme-light { background: #f4f4f4; }
-        .theme-dark { background: #1a1a1a; border-color: #555; }
-        .theme-warm { background: #fdf6e3; border-color: #d35400; }
+        /* NOTĂ ACTUALIZARE SISTEM */
+        .system-update-notice { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px dashed var(--border-color); color: #888; font-size: 0.95rem; }
+        .system-update-notice strong { color: var(--text-color); font-weight: 600; display: block; margin-bottom: 5px; font-size: 1rem; }
 
-        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; margin-top: 40px;}
+        footer { text-align: center; padding: 30px; font-size: 0.9rem; color: #666; margin-top: 20px;}
 
         /* ADAPTĂRI PENTRU TELEFON */
         @media (max-width: 768px) {
-            .desktop-only { display: none !important; }
-            .hamburger { display: block; }
-            
-            nav { flex-direction: row; justify-content: space-between; padding: 12px 15px; }
-            
-            .theme-switcher { position: fixed; top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; }
-            footer { padding-bottom: 90px; }
-            
+            nav { padding: 12px 15px; }
+            .logo-text { font-size: 22px; }
             .cta-section { border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 20px; margin-bottom: 10px; }
         }
     </style>
@@ -196,54 +189,58 @@
     <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
     <symbol id="icon-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></symbol>
     <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
-    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></symbol>
+    
+    <symbol id="icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></symbol>
 </svg>
 
 <nav>
-    <div class="hamburger" onclick="toggleMobileMenu()">
-        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    <div class="hamburger" onclick="toggleMenu()">
+        <svg><use href="#icon-menu"></use></svg>
     </div>
 
     <div class="logo-container" onclick="window.location.href='index.html'">
        <h2 class="logo-text">ETHHOFAR</h2>
     </div>
 
-    <div class="nav-links desktop-only">
-        <a href="index.html">Acasă</a>
-        <a href="servicii.html">Servicii și Tarife</a>
-        <a href="recenzii.html" class="active">Recenzii</a>
-    </div>
-
-    <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
-        <div class="nav-cart" id="navCartIcon" onclick="window.location.href='cos.html'">
+    <div class="nav-cart-wrapper" onclick="window.location.href='cos.html'">
+        <div class="nav-cart">
             <svg class="icon"><use href="#icon-cart"></use></svg>
             <span class="cart-badge" id="cartBadge">0</span>
-        </div>
-        <div class="cart-popup" id="cartPopup">
-            <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
-            <p id="popupText" style="color: var(--text-color); font-size: 0.95rem;">Ai <strong style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
-            <a href="cos.html" class="btn-go-cart">Mergi la coș <svg class="icon"><use href="#icon-arrow"></use></svg></a>
         </div>
     </div>
 </nav>
 
-<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
-<div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-header">
-        <span class="close-menu" onclick="toggleMobileMenu()">&times;</span>
-    </div>
-    <a href="index.html">Acasă</a>
-    <a href="servicii.html">Servicii și Tarife</a>
-    <a href="recenzii.html" class="active">Recenzii</a>
-    <a href="#" style="color: #888; font-size: 0.9rem;">Locații (În curând)</a>
-    <a href="#" style="color: #888; font-size: 0.9rem;">Colaboratori (În curând)</a>
-</div>
+<div class="mobile-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
-<div class="theme-switcher">
-    <div class="theme-ring" id="theme-ring"></div>
-    <button class="theme-btn theme-light" onclick="setTheme('light')" title="Temă Luminoasă"></button>
-    <button class="theme-btn theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"></button>
-    <button class="theme-btn theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"></button>
+<div class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+        <h2>ETHHOFAR</h2>
+        <div class="close-menu" onclick="toggleMenu()">
+            <svg><use href="#icon-close"></use></svg>
+        </div>
+    </div>
+    
+    <div class="side-menu-links">
+        <a href="index.html">Acasă</a>
+        <a href="servicii.html">Servicii și Tarife</a>
+        <a href="recenzii.html" class="active">Recenzii</a>
+        <a href="despre-noi.html">Despre Noi</a>
+        <a href="parteneri.html">Parteneri</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="menu-theme-switcher">
+        <div class="theme-title">Aspect Vizual</div>
+        <div class="theme-buttons">
+            <button class="theme-btn" id="btn-theme-light" onclick="setTheme('light')" title="Temă Luminoasă"><svg><use href="#icon-sun"></use></svg></button>
+            <button class="theme-btn" id="btn-theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"><svg><use href="#icon-moon"></use></svg></button>
+            <button class="theme-btn" id="btn-theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"><svg><use href="#icon-eye"></use></svg></button>
+        </div>
+    </div>
 </div>
 
 <div class="container">
@@ -303,6 +300,11 @@
 
     <div class="reviews-grid" id="reviewsGrid">
         </div>
+        
+    <div class="system-update-notice">
+        <strong>Nu-ți găsești recenzia?</strong>
+        Sistemul ETHHOFAR se actualizează în intervale cuprinse între câteva ore și câteva zile. Îți mulțumim pentru răbdare!
+    </div>
 </div>
 
 <div class="qr-modal" id="qrModal" onclick="if(event.target === this) this.classList.remove('active')">
@@ -319,11 +321,22 @@
 </footer>
 
 <script>
-    // --- SETĂRI TEMĂ ---
+    // --- SETĂRI TEMĂ & MENIU ---
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
+        
+        // Actualizează butoanele din meniu
+        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active-theme'));
+        const activeBtn = document.getElementById('btn-theme-' + themeName);
+        if(activeBtn) activeBtn.classList.add('active-theme');
     }
+
+    function toggleMenu() {
+        document.getElementById('sideMenu').classList.toggle('open');
+        document.getElementById('menuOverlay').classList.toggle('open');
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
@@ -343,7 +356,7 @@
         { id: "rev_9", name: "Nicoleta Popescu", stars: 5, text: "Performanța laptopului meu s-a îmbunătățit considerabil! Recomand cu încredere! 👏👏", date: "2026-05-22", color: "#fb8c00" }
     ];
 
-    const googleSearchLink = "https://www.google.com/search?sa=X&sca_esv=cb0ef06c41fe51d8&sxsrf=ANbL-n60m16Dj5qSOm3iXWRsRXRc8LLfyQ:1779432057350&q=ethhofar%20systems%20reviews&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2sjAyMzE2MTGytDQwMTQ0NTUz3MDI-IpRIrUkIyM_LbFIobiyuCQ1t1ihKLUsM7W8eBErTikAbOikw1AAAAA&rldimm=2826434429904115561&tbm=lcl&hl=en-RO&ved=0CBIQ5foLahcKEwjAl6P-pMyUAxUAAAAAHQAAAAAQBQ&biw=1200&bih=563&dpr=1.6#lkt=LocalPoiReviews&arid=Ci9DQUlRQUNvZENodHljRjlvT2xOT05rcFFlblZ0UW14R2VubHlUV2hQTjFGNVUwRRAB";
+    const googleSearchLink = "https://www.google.com/search?q=ethhofar%20systems%20reviews";
 
     function initReviews() {
         updateChart();
@@ -401,7 +414,7 @@
                         <h3>${rev.name}</h3>
                         <span class="review-source">
                             <svg style="width:14px; height:14px;"><use href="#icon-google"></use></svg> 
-                            <a href="${googleSearchLink}" target="_blank">Recenzie de la Google</a>
+                            <a href="${googleSearchLink}" target="_blank">Recenzie Google</a>
                         </span>
                     </div>
                 </div>
@@ -442,19 +455,6 @@
                     <span class="bar-label">${pct}%</span>
                 </div>
             `;
-        }
-    }
-
-    // Funcții pentru Meniul Mobil și Coș
-    function toggleMobileMenu() {
-        document.getElementById('mobileMenu').classList.toggle('open');
-        document.getElementById('mobileOverlay').classList.toggle('open');
-    }
-
-    function closePopupIfOpen() {
-        const popup = document.getElementById('cartPopup');
-        if (popup && popup.classList.contains('active')) {
-            popup.classList.remove('active');
         }
     }
 </script>
