@@ -137,7 +137,12 @@
 
         /* DESIGN RECENZII */
         /* am adăugat align-items: start; pentru ca rândurile să nu fie toate de aceeași înălțime artificială */
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; align-items: start; }
+   .reviews-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+    gap: 20px; 
+    align-items: stretch; 
+}
         .review-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; display: flex; flex-direction: column; }
         .review-card:hover { transform: translateY(-3px); border-color: var(--primary); }
         
