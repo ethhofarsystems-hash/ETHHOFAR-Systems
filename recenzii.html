@@ -231,15 +231,18 @@
     <h1>Recenzii ETHHOFAR Systems</h1>
     <div class="subtitle">Transparență totală. Vezi ce spun clienții noștri sau lasă-ne părerea ta!</div>
 
-    <div class="dashboard">
-        <div class="cta-section">
-            <h2>Ai colaborat cu noi?</h2>
-            <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Părerea ta ne ajută să construim servicii mai bune pentru comunitate.</p>
-            <a href="https://g.page/r/CWlXXo8jgzknEAE/review" target="_blank" class="btn-review">Scrie o recenzie</a>
-            <img src="qr-recenzii.png" alt="Scaneaza pentru a da un review" class="qr-code">
-            <span style="font-size: 0.75rem; color: #888; margin-top: 5px;">Scanează pe telefon</span>
-        </div>
+  <div class="cta-section">
+    <h2>Ai colaborat cu noi?</h2>
+    <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Părerea ta ne ajută să construim servicii mai bune.</p>
+    <a href="https://g.page/r/CWlXXo8jgzknEAE/review" target="_blank" class="btn-review">Scrie o recenzie</a>
+    <button class="btn-qr-trigger" onclick="document.getElementById('qrModal').classList.add('active')">
+        Scanează Cod QR
+    </button>
+</div>
 
+<div class="qr-modal" id="qrModal" onclick="this.classList.remove('active')">
+    <img src="qr-recenzii.png" alt="QR Code">
+</div>
         <div class="chart-section">
             <div class="chart-header">
                 <div class="avg-rating" id="avgScore">5.0</div>
