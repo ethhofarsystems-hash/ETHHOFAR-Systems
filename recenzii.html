@@ -136,30 +136,33 @@
         select:focus { border-color: var(--primary); }
 
         /* DESIGN RECENZII */
-        /* am adăugat align-items: start; pentru ca rândurile să nu fie toate de aceeași înălțime artificială */
-   .reviews-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-    gap: 20px; 
-    align-items: stretch; 
-}
-        .review-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; display: flex; flex-direction: column; }
+        /* stretch asigură carduri cu înălțime identică pe fiecare rând, automat */
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; align-items: stretch; }
+        
+        /* display: flex și flex-direction: column pe card ne ajută să împingem subsolul (data) în jos */
+        .review-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; }
         .review-card:hover { transform: translateY(-3px); border-color: var(--primary); }
         
         .review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        
+        /* Dimensiune fixă și împiedicare de micșorare a pozei (flex-shrink: 0) */
         .avatar { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; color: white; flex-shrink: 0; }
         
         .reviewer-info { flex-grow: 1; }
-        .reviewer-info h3 { margin: 0; font-size: 1.05rem; color: var(--text-color); display: flex; justify-content: space-between; align-items: center;}
-        .review-date { font-size: 0.8rem; color: #888; font-weight: normal; }
-        .review-source { font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+        .reviewer-info h3 { margin: 0; font-size: 1.05rem; color: var(--text-color); }
+        .review-source { font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 5px; margin-top: 4px; }
         .review-source a { color: inherit; text-decoration: none; }
         .review-source a:hover { text-decoration: underline; color: var(--primary); }
         
-        .stars { display: flex; gap: 2px; margin-bottom: 10px; color: var(--star-color); }
+        .stars { display: flex; gap: 2px; margin-bottom: 15px; color: var(--star-color); }
         .stars svg { width: 16px; height: 16px; fill: currentColor; }
         
-        .review-text { font-size: 0.95rem; line-height: 1.5; color: var(--text-color); flex-grow: 1; margin-bottom: 5px; }
+        /* flex-grow: 1 face textul să ocupe tot spațiul liber, împingând footer-ul în jos */
+        .review-text { font-size: 0.95rem; line-height: 1.5; color: var(--text-color); flex-grow: 1; margin-bottom: 20px; }
+
+        /* Noul container pentru Data, la baza cardului */
+        .review-footer { display: flex; justify-content: flex-end; align-items: center; border-top: 1px solid var(--border-color); padding-top: 10px; margin-top: auto; }
+        .review-date { font-size: 0.8rem; color: #888; font-weight: normal; }
 
         /* Teme Switcher (Desktop) */
         .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
@@ -395,7 +398,7 @@
                 <div class="review-header">
                     <div class="avatar" style="background-color: ${rev.color}">${rev.name.charAt(0).toUpperCase()}</div>
                     <div class="reviewer-info">
-                        <h3>${rev.name} <span class="review-date">${dateStr}</span></h3>
+                        <h3>${rev.name}</h3>
                         <span class="review-source">
                             <svg style="width:14px; height:14px;"><use href="#icon-google"></use></svg> 
                             <a href="${googleSearchLink}" target="_blank">Recenzie de la Google</a>
@@ -406,6 +409,9 @@
                     ${starsHTML} <span style="font-weight: bold; color: var(--text-color); margin-left: 5px; font-size: 0.9rem;">${rev.stars}/5</span>
                 </div>
                 <div class="review-text">${rev.text}</div>
+                <div class="review-footer">
+                    <span class="review-date">${dateStr}</span>
+                </div>
             `;
             grid.appendChild(card);
         });
