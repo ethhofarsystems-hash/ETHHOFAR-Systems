@@ -47,53 +47,58 @@
 
         /* --- TEME NEVOI SPECIALE --- */
         [data-theme="daltonism"] {
-            --primary: #1976D2; /* Albastru clar */
+            --primary: #1976D2;
             --dark: #1a1a1a;
             --light: #f4f4f4;
             --card-bg: #ffffff;
             --border-color: #ccc;
-            --accent: #FBC02D; /* Galben clar în loc de verde/roșu */
+            --accent: #FBC02D;
             --text-color: #1a1a1a;
             --btn-text: #ffffff;
-            --star-color: #1976D2; /* Stele albastre pentru contrast perfect */
+            --star-color: #1976D2;
         }
 
         [data-theme="dislexie"] {
             --primary: #005bb7; 
-            --light: #FAF8F5; /* Fundal crem foarte fin */
+            --light: #FAF8F5;
             --card-bg: #ffffff;
             --border-color: #e2dcd2;
             --accent: #27ae60;
-            --text-color: #2c2c2c; /* Contrast mai blând */
+            --text-color: #2c2c2c;
             --btn-text: #ffffff;
             --star-color: #fbbc04;
-            --letter-spacing: 0.08em; /* Spațiere mai mare a literelor */
-            --line-height: 1.8; /* Spațiere mai mare a rândurilor */
+            --letter-spacing: 0.08em;
+            --line-height: 1.8;
         }
 
         [data-theme="fotofobie"] {
-            --primary: #477085; /* Albastru estompat */
-            --light: #202324; /* Gri cărbune (nu negru) */
+            --primary: #477085;
+            --light: #202324;
             --card-bg: #2A2D2F;
             --border-color: #383B3D;
             --accent: #477085;
-            --text-color: #9EA3A8; /* Text gri blând (nu alb) */
+            --text-color: #9EA3A8;
             --btn-text: #E0E0E0;
             --star-color: #6C828C;
         }
 
         [data-theme="contrast"] {
-            --primary: #00FF00; /* Verde neon */
-            --light: #000000; /* Negru pur */
+            --primary: #00FF00;
+            --light: #000000;
             --card-bg: #000000;
-            --border-color: #FFFF00; /* Galben pur */
+            --border-color: #FFFF00;
             --accent: #00FF00;
-            --text-color: #FFFF00; /* Text Galben */
+            --text-color: #FFFF00;
             --btn-text: #000000;
             --star-color: #FFFF00;
         }
         
-        /* -------------------------------- */
+        /* --- BARA DE SCROLL PERSONALIZATĂ --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+        * { scrollbar-width: thin; scrollbar-color: var(--primary) var(--light); }
 
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; letter-spacing: var(--letter-spacing); line-height: var(--line-height); }
         
@@ -116,38 +121,37 @@
         .nav-cart .icon { width: 28px; height: 28px; fill: currentColor; }
         .cart-badge { position: absolute; top: -8px; right: -10px; background: var(--accent); color: var(--btn-text); font-size: 0.75rem; font-weight: bold; padding: 2px 6px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         
-        /* MENIU LATERAL */
+        /* MENIU LATERAL - COMPACTAT */
         .side-menu {
             position: fixed; top: 0; left: -300px; width: 280px; height: 100vh;
             background: var(--card-bg); border-right: 1px solid var(--border-color);
             z-index: 2005; transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex; flex-direction: column; box-shadow: 5px 0 25px rgba(0,0,0,0.15);
-            /* Permite scroll-ul interior pe telefoane mici */
-            overflow-y: auto; padding-bottom: 30px; 
+            overflow: hidden; /* Fără scroll */
         }
         .side-menu.open { left: 0; }
         
-        .side-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+        .side-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
         .side-menu-header h2 { margin: 0; font-size: 20px; font-weight: 900; letter-spacing: 1px; color: var(--primary); }
         .close-menu { cursor: pointer; color: var(--text-color); transition: 0.3s; display: flex; }
         .close-menu:hover { color: #e74c3c; transform: rotate(90deg); }
         .close-menu svg { width: 28px; height: 28px; fill: currentColor; }
 
-        .side-menu-links { flex-grow: 1; padding: 20px 0; display: flex; flex-direction: column; gap: 5px; }
-        .side-menu-links a { color: var(--text-color); text-decoration: none; font-size: 1.1rem; font-weight: 600; padding: 12px 25px; transition: 0.3s; display: flex; align-items: center; }
+        .side-menu-links { flex-grow: 1; padding: 10px 0; display: flex; flex-direction: column; gap: 2px; }
+        .side-menu-links a { color: var(--text-color); text-decoration: none; font-size: 1.05rem; font-weight: 600; padding: 10px 25px; transition: 0.3s; display: flex; align-items: center; }
         .side-menu-links a:hover { background: var(--light); color: var(--primary); padding-left: 35px; }
         .side-menu-links a.active { color: var(--primary); background: rgba(0, 91, 183, 0.08); border-left: 4px solid var(--primary); padding-left: 21px; }
 
-        /* THEME SWITCHER */
-        .menu-theme-switcher { padding: 20px; border-top: 1px solid var(--border-color); flex-shrink: 0; }
-        .theme-title { font-size: 0.85rem; color: #888; font-weight: bold; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .theme-buttons { display: flex; gap: 10px; margin-bottom: 15px; }
-        .theme-btn { flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--light); color: var(--text-color); cursor: pointer; transition: 0.3s; }
+        /* THEME SWITCHER - COMPACTAT */
+        .menu-theme-switcher { padding: 15px 20px; border-top: 1px solid var(--border-color); flex-shrink: 0; }
+        .theme-title { font-size: 0.8rem; color: #888; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .theme-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .theme-btn { flex: 1; display: flex; justify-content: center; align-items: center; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--light); color: var(--text-color); cursor: pointer; transition: 0.3s; }
         .theme-btn svg { width: 20px; height: 20px; fill: currentColor; }
         .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
         .theme-btn.active-theme { background: var(--primary); color: var(--btn-text); border-color: var(--primary); }
         
-        .btn-accessibility { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 8px; border: 1px dashed var(--border-color); background: transparent; color: var(--text-color); cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-accessibility { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px; border-radius: 8px; border: 1px dashed var(--border-color); background: transparent; color: var(--text-color); cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
         .btn-accessibility:hover { border-color: var(--primary); color: var(--primary); background: var(--light); }
         .btn-accessibility svg { width: 18px; height: 18px; fill: currentColor; }
 
@@ -180,9 +184,16 @@
         /* MODALE (Pop-ups) */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease-out; }
-        .modal-content { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; max-width: 90vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: translateY(0); animation: slideUp 0.3s ease-out; color: var(--text-color); }
-        .modal-content img { width: 100%; max-width: 350px; height: auto; border-radius: 8px; border: 1px solid #ddd; background: white; padding: 10px; }
-        .close-modal { margin-top: 20px; padding: 10px 20px; background: var(--text-color); color: var(--card-bg); border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        .modal-content { position: relative; background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; max-width: 90vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: translateY(0); animation: slideUp 0.3s ease-out; color: var(--text-color); }
+        .modal-content img { width: 100%; max-width: 350px; height: auto; border-radius: 8px; border: 1px solid #ddd; background: white; padding: 10px; margin-top: 10px; }
+        
+        /* Butonul X din colț */
+        .close-x { position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--text-color); cursor: pointer; opacity: 0.6; transition: 0.3s; padding: 0; display: flex; align-items: center; justify-content: center; }
+        .close-x:hover { opacity: 1; color: #e74c3c; transform: scale(1.1); }
+        .close-x svg { width: 24px; height: 24px; fill: currentColor; }
+
+        .close-modal { margin-top: 20px; padding: 10px 20px; background: var(--text-color); color: var(--card-bg); border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; width: 100%; }
+        .close-modal:hover { opacity: 0.9; }
         
         /* Modul Nevoi Speciale Listă */
         .acc-list { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }
@@ -257,7 +268,6 @@
     <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
     <symbol id="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
     <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></symbol>
-    
     <symbol id="icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/></symbol>
     <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></symbol>
     <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></symbol>
@@ -308,7 +318,7 @@
             <button class="theme-btn" id="btn-theme-warm" onclick="setTheme('warm')" title="Protecție Ochi (Standard)"><svg><use href="#icon-eye"></use></svg></button>
         </div>
         <button class="btn-accessibility" onclick="openModal('accModal')">
-            <svg><use href="#icon-accessibility"></use></svg> Setări Nevoi Speciale
+            <svg><use href="#icon-accessibility"></use></svg> Nevoi Speciale
         </button>
     </div>
 </div>
@@ -379,6 +389,7 @@
 
 <div class="modal-overlay" id="qrModal" onclick="if(event.target === this) closeModal('qrModal')">
     <div class="modal-content" style="max-width: 400px;">
+        <button class="close-x" onclick="closeModal('qrModal')"><svg><use href="#icon-close"></use></svg></button>
         <h3 style="margin-top: 0;">Scanează pentru recenzie</h3>
         <img src="qr-recenzii.png" alt="Scanează codul QR pentru recenzii">
         <br>
@@ -388,6 +399,7 @@
 
 <div class="modal-overlay" id="accModal" onclick="if(event.target === this) closeModal('accModal')">
     <div class="modal-content" style="max-width: 500px; text-align: center;">
+        <button class="close-x" onclick="closeModal('accModal')"><svg><use href="#icon-close"></use></svg></button>
         <svg style="width: 40px; height: 40px; fill: var(--primary); margin-bottom: 10px;"><use href="#icon-accessibility"></use></svg>
         <h3 style="margin: 0 0 10px 0;">Accesibilitate Vizuală</h3>
         <p style="font-size: 0.95rem; margin-bottom: 20px; opacity: 0.8;">La ETHHOFAR credem că tehnologia trebuie să fie accesibilă tuturor. Alege o temă optimizată pentru confortul tău:</p>
@@ -432,18 +444,15 @@
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
         
-        // Resetare stare butoane
         document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active-theme'));
         document.querySelectorAll('.acc-btn').forEach(btn => {
             btn.classList.remove('active');
             btn.innerText = "Activează Tema";
         });
 
-        // Setare buton activ (Meniu normal)
         const activeBtnNormal = document.getElementById('btn-theme-' + themeName);
         if(activeBtnNormal) activeBtnNormal.classList.add('active-theme');
         
-        // Setare buton activ (Meniu Accesibilitate)
         const activeBtnAcc = document.getElementById('acc-btn-' + themeName);
         if(activeBtnAcc) {
             activeBtnAcc.classList.add('active');
