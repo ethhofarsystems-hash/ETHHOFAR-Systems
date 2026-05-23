@@ -18,6 +18,8 @@
             --btn-text: #ffffff;
             --shield-color: #e74c3c;
             --danger: #e74c3c;
+            --letter-spacing: normal;
+            --line-height: 1.5;
         }
 
         [data-theme="dark"] {
@@ -46,30 +48,70 @@
             --danger: #c0392b;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; }
-        
-        /* NAVIGAȚIE */
-        nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
-        .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
-        nav a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
-        nav a:hover { color: var(--primary); }
-        
-        .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
-        .nav-cart { cursor: pointer; position: relative; display: flex; align-items: center; padding: 10px; border-radius: 50%; transition: 0.3s; z-index: 10; background: transparent; color: var(--text-color); }
-        .nav-cart:hover { transform: scale(1.1); color: var(--primary); }
-        .nav-cart .icon { width: 26px; height: 26px; }
-        .cart-badge { position: absolute; top: 0px; right: 0px; background: var(--accent); color: white; font-size: 0.8rem; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--card-bg); }
+        /* --- TEME NEVOI SPECIALE --- */
+        [data-theme="daltonism"] {
+            --primary: #1976D2; --dark: #1a1a1a; --light: #f4f4f4; --card-bg: #ffffff; --border-color: #ccc; --accent: #FBC02D; --text-color: #1a1a1a; --btn-text: #ffffff; --shield-color: #FBC02D; --danger: #d32f2f;
+        }
+        [data-theme="dislexie"] {
+            --primary: #005bb7; --light: #FAF8F5; --card-bg: #ffffff; --border-color: #e2dcd2; --accent: #27ae60; --text-color: #2c2c2c; --btn-text: #ffffff; --shield-color: #e74c3c; --danger: #e74c3c; --letter-spacing: 0.08em; --line-height: 1.8;
+        }
+        [data-theme="fotofobie"] {
+            --primary: #477085; --light: #202324; --card-bg: #2A2D2F; --border-color: #383B3D; --accent: #477085; --text-color: #9EA3A8; --btn-text: #E0E0E0; --shield-color: #835252; --danger: #8a3c3c;
+        }
+        [data-theme="contrast"] {
+            --primary: #00FF00; --light: #000000; --card-bg: #000000; --border-color: #FFFF00; --accent: #00FF00; --text-color: #FFFF00; --btn-text: #000000; --shield-color: #FF0000; --danger: #FF0000;
+        }
 
-        /* TEME */
-        .theme-switcher { position: fixed; top: 90px; left: 20px; display: flex; gap: 12px; background: var(--card-bg); padding: 8px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); border: 1px solid var(--border-color); z-index: 999; }
-        .theme-ring { position: absolute; width: 28px; height: 28px; border: 2px solid var(--primary); border-radius: 50%; top: 6px; left: 6px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-sizing: border-box; }
-        [data-theme="dark"] .theme-ring { left: 42px; } 
-        [data-theme="warm"] .theme-ring { left: 78px; } 
-        .theme-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid #ccc; cursor: pointer; transition: 0.3s; }
-        .theme-btn:hover { transform: scale(1.1); }
-        .theme-light { background: #f4f4f4; }
-        .theme-dark { background: #1a1a1a; border-color: #555; }
-        .theme-warm { background: #fdf6e3; border-color: #d35400; }
+        /* --- BARA DE SCROLL PERSONALIZATĂ --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+        * { scrollbar-width: thin; scrollbar-color: var(--primary) var(--light); }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--light); color: var(--text-color); transition: background 0.3s, color 0.3s; letter-spacing: var(--letter-spacing); line-height: var(--line-height); }
+        
+        /* NAVIGAȚIE PRINCIPALĂ (Meniu Hamburger) */
+        nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
+        
+        .hamburger { cursor: pointer; color: var(--text-color); display: flex; align-items: center; justify-content: center; z-index: 1001; }
+        .hamburger svg { width: 30px; height: 30px; fill: currentColor; transition: transform 0.3s; }
+        .hamburger:hover svg { transform: scale(1.1); color: var(--primary); }
+        
+        .logo-container { position: absolute; left: 50%; transform: translateX(-50%); cursor: pointer; display: flex; align-items: center; }
+        .logo-text { font-size: 26px; font-weight: 900; font-family: 'Segoe UI', sans-serif; letter-spacing: 2px; color: var(--text-color); margin: 0; transition: color 0.3s; }
+        .logo-text:hover { color: var(--primary); }
+
+        .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
+        .nav-cart { cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; color: var(--primary); transition: 0.3s; padding: 5px; border-radius: 50%; }
+        .nav-cart .icon { width: 28px; height: 28px; fill: currentColor; }
+        .cart-badge { position: absolute; top: 0px; right: -5px; background: var(--accent); color: var(--btn-text); font-size: 0.75rem; font-weight: bold; padding: 2px 6px; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); border: 2px solid var(--card-bg); }
+
+        /* MENIU LATERAL - COMPACTAT */
+        .side-menu { position: fixed; top: 0; left: -300px; width: 280px; height: 100vh; background: var(--card-bg); border-right: 1px solid var(--border-color); z-index: 2005; transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; flex-direction: column; box-shadow: 5px 0 25px rgba(0,0,0,0.15); overflow: hidden; }
+        .side-menu.open { left: 0; }
+        .side-menu-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+        .side-menu-header h2 { margin: 0; font-size: 20px; font-weight: 900; letter-spacing: 1px; color: var(--primary); }
+        .close-menu { cursor: pointer; color: var(--text-color); transition: 0.3s; display: flex; }
+        .close-menu:hover { color: #e74c3c; transform: rotate(90deg); }
+        .close-menu svg { width: 28px; height: 28px; fill: currentColor; }
+        .side-menu-links { flex-grow: 1; padding: 10px 0; display: flex; flex-direction: column; gap: 2px; justify-content: center; }
+        .side-menu-links a { color: var(--text-color); text-decoration: none; font-size: 1.05rem; font-weight: 600; padding: 10px 25px; transition: 0.3s; display: flex; align-items: center; }
+        .side-menu-links a:hover { background: var(--light); color: var(--primary); padding-left: 35px; }
+        
+        .menu-theme-switcher { padding: 15px 20px 35px 20px; border-top: 1px solid var(--border-color); flex-shrink: 0; }
+        .theme-title { font-size: 0.8rem; color: #888; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .theme-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .theme-btn { flex: 1; display: flex; justify-content: center; align-items: center; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--light); color: var(--text-color); cursor: pointer; transition: 0.3s; }
+        .theme-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .theme-btn.active-theme { background: var(--primary); color: var(--btn-text); border-color: var(--primary); }
+        .btn-accessibility { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 8px; border-radius: 8px; border: 1px dashed var(--border-color); background: transparent; color: var(--text-color); cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .btn-accessibility:hover { border-color: var(--primary); color: var(--primary); background: var(--light); }
+        .btn-accessibility svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2004; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s; backdrop-filter: blur(2px); }
+        .mobile-overlay.open { opacity: 1; visibility: visible; }
 
         /* CONTAINERE COȘ */
         .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
@@ -77,34 +119,54 @@
         .subtitle { font-size: 0.95rem; color: #777; margin-bottom: 30px; }
         [data-theme="dark"] .subtitle { color: #aaa; }
         
-        .checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; margin-bottom: 50px; }
+        .checkout-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; margin-bottom: 50px; align-items: start; }
         @media (max-width: 768px) { .checkout-grid { grid-template-columns: 1fr; } }
 
         .cart-list { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         
-        /* DESIGN NOU: ELEMENTE COȘ CU IMAGINE E-MAG STYLE */
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-color); transition: 0.3s; }
+        /* DESIGN NOU: ELEMENTE COȘ CU IMAGINE ORIGINALĂ ȘI LINK-URI */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border-color); transition: 0.3s; flex-wrap: wrap; gap: 15px; }
         .cart-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .cart-item-left { display: flex; align-items: center; gap: 15px; }
-        .cart-thumbnail { width: 65px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color); background: var(--border-color); flex-shrink: 0; }
-        .item-info { display: flex; flex-direction: column; gap: 5px; }
-        .item-name { font-weight: bold; font-size: 1.1rem; }
+        .cart-item-left { display: flex; align-items: center; gap: 20px; flex-grow: 1; }
+        
+        .cart-thumbnail-link { display: block; flex-shrink: 0; }
+        /* Modificare aspect ratio: imaginea își păstrează proporția */
+        .cart-thumbnail { width: 100px; height: auto; max-height: 80px; object-fit: contain; border-radius: 6px; border: 1px solid var(--border-color); background: var(--light); padding: 2px; transition: 0.3s; }
+        .cart-thumbnail:hover { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 91, 183, 0.2); }
+        
+        .item-info { display: flex; flex-direction: column; gap: 8px; }
+        .item-name { font-weight: bold; font-size: 1.1rem; color: var(--text-color); text-decoration: none; transition: 0.3s; }
+        .item-name:hover { color: var(--primary); text-decoration: underline; }
         .item-price { color: var(--primary); font-weight: bold; }
         
-        .btn-remove { background: none; color: var(--danger); border: 2px solid var(--danger); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
-        .btn-remove:hover { background: var(--danger); color: white; }
+        /* Controale Cantitate & Ștergere */
+        .item-actions { display: flex; align-items: center; gap: 15px; }
+        .qty-controls { display: flex; align-items: center; gap: 12px; background: var(--light); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); }
+        .btn-qty { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); width: 28px; height: 28px; border-radius: 4px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .btn-qty:hover { background: var(--primary); color: var(--btn-text); border-color: var(--primary); }
+        .btn-qty svg { width: 14px; height: 14px; fill: currentColor; }
+        .qty-number { font-weight: bold; font-size: 1rem; min-width: 15px; text-align: center; }
+
+        .btn-remove { background: none; color: var(--danger); border: none; cursor: pointer; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px; font-size: 0.9rem; padding: 5px; opacity: 0.8; }
+        .btn-remove:hover { opacity: 1; transform: scale(1.05); }
 
         /* REDUCERE & SUMAR */
-        .promo-box { background: rgba(0,0,0,0.03); padding: 15px; border-radius: 8px; border: 1px dashed var(--border-color); margin-top: 20px; }
-        [data-theme="dark"] .promo-box { background: rgba(255,255,255,0.05); }
-        .promo-flex { display: flex; gap: 10px; margin-top: 5px; }
-        .promo-input { padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; flex-grow: 1; background: var(--card-bg); color: var(--text-color); }
-        .btn-promo { padding: 10px 20px; background: var(--primary); color: var(--btn-text); border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-promo:hover { filter: brightness(1.1); }
+        .promo-box { background: var(--card-bg); padding: 20px; border-radius: 8px; border: 1px dashed var(--border-color); margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .promo-flex { display: flex; gap: 10px; margin-top: 10px; }
+        .promo-input { padding: 12px; border: 1px solid var(--border-color); border-radius: 4px; flex-grow: 1; background: var(--light); color: var(--text-color); outline: none; transition: 0.3s; }
+        .promo-input:focus { border-color: var(--primary); }
+        .btn-promo { padding: 12px 20px; background: var(--primary); color: var(--btn-text); border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-promo:hover { background: var(--accent); }
+        
+        .promo-active-box { display: flex; justify-content: space-between; align-items: center; background: rgba(39, 174, 96, 0.1); border: 1px solid var(--accent); padding: 12px 15px; border-radius: 6px; margin-top: 10px; }
+        .promo-success-text { color: var(--accent); font-weight: bold; font-size: 0.95rem; margin: 0; }
+        .btn-remove-promo { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-remove-promo:hover { background: var(--danger); color: white; }
+
         #promoMessage { font-size: 0.9rem; margin-top: 8px; margin-bottom: 0; font-weight: bold; }
         
         .total-box { font-size: 1.3rem; text-align: right; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color); }
-        .total-price { color: var(--accent); font-weight: bold; font-size: 1.6rem; }
+        .total-price { color: var(--accent); font-weight: bold; font-size: 1.6rem; display: inline-block; margin-left: 10px; }
 
         /* FORMULAR */
         .checkout-form { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
@@ -125,8 +187,9 @@
         /* GRILĂ RECOMANDĂRI */
         .section-header { display: flex; align-items: center; font-size: 1.8rem; font-weight: bold; color: var(--text-color); margin: 0 0 30px 0; }
         .section-header::after { content: ""; flex: 1; height: 1px; background: var(--border-color); margin-left: 20px; }
+        [data-theme="contrast"] .section-header { color: var(--text-color); }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-items: stretch; }
         .card-container { display: flex; height: 100%; }
         .card-front { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; background-color: var(--card-bg); color: var(--text-color); box-sizing: border-box; }
         .card-front:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0, 91, 183, 0.1); border-color: var(--primary); }
@@ -134,7 +197,7 @@
         .card-front h3 { margin-top: 0; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: flex-start; }
         .price { font-size: 1.4rem; font-weight: bold; color: var(--primary); margin: 10px 0; transition: color 0.3s ease; }
         .card-front:hover .price { color: var(--accent); }
-        .details-note { font-size: 0.8rem; color: #888; margin-bottom: 15px; font-style: italic; }
+        .details-note { font-size: 0.8rem; color: var(--text-color); opacity: 0.7; margin-bottom: 15px; font-style: italic; }
         
         .icon { width: 18px; height: 18px; fill: currentColor; }
         .button-group { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
@@ -142,6 +205,8 @@
         .btn-flip:hover { background: var(--primary); color: var(--btn-text); }
         .btn-cart { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; background: var(--primary); color: var(--btn-text); border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.3s, transform 0.2s; }
         .btn-cart:hover { background: var(--accent); transform: scale(1.02); } 
+        [data-theme="contrast"] .btn-flip, [data-theme="contrast"] .btn-cart { border-color: var(--border-color); color: var(--text-color); background: transparent; }
+        [data-theme="contrast"] .btn-cart { border: 2px solid var(--border-color); }
         
         .tooltip-container { position: relative; display: inline-flex; align-items: center; cursor: pointer; margin-left: 8px; }
         .shield-icon { width: 20px; height: 20px; color: var(--shield-color); transition: transform 0.3s; fill: currentColor; }
@@ -150,7 +215,34 @@
         .tooltip-text::after { content: ""; position: absolute; top: 100%; right: 15px; border-width: 6px; border-style: solid; border-color: var(--text-color) transparent transparent transparent; }
         .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; transform: translateY(0); }
 
-        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; }
+        /* MODAL ACCESIBILITATE */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease-out; }
+        .modal-content { position: relative; background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; max-width: 90vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transform: translateY(0); animation: slideUp 0.3s ease-out; color: var(--text-color); }
+        .close-x { position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--text-color); cursor: pointer; opacity: 0.6; transition: 0.3s; padding: 0; display: flex; align-items: center; justify-content: center; }
+        .close-x:hover { opacity: 1; color: #e74c3c; transform: scale(1.1); }
+        .close-x svg { width: 24px; height: 24px; fill: currentColor; }
+        .acc-list { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }
+        .acc-item { border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px; }
+        .acc-item h4 { margin: 0; color: var(--primary); font-size: 1.1rem; }
+        .acc-item p { margin: 0; font-size: 0.9rem; color: var(--text-color); opacity: 0.8; }
+        .acc-btn { background: var(--light); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; border-radius: 6px; cursor: pointer; font-weight: bold; text-align: center; transition: 0.3s; }
+        .acc-btn:hover, .acc-btn.active { background: var(--primary); color: var(--btn-text); border-color: var(--primary); }
+        .close-modal { margin-top: 20px; padding: 10px 20px; background: var(--text-color); color: var(--card-bg); border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; width: 100%; }
+        .close-modal:hover { opacity: 0.9; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); } to { transform: translateY(0); } }
+
+        footer { text-align: center; padding: 40px; font-size: 0.9rem; color: var(--text-color); opacity: 0.6; }
+
+        @media (max-width: 768px) {
+            nav { padding: 12px 15px; }
+            .logo-text { font-size: 22px; }
+            .cart-item { flex-direction: column; align-items: stretch; }
+            .cart-item-left { align-items: flex-start; }
+            .item-actions { justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -161,14 +253,23 @@
     <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></symbol>
     <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
     <symbol id="icon-back" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+    <symbol id="icon-minus" viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></symbol>
+    
+    <symbol id="icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"/></symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></symbol>
+    <symbol id="icon-accessibility" viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></symbol>
 </svg>
 
 <nav>
-    <div style="width: 50px;"></div> 
-    <div class="nav-links">
-        <a href="index.html">Acasă</a>
-        <a href="servicii.html">Servicii și Tarife</a>
-        <a href="recenzii.html">Recenzii</a>
+    <div class="hamburger" onclick="toggleMenu()">
+        <svg><use href="#icon-menu"></use></svg>
+    </div>
+    <div class="logo-container" onclick="window.location.href='index.html'">
+       <h2 class="logo-text">ETHHOFAR</h2>
     </div>
     <div class="nav-cart-wrapper">
         <div class="nav-cart" id="navCartIcon">
@@ -178,11 +279,32 @@
     </div>
 </nav>
 
-<div class="theme-switcher">
-    <div class="theme-ring" id="theme-ring"></div>
-    <button class="theme-btn theme-light" onclick="setTheme('light')" title="Temă Luminoasă"></button>
-    <button class="theme-btn theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"></button>
-    <button class="theme-btn theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"></button>
+<div class="mobile-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+<div class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+        <h2>ETHHOFAR</h2>
+        <div class="close-menu" onclick="toggleMenu()"><svg><use href="#icon-close"></use></svg></div>
+    </div>
+    <div class="side-menu-links">
+        <a href="index.html">Acasă</a>
+        <a href="servicii.html">Servicii și Tarife</a>
+        <a href="recenzii.html">Recenzii</a>
+        <a href="despre-noi.html">Despre Noi</a>
+        <a href="parteneri.html">Parteneri</a>
+        <a href="contact.html">Contact</a>
+    </div>
+    <div class="menu-theme-switcher">
+        <div class="theme-title">Aspect Vizual</div>
+        <div class="theme-buttons">
+            <button class="theme-btn" id="btn-theme-light" onclick="setTheme('light')" title="Temă Luminoasă"><svg><use href="#icon-sun"></use></svg></button>
+            <button class="theme-btn" id="btn-theme-dark" onclick="setTheme('dark')" title="Temă Întunecată"><svg><use href="#icon-moon"></use></svg></button>
+            <button class="theme-btn" id="btn-theme-warm" onclick="setTheme('warm')" title="Protecție Ochi"><svg><use href="#icon-eye"></use></svg></button>
+        </div>
+        <button class="btn-accessibility" onclick="openModal('accModal')">
+            <svg><use href="#icon-accessibility"></use></svg> Nevoi Speciale
+        </button>
+    </div>
 </div>
 
 <div class="container">
@@ -204,9 +326,13 @@
 
                 <div class="promo-box">
                     <label class="form-label">Ai un cod de reducere? (Opțional)</label>
-                    <div class="promo-flex">
-                        <input type="text" id="promoInput" class="promo-input" placeholder="Introdu codul">
+                    <div id="promo-input-area" class="promo-flex">
+                        <input type="text" id="promoInput" class="promo-input" placeholder="Introdu codul (ex: UB-GEO25)">
                         <button type="button" class="btn-promo" onclick="applyPromo()">Aplică</button>
+                    </div>
+                    <div id="promo-active-area" class="promo-active-box" style="display: none;">
+                        <p class="promo-success-text" id="promoSuccessText">Cod aplicat!</p>
+                        <button class="btn-remove-promo" onclick="removePromo()">Elimină</button>
                     </div>
                     <p id="promoMessage"></p>
                 </div>
@@ -241,10 +367,36 @@
         </div>
     </div>
 
-    <!-- RECOMANDĂRI GENERATE DINAMIC -->
-    <div class="section-header">Pachete & Servicii Recomandate</div>
+    <div class="section-header" id="recom-header" style="display: none;">Pachete & Servicii Recomandate</div>
     <div class="grid" id="recommendationsGrid">
-        <!-- Generat prin JavaScript -->
+        </div>
+</div>
+
+<div class="modal-overlay" id="accModal" onclick="if(event.target === this) closeModal('accModal')">
+    <div class="modal-content" style="max-width: 500px; text-align: center;">
+        <button class="close-x" onclick="closeModal('accModal')"><svg><use href="#icon-close"></use></svg></button>
+        <svg style="width: 40px; height: 40px; fill: var(--primary); margin-bottom: 10px;"><use href="#icon-accessibility"></use></svg>
+        <h3 style="margin: 0 0 10px 0;">Accesibilitate Vizuală</h3>
+        <p style="font-size: 0.95rem; margin-bottom: 20px; opacity: 0.8;">Alege o temă optimizată pentru confortul tău vizual:</p>
+        <div class="acc-list">
+            <div class="acc-item">
+                <h4>Daltonism (Spectru Albastru/Galben)</h4>
+                <button class="acc-btn" id="acc-btn-daltonism" onclick="setTheme('daltonism')">Activează Tema</button>
+            </div>
+            <div class="acc-item">
+                <h4>Dislexie / Stres Vizual</h4>
+                <button class="acc-btn" id="acc-btn-dislexie" onclick="setTheme('dislexie')">Activează Tema</button>
+            </div>
+            <div class="acc-item">
+                <h4>Fotofobie / Sensibilitate la lumină</h4>
+                <button class="acc-btn" id="acc-btn-fotofobie" onclick="setTheme('fotofobie')">Activează Tema</button>
+            </div>
+            <div class="acc-item">
+                <h4>Contrast Maxim (Vedere slabă)</h4>
+                <button class="acc-btn" id="acc-btn-contrast" onclick="setTheme('contrast')">Activează Tema</button>
+            </div>
+        </div>
+        <button class="close-modal" onclick="closeModal('accModal')">Salvează & Închide</button>
     </div>
 </div>
 
@@ -253,7 +405,7 @@
 </footer>
 
 <script>
-    // --- BAZA DE DATE A SERVICIILOR ---
+    // --- BAZA DE DATE A SERVICIILOR (Pentru recunoaștere link-uri și recomandări) ---
     const servicesDB = [
         { name: 'Asamblare Desktop', price: 250, img: 'poza-editare.jpg', link: 'servicii/asamblare-desktop.html', note: '', tags: ['desktop', 'hardware', 'nou'] },
         { name: 'Consultanță SH', price: 100, img: 'poza-editare.jpg', link: 'servicii/consultanta-achizitie.html', note: '', tags: ['consultanta', 'sh', 'achizitie'] },
@@ -264,9 +416,22 @@
         { name: 'Mentenanță Consolă', price: 250, img: 'poza-editare.jpg', link: 'servicii/mentenanta-consola.html', note: 'PS4, PS5, Xbox', tags: ['consola', 'mentenanta', 'curatare'] },
         { name: 'Mentenanță Desktop', price: 220, img: 'poza-editare.jpg', link: 'servicii/mentenanta-desktop.html', note: 'Aer sau AIO. Fără Custom Loop.', tags: ['desktop', 'mentenanta', 'curatare'] },
         { name: 'Mentenanță Laptop', price: 200, img: 'mentenanta-laptop.jpg', link: 'servicii/mentenanta-laptop.html', note: '', tags: ['laptop', 'mentenanta', 'curatare'] },
+        { name: 'Mentenanță Mouse', price: 50, img: 'poza-editare.jpg', link: 'servicii/mentenanta-mouse.html', note: '', tags: ['mouse', 'hardware', 'curatare'] },
         { name: 'Mentenanță GPU', price: 80, img: 'poza-editare.jpg', link: 'servicii/mentenanta-placa-video.html', note: 'GPU ieșit din garanție.', tags: ['desktop', 'hardware', 'mentenanta', 'curatare'] },
         { name: 'Optimizare Tuning PC', price: 100, img: 'poza-editare.jpg', link: 'servicii/optimizare-os-tuning.html', note: 'Temperaturi minime sau performanță.', tags: ['software', 'os', 'optimizare', 'viteza'] },
-        { name: 'Revitalizare Laptop', price: 275, img: 'pachet-revitalizare.jpg', link: 'servicii/pachet-revitalizare.html', note: 'Mentenanță completă + OS', tags: ['laptop', 'mentenanta', 'software', 'pachet'] },
+        { name: 'Pachet Revitalizare', price: 275, img: 'pachet-revitalizare.jpg', link: 'servicii/pachet-revitalizare.html', note: 'Mentenanță completă + OS', tags: ['laptop', 'mentenanta', 'software', 'pachet'] },
+        { name: 'Porturi USB modulare', price: 80, img: 'poza-editare.jpg', link: 'servicii/porturi-usb.html', note: '', tags: ['hardware', 'laptop', 'reparatie'] },
+        { name: 'Reparare Mouse', price: 70, img: 'poza-editare.jpg', link: 'servicii/reparare-mouse.html', note: '', tags: ['mouse', 'hardware', 'reparatie'] },
+        { name: 'Schimbare balamale', price: 100, img: 'poza-editare.jpg', link: 'servicii/schimbare-balamale.html', note: '', tags: ['laptop', 'hardware', 'reparatie'] },
+        { name: 'Schimbare boxe laptop', price: 70, img: 'poza-editare.jpg', link: 'servicii/schimbare-boxe.html', note: '', tags: ['laptop', 'hardware', 'audio'] },
+        { name: 'Schimbare butoane', price: 70, img: 'poza-editare.jpg', link: 'servicii/schimbare-butoane.html', note: '', tags: ['consola', 'hardware', 'reparatie'] },
+        { name: 'Schimbare ecran/panel', price: 200, img: 'poza-editare.jpg', link: 'servicii/schimbare-ecran.html', note: '', tags: ['laptop', 'hardware', 'display'] },
+        { name: 'Schimbare placă bază', price: 250, img: 'poza-editare.jpg', link: 'servicii/schimbare-placa-baza.html', note: '', tags: ['laptop', 'desktop', 'hardware'] },
+        { name: 'Schimbare placă Wi-Fi', price: 80, img: 'poza-editare.jpg', link: 'servicii/schimbare-placa-wifi.html', note: '', tags: ['laptop', 'hardware', 'retea'] },
+        { name: 'Schimbare radiator/vent.', price: 100, img: 'poza-editare.jpg', link: 'servicii/schimbare-radiator.html', note: '', tags: ['laptop', 'desktop', 'hardware', 'racire'] },
+        { name: 'Schimbare tastatură', price: 100, img: 'poza-editare.jpg', link: 'servicii/schimbare-tastatura.html', note: '', tags: ['laptop', 'hardware'] },
+        { name: 'Schimbare Touchpad', price: 90, img: 'poza-editare.jpg', link: 'servicii/schimbare-touchpad.html', note: '', tags: ['laptop', 'hardware'] },
+        { name: 'Schimbare webcam/mic.', price: 100, img: 'poza-editare.jpg', link: 'servicii/schimbare-webcam.html', note: '', tags: ['laptop', 'hardware', 'video'] },
         { name: 'Upgrade RAM', price: 80, img: 'upgrade-ram.jpg', link: 'servicii/upgrade-ram.html', note: '', tags: ['hardware', 'upgrade', 'viteza', 'laptop', 'desktop'] },
         { name: 'Upgrade SSD/HDD', price: 80, img: 'upgrade-ssd-hdd.jpg', link: 'servicii/upgrade-ssd-hdd.html', note: '', tags: ['hardware', 'upgrade', 'viteza', 'laptop', 'desktop'] }
     ];
@@ -277,13 +442,34 @@
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
         localStorage.setItem('ethhofar_theme', themeName);
+        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active-theme'));
+        document.querySelectorAll('.acc-btn').forEach(btn => { btn.classList.remove('active'); btn.innerText = "Activează Tema"; });
+        const activeBtnNormal = document.getElementById('btn-theme-' + themeName);
+        if(activeBtnNormal) activeBtnNormal.classList.add('active-theme');
+        const activeBtnAcc = document.getElementById('acc-btn-' + themeName);
+        if(activeBtnAcc) { activeBtnAcc.classList.add('active'); activeBtnAcc.innerText = "Temă Activată ✓"; }
     }
+    function toggleMenu() { document.getElementById('sideMenu').classList.toggle('open'); document.getElementById('menuOverlay').classList.toggle('open'); }
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
     // --- LOGICĂ COȘ ---
-    let discountMultiplier = 0;
+    let activePromo = null; // Stochează { code: 'Nume', discount: 0.25 }
+    const validPromoCodes = {
+        'motanel10': 0.10,
+        'ub-geo25': 0.25
+    };
 
     function getCart() { return JSON.parse(localStorage.getItem('ethhofar_cart')) || []; }
     function saveCart(cart) { localStorage.setItem('ethhofar_cart', JSON.stringify(cart)); }
+
+    // Gramatica română pentru numărare
+    function formatServiceCount(count) {
+        if (count === 1) return "1 (un) serviciu";
+        if (count === 2) return "2 (două) servicii";
+        if (count < 20) return `${count} servicii`;
+        return `${count} de servicii`; // De ex. 20 de servicii
+    }
 
     function updateCartBadge() {
         const cart = getCart();
@@ -291,55 +477,64 @@
         if(badge) badge.innerText = cart.length;
     }
 
-    function removeItem(id) {
+    function removeSingleItem(name) {
         let cart = getCart();
-        cart = cart.filter(item => item.id !== id);
-        saveCart(cart);
-        renderCart();
-        generateRecommendations(); 
+        const index = cart.findIndex(item => item.name === name);
+        if (index > -1) {
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+            generateRecommendations(); 
+        }
     }
 
-    // Noua funcție acceptă parametrul 'img'
-    function addToCart(name, price, img, tags = []) {
-        const cart = getCart();
-        const id = Date.now() + Math.random();
-        
-        // Dacă o comandă mai veche vine fără imagine, folosim poza de editare ca fallback
-        const imagePath = img || 'poza-editare.jpg'; 
-        
-        cart.push({ id, name, price, img: imagePath });
-        saveCart(cart); 
-        
-        trackInterests(tags, 3);
-        
-        renderCart(); 
-        generateRecommendations(); 
-        
-        const cartIcon = document.getElementById('navCartIcon');
-        cartIcon.style.transform = 'scale(1.2)';
-        cartIcon.style.color = 'var(--primary)';
-        setTimeout(() => {
-            cartIcon.style.transform = 'scale(1)';
-            cartIcon.style.color = 'var(--text-color)';
-        }, 300);
+    function addSingleItem(name, price, img) {
+        let cart = getCart();
+        cart.push({ id: Date.now() + Math.random(), name, price, img });
+        saveCart(cart);
+        renderCart();
+    }
+
+    function removeAllOfItem(name) {
+        let cart = getCart();
+        cart = cart.filter(item => item.name !== name);
+        saveCart(cart);
+        renderCart();
+        generateRecommendations();
     }
 
     function applyPromo() {
-        const code = document.getElementById('promoInput').value.trim().toLowerCase();
+        const inputCode = document.getElementById('promoInput').value.trim().toLowerCase();
         const msg = document.getElementById('promoMessage');
         
-        if (code === 'motanel10') { 
-            discountMultiplier = 0.10; 
-            msg.innerText = "✅ Cod valid! 10% reducere aplicată manoperei."; 
-            msg.style.color = "var(--accent)"; 
-        } else if (code === '') { 
+        if (!inputCode) { 
             msg.innerText = "Introduceți un cod înainte de aplicare."; 
             msg.style.color = "#e67e22"; 
-        } else { 
-            discountMultiplier = 0; 
-            msg.innerText = "❌ Cod invalid. Verifică și încearcă din nou."; 
-            msg.style.color = "var(--danger)"; 
+            return; 
         }
+
+        if (validPromoCodes[inputCode]) {
+            const newDiscount = validPromoCodes[inputCode];
+
+            // Protect the user from overriding a good code with a worse one accidentally
+            if (activePromo && activePromo.discount > newDiscount && activePromo.code !== inputCode) {
+                msg.innerText = "⚠️ Nu se pot cumula! Sistemul a păstrat automat codul cu reducerea mai mare.";
+                msg.style.color = "#e67e22";
+            } else {
+                activePromo = { code: inputCode, discount: newDiscount };
+                document.getElementById('promoInput').value = ''; // clear input
+                msg.innerText = "";
+                renderCart();
+            }
+        } else {
+            msg.innerText = "❌ Cod invalid. Verifică și încearcă din nou.";
+            msg.style.color = "var(--danger)";
+        }
+    }
+
+    function removePromo() {
+        activePromo = null;
+        document.getElementById('promoMessage').innerText = "";
         renderCart();
     }
 
@@ -347,21 +542,24 @@
         const cart = getCart();
         const contentDiv = document.getElementById('cart-content-wrapper');
         const emptyDiv = document.getElementById('empty-cart-message');
+        const recomHeader = document.getElementById('recom-header');
         
         updateCartBadge();
 
         if (cart.length === 0) {
             contentDiv.style.display = 'none';
             emptyDiv.style.display = 'block';
+            recomHeader.style.display = 'none';
+            document.getElementById('recommendationsGrid').innerHTML = '';
             return;
         } else {
             contentDiv.style.display = 'block';
             emptyDiv.style.display = 'none';
+            recomHeader.style.display = 'flex';
         }
 
         const cartTitle = document.getElementById('cart-title');
-        let cuvant = cart.length === 1 ? "serviciu" : "servicii";
-        cartTitle.innerText = `Coșul tău (${cart.length} ${cuvant})`;
+        cartTitle.innerText = `Coșul tău conține ${formatServiceCount(cart.length)}`;
 
         const list = document.getElementById('cart-list');
         const totalEl = document.getElementById('cart-total');
@@ -371,37 +569,79 @@
         list.innerHTML = '';
         let servicesText = "";
         let baseTotal = 0;
-        
+
+        // Group identical items by name
+        const groupedCart = {};
         cart.forEach((item) => {
             baseTotal += item.price;
-            
-            // Dacă clientul avea deja produse salvate înainte de update, le punem o poză default
-            let safeImg = item.img ? item.img : 'poza-editare.jpg';
+            if(!groupedCart[item.name]) {
+                // Look up link from DB
+                const dbMatch = servicesDB.find(s => s.name === item.name);
+                groupedCart[item.name] = { 
+                    name: item.name, 
+                    price: item.price, 
+                    img: item.img || 'poza-editare.jpg', 
+                    link: dbMatch ? dbMatch.link : '#',
+                    count: 1 
+                };
+            } else {
+                groupedCart[item.name].count++;
+            }
+        });
 
+        // Render grouped items
+        for (const key in groupedCart) {
+            const item = groupedCart[key];
+            const itemTotal = item.price * item.count;
+            
             const itemDiv = document.createElement('div');
             itemDiv.className = 'cart-item';
             itemDiv.innerHTML = `
                 <div class="cart-item-left">
-                    <img src="${safeImg}" alt="${item.name}" class="cart-thumbnail">
+                    <a href="${item.link}" class="cart-thumbnail-link">
+                        <img src="${item.img}" alt="${item.name}" class="cart-thumbnail">
+                    </a>
                     <div class="item-info">
-                        <span class="item-name">${item.name}</span>
-                        <span class="item-price">${item.price} RON</span>
+                        <a href="${item.link}" class="item-name">${item.name}</a>
+                        <span class="item-price">${item.price} RON / buc</span>
                     </div>
                 </div>
-                <button type="button" class="btn-remove" onclick="removeItem(${item.id})">
-                    <svg class="icon"><use href="#icon-trash"></use></svg> Șterge
-                </button>
+                <div class="item-actions">
+                    <div class="qty-controls">
+                        <button class="btn-qty" onclick="removeSingleItem('${item.name}')"><svg><use href="#icon-minus"></use></svg></button>
+                        <span class="qty-number">${item.count}</span>
+                        <button class="btn-qty" onclick="addSingleItem('${item.name}', ${item.price}, '${item.img}')"><svg><use href="#icon-plus"></use></svg></button>
+                    </div>
+                    <div style="font-weight: bold; min-width: 80px; text-align: right; color: var(--primary);">
+                        ${itemTotal} RON
+                    </div>
+                    <button type="button" class="btn-remove" onclick="removeAllOfItem('${item.name}')" title="Șterge complet">
+                        <svg class="icon"><use href="#icon-trash"></use></svg>
+                    </button>
+                </div>
             `;
             list.appendChild(itemDiv);
-            servicesText += item.name + " (" + item.price + " RON), ";
-        });
+            servicesText += `${item.count}x ${item.name} (${item.price} RON), `;
+        }
         
-        let finalTotal = baseTotal - (baseTotal * discountMultiplier);
-        
-        if (discountMultiplier > 0) {
+        // Render Promo State
+        const inputArea = document.getElementById('promo-input-area');
+        const activeArea = document.getElementById('promo-active-area');
+        const successText = document.getElementById('promoSuccessText');
+
+        let finalTotal = baseTotal;
+
+        if (activePromo) {
+            finalTotal = baseTotal - (baseTotal * activePromo.discount);
+            inputArea.style.display = 'none';
+            activeArea.style.display = 'flex';
+            successText.innerText = `✅ Cod activ: ${activePromo.code.toUpperCase()} (-${activePromo.discount * 100}%)`;
+            
             totalEl.innerHTML = `<s style="color: #999; font-size: 1.1rem; margin-right: 10px;">${baseTotal} RON</s> <span>${finalTotal.toFixed(2)} RON</span>`;
-            servicesText += ` | *** Reducere aplicată: Motanel10 (-10%) ***`;
+            servicesText += ` | *** Reducere aplicată: ${activePromo.code.toUpperCase()} (-${activePromo.discount * 100}%) ***`;
         } else {
+            inputArea.style.display = 'flex';
+            activeArea.style.display = 'none';
             totalEl.innerText = baseTotal + " RON";
         }
 
@@ -410,6 +650,15 @@
     }
 
     // --- MOTOR DE RECOMANDĂRI ---
+    function addToCartFromRecom(name, price, img, tags) {
+        let cart = getCart();
+        cart.push({ id: Date.now() + Math.random(), name, price, img });
+        saveCart(cart); 
+        trackInterests(tags, 3);
+        renderCart(); 
+        generateRecommendations(); 
+    }
+
     function trackInterests(tags, weight) {
         let interests = JSON.parse(localStorage.getItem('ethhofar_interese')) || {};
         tags.forEach(tag => { interests[tag] = (interests[tag] || 0) + weight; });
@@ -418,18 +667,19 @@
 
     function generateRecommendations() {
         const cart = getCart();
+        if(cart.length === 0) return; // nu recomandăm pe coș gol
+        
         const interests = JSON.parse(localStorage.getItem('ethhofar_interese')) || {};
         const grid = document.getElementById('recommendationsGrid');
         grid.innerHTML = '';
 
-        const cartNames = cart.map(item => item.name);
+        // Extract unique names from cart
+        const cartNames = [...new Set(cart.map(item => item.name))];
         const availableServices = servicesDB.filter(srv => !cartNames.includes(srv.name));
 
         availableServices.forEach(srv => {
             let score = 0;
-            srv.tags.forEach(tag => {
-                if (interests[tag]) score += interests[tag];
-            });
+            srv.tags.forEach(tag => { if (interests[tag]) score += interests[tag]; });
             srv.score = score;
         });
 
@@ -452,7 +702,7 @@
                     </div>
                     <div class="button-group">
                         <a href="${srv.link}" class="btn-flip" onclick="trackInterests(${tagsString}, 2)"><svg class="icon"><use href="#icon-details"></use></svg> Detalii Complete</a>
-                        <button class="btn-cart" onclick="addToCart('${srv.name}', ${srv.price}, '${srv.img}', ${tagsString})"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
+                        <button class="btn-cart" onclick="addToCartFromRecom('${srv.name}', ${srv.price}, '${srv.img}', ${tagsString})"><svg class="icon"><use href="#icon-cart"></use></svg> Adaugă în coș</button>
                     </div>
                 </div>
             `;
