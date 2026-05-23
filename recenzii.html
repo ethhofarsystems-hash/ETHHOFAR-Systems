@@ -49,14 +49,14 @@
         nav { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
         
         /* LOGO TEXT ETHHOFAR */
-        .logo-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; }
+        .logo-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; cursor: pointer; }
         .logo-text { font-size: 26px; font-weight: 900; font-family: 'Segoe UI', sans-serif; letter-spacing: 2px; color: var(--text-color); margin: 0; transition: color 0.3s; }
 
         .nav-links { display: flex; gap: 40px; justify-content: center; flex-grow: 1; }
         .nav-links a { text-decoration: none; color: var(--text-color); font-weight: bold; transition: 0.3s; padding: 5px 10px;}
         .nav-links a:hover, .nav-links a.active { color: var(--primary); }
 
-        /* Coș Cumpărături (Desktop & Mobil) */
+        /* Coș Cumpărături */
         .nav-cart-wrapper { position: relative; display: flex; align-items: center; }
         .nav-cart { cursor: pointer; display: flex; align-items: center; position: relative; color: var(--text-color); transition: color 0.3s; }
         .nav-cart:hover { color: var(--primary); }
@@ -68,7 +68,7 @@
         .btn-go-cart:hover { background: #004494; }
         .btn-go-cart .icon { width: 16px; height: 16px; fill: white; }
 
-        /* Meniul Lateral Glisant (Ascuns pe desktop) */
+        /* Meniul Lateral Glisant (Mobil) */
         .hamburger { display: none; cursor: pointer; color: var(--text-color); }
         .hamburger svg { width: 30px; height: 30px; fill: currentColor; }
         
@@ -95,14 +95,27 @@
         .subtitle { text-align: center; color: #777; margin-bottom: 40px; font-size: 1.1rem; }
         [data-theme="dark"] .subtitle { color: #aaa; }
 
-        /* SECȚIUNE STATISTICI eMAG STYLE & CALL TO ACTION */
+        /* SECȚIUNE STATISTICI & CALL TO ACTION */
         .dashboard { display: flex; flex-wrap: wrap; gap: 30px; background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         
         .cta-section { flex: 1; min-width: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid var(--border-color); padding-right: 20px; }
         .cta-section h2 { margin-top: 0; color: var(--text-color); font-size: 1.4rem; }
-        .btn-review { background: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: inline-block; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,183,0.2); }
-        .btn-review:hover { background: var(--accent); transform: scale(1.05); }
-        .qr-code { width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--border-color); }
+        
+        /* Grup Butoane CTA */
+        .cta-buttons { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 220px; }
+        .btn-review { background: var(--primary); color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; display: block; box-shadow: 0 4px 6px rgba(0,0,183,0.2); }
+        .btn-review:hover { background: #004494; transform: scale(1.05); }
+        
+        .btn-qr-trigger { background: #ff9800; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; cursor: pointer; display: block; box-shadow: 0 4px 6px rgba(255, 152, 0, 0.2); font-family: inherit; }
+        .btn-qr-trigger:hover { background: #e68a00; transform: scale(1.05); }
+
+        /* Modal QR */
+        .qr-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; }
+        .qr-modal.active { display: flex; }
+        .qr-modal-content { background: white; padding: 25px; border-radius: 12px; text-align: center; max-width: 90vw; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .qr-modal-content img { width: 100%; max-width: 350px; height: auto; border-radius: 8px; border: 1px solid #ddd; }
+        .close-modal { margin-top: 20px; padding: 10px 20px; background: #333; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        .close-modal:hover { background: #555; }
 
         .chart-section { flex: 1.5; min-width: 300px; }
         .chart-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
@@ -123,7 +136,8 @@
         select:focus { border-color: var(--primary); }
 
         /* DESIGN RECENZII */
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        /* am adăugat align-items: start; pentru ca rândurile să nu fie toate de aceeași înălțime artificială */
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; align-items: start; }
         .review-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; display: flex; flex-direction: column; }
         .review-card:hover { transform: translateY(-3px); border-color: var(--primary); }
         
@@ -154,16 +168,13 @@
 
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: #666; margin-top: 40px;}
 
-        /* =================================================== */
-        /* ADAPTĂRI PENTRU TELEFON (MOBILE RESPONSIVE PREMIUM) */
-        /* =================================================== */
+        /* ADAPTĂRI PENTRU TELEFON */
         @media (max-width: 768px) {
             .desktop-only { display: none !important; }
             .hamburger { display: block; }
             
             nav { flex-direction: row; justify-content: space-between; padding: 12px 15px; }
             
-            /* Temele coboara jos pe mobil */
             .theme-switcher { position: fixed; top: auto; bottom: 20px; left: 50%; transform: translateX(-50%); box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; }
             footer { padding-bottom: 90px; }
             
@@ -231,18 +242,19 @@
     <h1>Recenzii ETHHOFAR Systems</h1>
     <div class="subtitle">Transparență totală. Vezi ce spun clienții noștri sau lasă-ne părerea ta!</div>
 
-  <div class="cta-section">
-    <h2>Ai colaborat cu noi?</h2>
-    <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Părerea ta ne ajută să construim servicii mai bune.</p>
-    <a href="https://g.page/r/CWlXXo8jgzknEAE/review" target="_blank" class="btn-review">Scrie o recenzie</a>
-    <button class="btn-qr-trigger" onclick="document.getElementById('qrModal').classList.add('active')">
-        Scanează Cod QR
-    </button>
-</div>
+    <div class="dashboard">
+        <div class="cta-section">
+            <h2>Ai colaborat cu noi?</h2>
+            <p style="font-size: 0.9rem; color: #777; margin-bottom: 20px;">Părerea ta ne ajută să construim servicii mai bune.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://g.page/r/CWlXXo8jgzknEAE/review" target="_blank" class="btn-review">Scrie o recenzie</a>
+                <button class="btn-qr-trigger" onclick="document.getElementById('qrModal').classList.add('active')">
+                    Scanează Cod QR
+                </button>
+            </div>
+        </div>
 
-<div class="qr-modal" id="qrModal" onclick="this.classList.remove('active')">
-    <img src="qr-recenzii.png" alt="QR Code">
-</div>
         <div class="chart-section">
             <div class="chart-header">
                 <div class="avg-rating" id="avgScore">5.0</div>
@@ -283,6 +295,15 @@
 
     <div class="reviews-grid" id="reviewsGrid">
         </div>
+</div>
+
+<div class="qr-modal" id="qrModal" onclick="if(event.target === this) this.classList.remove('active')">
+    <div class="qr-modal-content">
+        <h3 style="margin-top: 0; color: #1a1a1a;">Scanează pentru recenzie</h3>
+        <img src="qr-recenzii.png" alt="Scanează codul QR pentru recenzii">
+        <br>
+        <button class="close-modal" onclick="document.getElementById('qrModal').classList.remove('active')">Închide</button>
+    </div>
 </div>
 
 <footer>
