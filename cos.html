@@ -316,13 +316,22 @@
         <a href="servicii.html" class="btn-return"><svg class="icon"><use href="#icon-back"></use></svg> Vezi lista de servicii</a>
     </div>
     
-    <div id="success-message" class="empty-cart" style="display: none; border-color: var(--accent);">
+  <div id="success-message" class="empty-cart" style="display: none; border-color: var(--accent);">
         <svg class="empty-cart-icon" style="color: var(--accent);"><use href="#icon-shield"></use></svg>
         <h3 style="color: var(--accent);">Ai trimis comanda cu succes!</h3>
         <p>Vei fi contactat în scurt timp pentru mai multe detalii.</p>
-        <a href="index.html" class="btn-return">Întoarce-te la pagina principală</a>
+        
+        <!-- Containerul pentru butoane -->
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="index.html" class="btn-return" style="margin-top: 0; background: var(--dark);">
+                <svg class="icon"><use href="#icon-back"></use></svg> Pagina principală
+            </a>
+            <a href="servicii.html" class="btn-return" style="margin-top: 0;">
+                <svg class="icon"><use href="#icon-cart"></use></svg> Continuă să cumperi
+            </a>
+        </div>
     </div>
-
+    
     <div id="cart-content-wrapper" style="display: none;">
         <h2 class="page-title"><svg class="icon" style="width: 32px; height: 32px;"><use href="#icon-cart"></use></svg> <span id="cart-title">Coșul tău</span></h2>
         <p class="subtitle">Plata va fi calculată fără adaosuri comerciale ascunse la piese și se va efectua la finalul intervenției.</p>
