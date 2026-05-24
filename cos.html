@@ -315,6 +315,13 @@
         <p>Nu ai adăugat încă niciun serviciu ETHHOFAR.</p>
         <a href="servicii.html" class="btn-return"><svg class="icon"><use href="#icon-back"></use></svg> Vezi lista de servicii</a>
     </div>
+    
+    <div id="success-message" class="empty-cart" style="display: none; border-color: var(--accent);">
+        <svg class="empty-cart-icon" style="color: var(--accent);"><use href="#icon-shield"></use></svg>
+        <h3 style="color: var(--accent);">Ai trimis comanda cu succes!</h3>
+        <p>Vei fi contactat în scurt timp pentru mai multe detalii.</p>
+        <a href="index.html" class="btn-return">Întoarce-te la pagina principală</a>
+    </div>
 
     <div id="cart-content-wrapper" style="display: none;">
         <h2 class="page-title"><svg class="icon" style="width: 32px; height: 32px;"><use href="#icon-cart"></use></svg> <span id="cart-title">Coșul tău</span></h2>
@@ -709,7 +716,53 @@
             grid.appendChild(card);
         });
     }
+// --- PROCESARE FORMULAR FĂRĂ REDIRECȚIONARE ---
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Oprește redirecționarea standard către pagina Formspree
 
+        const form = e.target;
+        const data = new FormData(form);
+        const submitBtn = form.querySelector('.btn-submit');
+        const originalBtnText = submitBtn.innerText;
+
+        // Oferim feedback vizual în timp ce se trimite
+        submitBtn.innerText = 'Se trimite...';
+        submitBtn.disabled = true;
+
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json' // Esențial pentru Formspree, îi spune să returneze JSON, nu o pagină HTML
+            }
+        }).then(response => {
+            if (response.ok) {
+                // 1. Golim coșul din localStorage
+                localStorage.removeItem('ethhofar_cart');
+                
+                // 2. Actualizăm interfața (ascundem coșul și formularul, arătăm mesajul)
+                document.getElementById('cart-content-wrapper').style.display = 'none';
+                document.getElementById('recom-header').style.display = 'none';
+                document.getElementById('recommendationsGrid').style.display = 'none';
+                
+                document.getElementById('success-message').style.display = 'block';
+                
+                // 3. Resetăm formularul și insigna (badge-ul) de coș
+                form.reset();
+                updateCartBadge();
+                
+            } else {
+                alert('A apărut o eroare la trimiterea comenzii. Te rugăm să verifici datele și să încerci din nou.');
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }).catch(error => {
+            alert('Eroare de conexiune. Verifică internetul și încearcă din nou.');
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+        });
+    });
+    
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('ethhofar_theme') || 'light';
         setTheme(savedTheme);
