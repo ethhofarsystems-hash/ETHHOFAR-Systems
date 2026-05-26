@@ -130,10 +130,11 @@
         .hero-intro { padding: 50px 20px; text-align: center; background: var(--card-bg); border-bottom: 1px solid var(--border-color); }
         .hero-intro h1 { font-size: 2.8rem; font-weight: 900; margin-top: 0; margin-bottom: 15px; color: var(--primary); line-height: 1.2; }
         .hero-intro p { font-size: 1.15rem; max-width: 800px; margin: 0 auto 30px auto; color: var(--text-color); opacity: 0.9; }
-        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .btn-hero-primary { background: var(--primary); color: var(--btn-text); padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 2px solid var(--primary); }
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .btn-hero-primary { background: var(--primary); color: var(--btn-text); padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
         .btn-hero-primary:hover { background: transparent; color: var(--primary); }
-        .btn-hero-secondary { background: transparent; color: var(--text-color); padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 2px solid var(--border-color); }
+        
+        .btn-hero-secondary { background: transparent; color: var(--text-color); padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
         .btn-hero-secondary:hover { background: var(--light); border-color: var(--text-color); }
         .btn-hero-whatsapp { background: #25D366; color: #fff; padding: 14px 20px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; border: 2px solid #25D366; }
         .btn-hero-whatsapp:hover { background: transparent; color: #25D366; }
@@ -322,7 +323,7 @@
     <p>Suntem o echipă de studenți pasionați care îți readuc la viață laptopul, desktopul sau consola. Tu plătești manopera, iar piesele le facturăm exact la prețul de achiziție.</p>
     <div class="hero-buttons">
         <a href="servicii.html" class="btn-hero-primary">Vezi Serviciile și Tarifele</a>
-    <div id="contact-wrapper" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+   <div id="contact-wrapper" style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
             <button id="btn-show-contact" class="btn-hero-secondary" onclick="showContactOptions()" style="cursor: pointer;">Contactează-ne</button>
             
             <div id="contact-options" style="display: none; gap: 10px; flex-wrap: wrap; justify-content: center; animation: fadeIn 0.3s ease;">
