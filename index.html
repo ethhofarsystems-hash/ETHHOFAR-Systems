@@ -135,6 +135,11 @@
         .btn-hero-primary:hover { background: transparent; color: var(--primary); }
         .btn-hero-secondary { background: transparent; color: var(--text-color); padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 2px solid var(--border-color); }
         .btn-hero-secondary:hover { background: var(--light); border-color: var(--text-color); }
+        .btn-hero-whatsapp { background: #25D366; color: #fff; padding: 14px 20px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; border: 2px solid #25D366; }
+        .btn-hero-whatsapp:hover { background: transparent; color: #25D366; }
+        
+        .btn-hero-phone { background: var(--primary); color: #fff; padding: 14px 20px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-decoration: none; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; border: 2px solid var(--primary); }
+        .btn-hero-phone:hover { background: transparent; color: var(--primary); }
 
         /* CONTAINER GENERAL & REVEAL */
         .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
@@ -233,7 +238,8 @@
     </style>
 </head>
 <body>
-
+<symbol id="icon-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.101.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
     <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
     <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></symbol>
@@ -316,7 +322,18 @@
     <p>Suntem o echipă de studenți pasionați care îți readuc la viață laptopul, desktopul sau consola. Tu plătești manopera, iar piesele le facturăm exact la prețul de achiziție.</p>
     <div class="hero-buttons">
         <a href="servicii.html" class="btn-hero-primary">Vezi Serviciile și Tarifele</a>
-        <a href="contact.html" class="btn-hero-secondary">Contactează-ne</a>
+    <div id="contact-wrapper" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <button id="btn-show-contact" class="btn-hero-secondary" onclick="showContactOptions()" style="cursor: pointer;">Contactează-ne</button>
+            
+            <div id="contact-options" style="display: none; gap: 10px; flex-wrap: wrap; justify-content: center; animation: fadeIn 0.3s ease;">
+                <a href="https://wa.me/407XXXXXXXX" target="_blank" class="btn-hero-whatsapp">
+                    <svg class="icon"><use href="#icon-whatsapp"></use></svg> WhatsApp
+                </a>
+                <a href="tel:+407XXXXXXXX" class="btn-hero-phone">
+                    <svg class="icon"><use href="#icon-phone"></use></svg> Apelare
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -580,6 +597,12 @@
 </footer>
 
 <script>
+
+    function showContactOptions() {
+        document.getElementById('btn-show-contact').style.display = 'none';
+        document.getElementById('contact-options').style.display = 'flex';
+    }
+    
     // --- LOGICA TEMELOR ȘI A MODALULUI ---
     let themeBeforeModal = 'light';
 
