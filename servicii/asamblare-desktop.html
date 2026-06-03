@@ -1,10 +1,15 @@
+Iată codul complet și optimizat pentru pagina serviciului **Asamblare Unitate Desktop**, gata de salvat sub numele `asambleaza-desktop.html` (sau denumirea dorită din folderul tău de servicii).
+
+Toate legăturile de directoare (`../`), placeholderul de imagine solicitat (`poza-editare.jpg`), prețul de **250 RON** și descrierea ta au fost integrate exact în structura tehnică a sistemului ETHHOFAR:
+
+```html
 <!DOCTYPE html>
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Nume Serviciu | ETHHOFAR Systems</title>
+    <title>Asamblare Unitate Desktop | ETHHOFAR Systems</title>
     
     <link rel="icon" type="image/png" sizes="192x192" href="../logo_fara_text-cerc.png">
     <link rel="apple-touch-icon" href="../logo_fara_text-cerc.png">
@@ -171,7 +176,7 @@
 
         /* Descriere expandabilă */
         .description-container { border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; position: relative; overflow: hidden; background: var(--card-bg); margin-bottom: 30px;}
-        .description-content { max-height: 150px; overflow: hidden; transition: max-height 0.5s ease; opacity: 0.9; line-height: 1.6; }
+        .description-content { max-height: 180px; overflow: hidden; transition: max-height 0.5s ease; opacity: 0.9; line-height: 1.6; }
         .description-content.expanded { max-height: 2000px; }
         .description-content ul { list-style-type: none; padding-left: 0; }
         .description-content li { position: relative; padding-left: 25px; margin-bottom: 10px; }
@@ -181,7 +186,7 @@
         .btn-toggle-desc { display: block; width: 100%; background: none; border: none; border-top: 1px solid var(--border-color); color: var(--primary); font-weight: bold; padding: 15px 0 0 0; cursor: pointer; font-size: 1rem; transition: 0.3s; margin-top: 10px;}
         .btn-toggle-desc:hover { color: var(--accent); }
 
-        /* Secțiune Recomandări (la fel ca pe index) */
+        /* Secțiune Recomandări */
         .recommendations-section { margin-top: 60px; }
         .section-title { font-size: 1.8rem; color: var(--primary); margin-bottom: 25px; text-align: left;}
         
@@ -281,18 +286,18 @@
     <div class="product-page-container">
         
         <div class="gallery-area">
-            <img id="main-product-image" src="../imagini/poza-editare.jpg" alt="Imagine Principala Serviciu" class="main-image" onerror="this.src='../imagini/poza-editare.jpg'">
+            <img id="main-product-image" src="../poza-editare.jpg" alt="Imagine Asamblare Desktop" class="main-image" onerror="this.src='../poza-editare.jpg'">
             
             <div class="thumbnails">
-                <img src="../imagini/poza-editare.jpg" class="active" onclick="changeImage(this)" alt="Poza 1" onerror="this.src='../imagini/poza-editare.jpg'">
-                <img src="../imagini/poza-editare.jpg" onclick="changeImage(this)" alt="Poza 2" onerror="this.src='../imagini/poza-editare.jpg'">
-                <img src="../imagini/poza-editare.jpg" onclick="changeImage(this)" alt="Poza 3" onerror="this.src='../imagini/poza-editare.jpg'">
+                <img src="../poza-editare.jpg" class="active" onclick="changeImage(this)" alt="Poza 1" onerror="this.src='../poza-editare.jpg'">
+                <img src="../poza-editare.jpg" onclick="changeImage(this)" alt="Poza 2" onerror="this.src='../poza-editare.jpg'">
+                <img src="../poza-editare.jpg" onclick="changeImage(this)" alt="Poza 3" onerror="this.src='../poza-editare.jpg'">
             </div>
         </div>
 
         <div class="product-details-area">
             
-            <h1 id="service-title-dynamic">Nume Serviciu General</h1>
+            <h1 id="service-title-dynamic">Asamblare Unitate Desktop</h1>
             
             <div class="warranty-badge">
                 <svg class="icon" style="color: var(--accent);"><use href="#icon-shield"></use></svg> Serviciu cu Garanție ETHHOFAR
@@ -300,11 +305,11 @@
 
             <div class="price-action-box">
                 <div class="price-row">
-                    <span class="main-price" id="service-price-dynamic">000</span>
+                    <span class="main-price" id="service-price-dynamic">250</span>
                     <span class="currency">RON</span>
                 </div>
                 
-                <span class="details-note-main">O scurtă descriere a acestui serviciu general pentru client.</span>
+                <span class="details-note-main">Ai piesele, ai cutiile, ai entuziasmul — dar nu vrei să strici ceva la primul șurub. Sau poate pur și simplu preferi să fie făcut cum trebuie de la început.</span>
                 
                 <button class="btn-add-to-cart" onclick="addCurrentServiceToCart()">
                     <svg class="icon" style="width:24px; height:24px;"><use href="#icon-cart"></use></svg> Adaugă în Coș
@@ -315,14 +320,16 @@
                 <h3 style="margin-top: 0; color: var(--primary);">Descriere Serviciu</h3>
                 <div class="description-content" id="descContent">
                     
-                    <p>Acest serviciu presupune atenție la detalii și o abordare profesionistă. Asigurăm funcționalitatea optimă prin:</p>
+                    <p>Aduci totul la noi, noi montăm, testăm și îți predăm un computer gata de utilizare. Fără surprize și fără clasicul „vezi tu acasă dacă merge”. Ne asigurăm că fiecare componentă rulează în parametri ideali.</p>
+                    
                     <ul>
-                        <li><strong>Pasul 1:</strong> Descriere pași serviciu 1.</li>
-                        <li><strong>Pasul 2:</strong> Descriere pași serviciu 2.</li>
-                        <li><strong>Pasul 3:</strong> Descriere pași serviciu 3.</li>
-                        <li><strong>Pasul 4:</strong> Descriere pași serviciu 4.</li>
+                        <li><strong>Asamblare Curată:</strong> Cablurile vor fi legate și organizate îngrijit (wire management excelent) pentru un flux de aer optim.</li>
+                        <li><strong>Management Termic:</strong> Pasta termică este aplicată corect și uniform pe cooler-ul procesorului pentru temperaturi minime.</li>
+                        <li><strong>Verificare Chirurgicală:</strong> Înainte de a pleca, verificăm minuțios în BIOS că sistemul recunoaște absolut fiecare componentă instalată.</li>
+                        <li><strong>Prevenție Defecțiuni:</strong> Dacă o componentă prezintă probleme din fabrică, aflăm pe loc în studio, nu acasă după ce ai despachetat totul.</li>
                     </ul>
-                    <p><em>*Notă: Prețul reprezintă manopera standard. Eventualele piese necesare vor fi achiziționate separat de comun acord, fără adaos comercial din partea noastră.</em></p>
+                    
+                    <p><em>*Notă: Prețul de 250 RON reprezintă strict manopera standard. Dacă mai ai nevoie de piese suplimentare, le achiziționăm împreună exact la prețul curat din magazin — fără niciun leu adaos comercial din partea noastră.</em></p>
                     
                 </div>
                 <div class="fade-overlay" id="descOverlay"></div>
@@ -333,8 +340,7 @@
 
     <div class="recommendations-section">
         <h2 class="section-title">Clienții au mai fost interesați de:</h2>
-        <div class="grid" id="recommendationsGrid">
-            </div>
+        <div class="grid" id="recommendationsGrid"></div>
     </div>
 </div>
 
@@ -475,7 +481,6 @@
         }
     }
 
-    // Funcție apelată din pagina principală de produs
     function addCurrentServiceToCart() {
         const title = document.getElementById('service-title-dynamic').innerText;
         const priceText = document.getElementById('service-price-dynamic').innerText;
@@ -486,7 +491,8 @@
     function addToCart(name, price) {
         const cart = getCart();
         const id = Date.now() + Math.random();
-        cart.push({ id, name, price });
+        // Adăugăm și imaginea implicită pentru compatibilitatea cu codul de coș
+        cart.push({ id, name, price, img: 'poza-editare.jpg' });
         saveCart(cart); 
         
         updateCartBadge();
@@ -509,28 +515,28 @@
 
     // --- LOGICA RECOMANDĂRI (STATICE DUPĂ ÎNCĂRCARE) ---
     const serviceCatalog = [
-        { name: "Asamblare Unitate Desktop", price: 250, tags: ["hardware", "desktop", "asamblare"], link: "asamblare-desktop.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Diagnosticare Hardware & Software", price: 50, tags: ["hardware", "software", "diagnosticare"], link: "diagnosticare.html", img: "../imagini/poza-editare.jpg", hasShield: false, note: "Gratuit dacă se repară la noi." },
-        { name: "Instalare Windows", price: 100, tags: ["software", "os", "diagnosticare"], link: "instalare-windows.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Înlocuire baterie BIOS", price: 50, tags: ["hardware", "desktop", "laptop", "baterie"], link: "inlocuire-baterie-bios.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Manoperă Montaj Baterie", price: 120, tags: ["hardware", "laptop", "baterie", "reparatie"], link: "manopera-montaj-baterie.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Mentenanță Controlere", price: 60, tags: ["hardware", "curatare", "periferice", "consola"], link: "mentenanta-controlere.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "Curățare și prevenire drift" },
-        { name: "Mentenanță Consolă", price: 250, tags: ["hardware", "curatare", "consola"], link: "mentenanta-consola.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "PS4, PS5, Xbox" },
-        { name: "Mentenanță Desktop", price: 220, tags: ["hardware", "curatare", "desktop"], link: "mentenanta-desktop.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "Aer sau AIO. Fără Custom Loop." },
-        { name: "Mentenanță Laptop", price: 200, tags: ["hardware", "curatare", "laptop"], link: "mentenanta-laptop.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Mentenanță Mouse", price: 50, tags: ["hardware", "curatare", "periferice"], link: "mentenanta-mouse.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "Curățare și schimbare skate-uri" },
-        { name: "Mentenanță Placă Video", price: 80, tags: ["hardware", "curatare", "desktop", "gpu"], link: "mentenanta-placa-video.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "GPU ieșit din garanție." },
-        { name: "Upgrade SSD sau HDD", price: 80, tags: ["hardware", "upgrade", "stocare", "laptop", "desktop"], link: "upgrade-ssd-hdd.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Upgrade RAM", price: 80, tags: ["hardware", "upgrade", "laptop", "desktop"], link: "upgrade-ram.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Pachet Revitalizare", price: 275, tags: ["hardware", "software", "complet", "curatare", "os"], link: "pachet-revitalizare.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "Mentenanță completă + OS" },
-        { name: "Optimizare OS & Tuning", price: 100, tags: ["software", "performanta", "os"], link: "optimizare-os-tuning.html", img: "../imagini/poza-editare.jpg", hasShield: false, note: "Temperaturi minime sau performanță." },
-        { name: "Schimbare placă Wi-Fi", price: 80, tags: ["hardware", "reparatie", "laptop"], link: "schimbare-placa-wifi.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Porturi USB modulare", price: 80, tags: ["hardware", "reparatie", "laptop", "desktop"], link: "porturi-usb.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Reparare Mouse", price: 70, tags: ["hardware", "reparatie", "periferice"], link: "reparare-mouse.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "Schimbare switch-uri sau scroll" },
-        { name: "Schimbare balamale", price: 100, tags: ["hardware", "reparatie", "laptop", "carcasa"], link: "schimbare-balamale.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Schimbare boxe laptop", price: 70, tags: ["hardware", "reparatie", "laptop", "audio"], link: "schimbare-boxe.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" },
-        { name: "Schimbare butoane", price: 70, tags: ["hardware", "reparatie", "consola", "periferice"], link: "schimbare-butoane.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "Pentru controllere" },
-        { name: "Schimbare ecran/panel", price: 200, tags: ["hardware", "reparatie", "laptop", "display"], link: "schimbare-ecran.html", img: "../imagini/poza-editare.jpg", hasShield: true, note: "" }
+        { name: "Asamblare Unitate Desktop", price: 250, tags: ["hardware", "desktop", "asamblare"], link: "asamblare-desktop.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Diagnosticare Hardware & Software", price: 50, tags: ["hardware", "software", "diagnosticare"], link: "diagnosticare.html", img: "../poza-editare.jpg", hasShield: false, note: "Gratuit dacă se repară la noi." },
+        { name: "Instalare Windows", price: 100, tags: ["software", "os", "diagnosticare"], link: "instalare-windows.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Înlocuire baterie BIOS", price: 50, tags: ["hardware", "desktop", "laptop", "baterie"], link: "inlocuire-baterie-bios.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Manoperă Montaj Baterie", price: 120, tags: ["hardware", "laptop", "baterie", "reparatie"], link: "manopera-montaj-baterie.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Mentenanță Controlere", price: 60, tags: ["hardware", "curatare", "periferice", "consola"], link: "mentenanta-controlere.html", img: "../poza-editare.jpg", hasShield: true, note: "Curățare și prevenire drift" },
+        { name: "Mentenanță Consolă", price: 250, tags: ["hardware", "curatare", "consola"], link: "mentenanta-consola.html", img: "../poza-editare.jpg", hasShield: true, note: "PS4, PS5, Xbox" },
+        { name: "Mentenanță Desktop", price: 220, tags: ["hardware", "curatare", "desktop"], link: "mentenanta-desktop.html", img: "../poza-editare.jpg", hasShield: true, note: "Aer sau AIO. Fără Custom Loop." },
+        { name: "Mentenanță Laptop", price: 200, tags: ["hardware", "curatare", "laptop"], link: "mentenanta-laptop.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Mentenanță Mouse", price: 50, tags: ["hardware", "curatare", "periferice"], link: "mentenanta-mouse.html", img: "../poza-editare.jpg", hasShield: true, note: "Curățare și schimbare skate-uri" },
+        { name: "Mentenanță Placă Video", price: 80, tags: ["hardware", "curatare", "desktop", "gpu"], link: "mentenanta-placa-video.html", img: "../poza-editare.jpg", hasShield: true, note: "GPU ieșit din garanție." },
+        { name: "Upgrade SSD sau HDD", price: 80, tags: ["hardware", "upgrade", "stocare", "laptop", "desktop"], link: "upgrade-ssd-hdd.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Upgrade RAM", price: 80, tags: ["hardware", "upgrade", "laptop", "desktop"], link: "upgrade-ram.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Pachet Revitalizare", price: 275, tags: ["hardware", "software", "complet", "curatare", "os"], link: "pachet-revitalizare.html", img: "../poza-editare.jpg", hasShield: true, note: "Mentenanță completă + OS" },
+        { name: "Optimizare OS & Tuning", price: 100, tags: ["software", "performanta", "os"], link: "optimizare-os-tuning.html", img: "../poza-editare.jpg", hasShield: false, note: "Temperaturi minime sau performanță." },
+        { name: "Schimbare placă Wi-Fi", price: 80, tags: ["hardware", "reparatie", "laptop"], link: "schimbare-placa-wifi.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Porturi USB modulare", price: 80, tags: ["hardware", "reparatie", "laptop", "desktop"], link: "porturi-usb.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Reparare Mouse", price: 70, tags: ["hardware", "reparatie", "periferice"], link: "reparare-mouse.html", img: "../poza-editare.jpg", hasShield: true, note: "Schimbare switch-uri sau scroll" },
+        { name: "Schimbare balamale", price: 100, tags: ["hardware", "reparatie", "laptop", "carcasa"], link: "schimbare-balamale.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Schimbare boxe laptop", price: 70, tags: ["hardware", "reparatie", "laptop", "audio"], link: "schimbare-boxe.html", img: "../poza-editare.jpg", hasShield: true, note: "" },
+        { name: "Schimbare butoane", price: 70, tags: ["hardware", "reparatie", "consola", "periferice"], link: "schimbare-butoane.html", img: "../poza-editare.jpg", hasShield: true, note: "Pentru controllere" },
+        { name: "Schimbare ecran/panel", price: 200, tags: ["hardware", "reparatie", "laptop", "display"], link: "schimbare-ecran.html", img: "../poza-editare.jpg", hasShield: true, note: "" }
     ];
 
     const shieldHTML = `
@@ -595,7 +601,7 @@
                 <div class="card-container">
                     <div class="card-front card">
                         <div>
-                            <img src="${service.img}" alt="${service.name}" class="service-img" onerror="this.src='../imagini/poza-editare.jpg'">
+                            <img src="${service.img}" alt="${service.name}" class="service-img" onerror="this.src='../poza-editare.jpg'">
                             <h3>${service.name} ${hasShieldStr}</h3>
                             <p class="price">${service.price} RON</p>
                             ${noteStr}
@@ -621,3 +627,5 @@
 
 </body>
 </html>
+
+```
