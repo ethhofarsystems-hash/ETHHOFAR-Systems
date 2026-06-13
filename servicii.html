@@ -281,7 +281,13 @@
         @keyframes slideUp { from { transform: translateY(20px); } to { transform: translateY(0); } }
 
         footer { text-align: center; padding: 40px; font-size: 0.9rem; color: var(--text-color); opacity: 0.6; }
-
+/* --- STILURI AUTENTIFICARE SUPABASE --- */
+        .btn-login { background: transparent; color: var(--text-color); border: 2px solid var(--primary); padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-right: 15px; display: flex; align-items: center; justify-content: center; }
+        .btn-login:hover { background: var(--primary); color: var(--btn-text); }
+        
+        .auth-input { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 2px solid var(--border-color); border-radius: 6px; background: var(--card-bg); color: var(--text-color); box-sizing: border-box; outline: none; transition: 0.3s; font-family: inherit;}
+        .auth-input:focus { border-color: var(--primary); }
+        [data-theme="contrast"] .auth-input { border-color: var(--border-color); }
         /* ADAPTĂRI TELEFON */
         @media (max-width: 768px) {
             nav { padding: 12px 15px; }
@@ -292,6 +298,7 @@
             .cart-popup { right: -50px; }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -333,22 +340,26 @@
         <svg><use href="#icon-menu"></use></svg>
     </div>
 
-    <div class="logo-container" onclick="window.location.href='index.html'">
-       <h2 class="logo-text">ETHHOFAR</h2>
+<div class="logo-container" onclick="window.location.href='index.html'">
+        <h2 class="logo-text">ETHHOFAR</h2>
     </div>
 
-    <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
-        <div class="nav-cart" id="navCartIcon" onclick="window.location.href='cos.html'">
-            <svg class="icon"><use href="#icon-cart"></use></svg>
-            <span class="cart-badge" id="cartBadge">0</span>
-        </div>
+    <div style="display: flex; align-items: center;">
+        <button class="btn-login" id="loginBtn" onclick="openModal('authModal')">Logare</button>
         
-        <div class="cart-popup" id="cartPopup">
-            <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
-            <p id="popupText" style="color: var(--text-color); font-size: 0.95rem;">Ai <strong style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
-            <a href="cos.html" class="btn-go-cart">
-                Mergi la coș <svg class="icon"><use href="#icon-arrow"></use></svg>
-            </a>
+        <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
+            <div class="nav-cart" id="navCartIcon" onclick="window.location.href='cos.html'">
+                <svg class="icon"><use href="#icon-cart"></use></svg>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
+            
+            <div class="cart-popup" id="cartPopup">
+                <h4 style="margin-top: 0; color: var(--text-color);">Produs Adăugat!</h4>
+                <p id="popupText" style="color: var(--text-color); font-size: 0.95rem;">Ai <strong style="color: var(--accent); font-size: 1.1rem;">0</strong> servicii în coș.</p>
+                <a href="cos.html" class="btn-go-cart">
+                    Mergi la coș <svg class="icon"><use href="#icon-arrow"></use></svg>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
@@ -926,6 +937,26 @@
         <button class="close-modal" onclick="closeModal('accModal')" style="margin-top: 25px; width: 100%;">Salvează & Închide</button>
     </div>
 </div>
+<div class="modal-overlay" id="authModal" onclick="if(event.target === this) closeModal('authModal')">
+    <div class="modal-content" style="max-width: 350px; width: 90%; text-align: center;">
+        <button class="close-x" onclick="closeModal('authModal')"><svg><use href="#icon-close"></use></svg></button>
+        
+        <h3 style="margin: 0 0 20px 0; color: var(--primary);">Autentificare</h3>
+        
+        <div style="text-align: left;">
+            <label style="font-size: 0.85rem; font-weight: bold; color: var(--text-color);">Email</label>
+            <input type="email" id="authEmail" class="auth-input" placeholder="nume@exemplu.com" required>
+            
+            <label style="font-size: 0.85rem; font-weight: bold; color: var(--text-color);">Parolă</label>
+            <input type="password" id="authPassword" class="auth-input" placeholder="Parola ta" required>
+        </div>
+
+        <p id="authMessage" style="font-size: 0.85rem; display: none; margin-bottom: 15px; font-weight: bold;"></p>
+        
+        <button class="btn-cart" style="width: 100%; margin-bottom: 10px;" onclick="handleSupabaseAuth('login')">Intră în cont</button>
+        <button class="acc-btn" style="width: 100%;" onclick="handleSupabaseAuth('signup')">Creează cont nou</button>
+    </div>
+</div>
 
 <footer>
     &copy; 2026 ETHHOFAR Systems. Toate drepturile rezervate.
@@ -1179,6 +1210,82 @@
     setTimeout(() => { document.getElementById('wa-help-popup').classList.add('show'); }, 300000); 
     function closeWaPopup() { document.getElementById('wa-help-popup').classList.remove('show'); document.getElementById('wa-minimized-bar').classList.add('active'); }
     function openWaPopup() { document.getElementById('wa-help-popup').classList.add('show'); document.getElementById('wa-minimized-bar').classList.remove('active'); }
+// --- INTEGRARE SUPABASE ---
+    const supabaseUrl = 'https://kwaxwhrtertjwuxrgomt.supabase.co';
+    const supabaseKey = 'sb_publishable_1kcCuQQ3ZuImHX9_j8CzWQ_UxHW567G';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Funcție unificată pentru Logare și Înregistrare
+    async function handleSupabaseAuth(action) {
+        const email = document.getElementById('authEmail').value.trim();
+        const password = document.getElementById('authPassword').value.trim();
+        const msg = document.getElementById('authMessage');
+
+        if (!email || !password) {
+            msg.style.display = 'block';
+            msg.style.color = '#e74c3c';
+            msg.innerText = "Te rugăm să completezi ambele câmpuri.";
+            return;
+        }
+
+        msg.style.display = 'block';
+        msg.style.color = 'var(--text-color)';
+        msg.innerText = "Se procesează...";
+
+        let result;
+        if (action === 'login') {
+            result = await supabaseClient.auth.signInWithPassword({ email, password });
+        } else {
+            result = await supabaseClient.auth.signUp({ email, password });
+        }
+
+        if (result.error) {
+            msg.style.color = '#e74c3c';
+            msg.innerText = "Eroare: " + result.error.message;
+        } else {
+            msg.style.color = 'var(--accent)';
+            if (action === 'signup') {
+                msg.innerText = "Cont creat! Verifică-ți adresa de email pentru confirmare.";
+            } else {
+                msg.innerText = "Te-ai logat cu succes!";
+                setTimeout(() => {
+                    closeModal('authModal');
+                    updateLoginState(result.data.user);
+                }, 1500);
+            }
+        }
+    }
+
+    // Funcție pentru actualizarea butonului din Meniu (când ești logat)
+    function updateLoginState(user) {
+        const btn = document.getElementById('loginBtn');
+        if (user) {
+            btn.innerText = "Deconectare";
+            btn.classList.add('active-theme'); // Îi dăm o culoare să iasă în evidență
+            btn.onclick = async () => {
+                await supabaseClient.auth.signOut();
+                window.location.reload(); // Reîmprospătăm pagina la deconectare
+            };
+        } else {
+            btn.innerText = "Logare";
+            btn.classList.remove('active-theme');
+            btn.onclick = () => openModal('authModal');
+        }
+    }
+
+    // Verificare automată la încărcarea paginii dacă utilizatorul este deja logat
+    document.addEventListener("DOMContentLoaded", async () => {
+        const { data: { session } } = await supabaseClient.auth.getSession();
+        if (session && session.user) {
+            updateLoginState(session.user);
+        }
+        
+        // La final, adăugăm listener pentru modificări de sesiune
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (session) updateLoginState(session.user);
+            else updateLoginState(null);
+        });
+    });
 </script>
 
 </body>
