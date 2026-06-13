@@ -303,6 +303,7 @@
 <body>
 
 <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-user" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
     <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></symbol>
     <symbol id="icon-details" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></symbol>
     <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zM12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></symbol>
@@ -345,7 +346,9 @@
     </div>
 
     <div style="display: flex; align-items: center;">
-        <button class="btn-login" id="loginBtn" onclick="openModal('authModal')">Logare</button>
+     <button class="btn-login" id="loginBtn" onclick="openModal('authModal')">
+        <svg class="icon" style="margin-right: 6px; width: 18px; height: 18px;"><use href="#icon-user"></use></svg> Cont
+    </button>
         
         <div class="nav-cart-wrapper" onmouseleave="closePopupIfOpen()">
             <div class="nav-cart" id="navCartIcon" onclick="window.location.href='cos.html'">
@@ -941,7 +944,11 @@
     <div class="modal-content" style="max-width: 350px; width: 90%; text-align: center;">
         <button class="close-x" onclick="closeModal('authModal')"><svg><use href="#icon-close"></use></svg></button>
         
-        <h3 style="margin: 0 0 20px 0; color: var(--primary);">Autentificare</h3>
+        <h3 style="margin: 0 0 10px 0; color: var(--primary);">Autentificare</h3>
+        
+        <p style="font-size: 0.85rem; color: var(--text-color); opacity: 0.8; margin-bottom: 20px; line-height: 1.4;">
+            Completează detaliile tale dacă ai cont. Dacă nu, înregistrează-ți un cont pe butonul de mai jos.
+        </p>
         
         <div style="text-align: left;">
             <label style="font-size: 0.85rem; font-weight: bold; color: var(--text-color);">Email</label>
@@ -954,7 +961,8 @@
         <p id="authMessage" style="font-size: 0.85rem; display: none; margin-bottom: 15px; font-weight: bold;"></p>
         
         <button class="btn-cart" style="width: 100%; margin-bottom: 10px;" onclick="handleSupabaseAuth('login')">Intră în cont</button>
-        <button class="acc-btn" style="width: 100%;" onclick="handleSupabaseAuth('signup')">Creează cont nou</button>
+        
+        <button class="btn-flip" style="width: 100%; justify-content: center;" onclick="handleSupabaseAuth('signup')">Creează cont nou</button>
     </div>
 </div>
 
