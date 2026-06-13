@@ -991,36 +991,46 @@
 
 <script>
     // ==========================================
-    // 1. CONFIGURARE SUPABASE
+    // 1. CONFIGURARE SUPABASE (VERSIUNE PROTEJATĂ)
     // ==========================================
-    const SUPABASE_URL = 'https://kwaxwhrtertjwuxrgomt.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_1kcCuQQ3ZuImHX9_j8CzWQ_UxHW567G';
-    
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    let supabase = null;
     let currentUser = null;
 
-    async function checkUserSession() {
-        const { data: { session } } = await supabase.auth.getSession();
-        currentUser = session ? session.user : null;
-        updateAuthUI();
+    try {
+        if (typeof window.supabase !== 'undefined') {
+            const SUPABASE_URL = 'https://kwaxwhrtertjwuxrgomt.supabase.co';
+            const SUPABASE_ANON_KEY = 'sb_publishable_1kcCuQQ3ZuImHX9_j8CzWQ_UxHW567G';
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            
+            supabase.auth.onAuthStateChange((event, session) => {
+                currentUser = session ? session.user : null;
+                updateAuthUI();
+            });
+        } else {
+            console.warn("Supabase nu s-a încărcat. Site-ul va rula în modul normal fără cont.");
+        }
+    } catch (e) {
+        console.error("Eroare la baza de date:", e);
     }
 
-    supabase.auth.onAuthStateChange((event, session) => {
-        currentUser = session ? session.user : null;
-        updateAuthUI();
-    });
+    async function checkUserSession() {
+        if (!supabase) return;
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            currentUser = session ? session.user : null;
+            updateAuthUI();
+        } catch(e) { console.error(e); }
+    }
 
     function updateAuthUI() {
         const authText = document.getElementById('authBtnText');
-        if (currentUser) {
-            authText.innerText = "Contul Meu";
-        } else {
-            authText.innerText = "Log In";
+        if (authText) {
+            authText.innerText = currentUser ? "Contul Meu" : "Log In";
         }
     }
 
     async function handleAuthClick() {
-        if (currentUser) {
+        if (currentUser && supabase) {
             const confirmare = confirm("Ești logat. Vrei să te deconectezi?");
             if(confirmare) {
                 await supabase.auth.signOut();
@@ -1072,14 +1082,15 @@
         
         const originalCards = document.querySelectorAll('.card-container');
         originalCards.forEach(card => {
+            const h3 = card.querySelector('h3');
             allCardsData.push({
                 element: card.cloneNode(true),
-                name: card.querySelector('h3').innerText.trim().toUpperCase(),
+                name: h3 ? h3.innerText.trim().toUpperCase() : "",
                 price: parseInt(card.getAttribute('data-price') || "0"),
                 pop: parseInt(card.getAttribute('data-pop') || "0"),
                 kw: (card.getAttribute('data-kw') || "").toLowerCase(),
                 cat: card.getAttribute('data-category') || "toate",
-                letter: card.closest('.letter-section').getAttribute('data-letter')
+                letter: card.closest('.letter-section') ? card.closest('.letter-section').getAttribute('data-letter') : ""
             });
         });
 
@@ -1102,7 +1113,8 @@
     }
 
     function filterCards() {
-        const filter = document.getElementById('searchInput').value.toLowerCase().trim();
+        const searchInput = document.getElementById('searchInput');
+        const filter = searchInput ? searchInput.value.toLowerCase().trim() : "";
         const sections = document.querySelectorAll('.letter-section');
         
         sections.forEach(sec => {
@@ -1135,8 +1147,10 @@
     }
 
     function sortAndRenderCards() {
-        const sortType = document.getElementById('sortSelect').value;
+        const sortSelect = document.getElementById('sortSelect');
+        const sortType = sortSelect ? sortSelect.value : 'alpha';
         const container = document.getElementById('dynamic-grid-container');
+        if (!container) return;
         
         container.innerHTML = "";
         let sortedCards = [...allCardsData];
@@ -1215,6 +1229,7 @@
     function buildNavigation() {
         const navContainer = document.getElementById('alphabet-nav');
         const sections = document.querySelectorAll('.letter-section');
+        if(!navContainer) return;
         navContainer.innerHTML = ""; 
 
         if(myObserver) myObserver.disconnect(); 
@@ -1267,34 +1282,59 @@
         }
     }
 
-    function addToCart(name, price) {
+    async function addToCart(name, price) {
         const cart = getCart();
         const id = Date.now() + Math.random();
         cart.push({ id, name, price });
-        saveCart(cart); 
         
+        if (currentUser && supabase) {
+            console.log("Salvat în coș pentru:", currentUser.email);
+        }
+
+        saveCart(cart); 
         updateCartBadge();
         
         const popup = document.getElementById('cartPopup');
-        popup.classList.add('active');
-        if(popupTimeout) clearTimeout(popupTimeout);
-        popupTimeout = setTimeout(() => { popup.classList.remove('active'); }, 5000); 
+        if(popup) {
+            popup.classList.add('active');
+            if(popupTimeout) clearTimeout(popupTimeout);
+            popupTimeout = setTimeout(() => { popup.classList.remove('active'); }, 5000); 
+        }
 
         const cartIcon = document.getElementById('navCartIcon');
-        cartIcon.classList.remove('cart-highlight');
-        void cartIcon.offsetWidth; 
-        cartIcon.classList.add('cart-highlight');
-        
-        if(highlightTimeout) clearTimeout(highlightTimeout);
-        highlightTimeout = setTimeout(() => { cartIcon.classList.remove('cart-highlight'); }, 2000);
+        if(cartIcon) {
+            cartIcon.classList.remove('cart-highlight');
+            void cartIcon.offsetWidth; 
+            cartIcon.classList.add('cart-highlight');
+            
+            if(highlightTimeout) clearTimeout(highlightTimeout);
+            highlightTimeout = setTimeout(() => { cartIcon.classList.remove('cart-highlight'); }, 2000);
+        }
     }
 
-    function closePopupIfOpen() { document.getElementById('cartPopup').classList.remove('active'); }
+    function closePopupIfOpen() { 
+        const popup = document.getElementById('cartPopup');
+        if(popup) popup.classList.remove('active'); 
+    }
 
-    setTimeout(() => { document.getElementById('wa-help-popup').classList.add('show'); }, 300000); 
-    function closeWaPopup() { document.getElementById('wa-help-popup').classList.remove('show'); document.getElementById('wa-minimized-bar').classList.add('active'); }
-    function openWaPopup() { document.getElementById('wa-help-popup').classList.add('show'); document.getElementById('wa-minimized-bar').classList.remove('active'); }
+    setTimeout(() => { 
+        const wa = document.getElementById('wa-help-popup');
+        if(wa) wa.classList.add('show'); 
+    }, 300000); 
+
+    function closeWaPopup() { 
+        const waHelp = document.getElementById('wa-help-popup');
+        const waMin = document.getElementById('wa-minimized-bar');
+        if(waHelp) waHelp.classList.remove('show'); 
+        if(waMin) waMin.classList.add('active'); 
+    }
+    
+    function openWaPopup() { 
+        const waHelp = document.getElementById('wa-help-popup');
+        const waMin = document.getElementById('wa-minimized-bar');
+        if(waHelp) waHelp.classList.add('show'); 
+        if(waMin) waMin.classList.remove('active'); 
+    }
 </script>
-
 </body>
 </html>
